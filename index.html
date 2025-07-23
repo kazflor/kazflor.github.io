@@ -8,7 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Playfair Display', serif; background: #fffafc; color: #444; line-height: 1.6; }
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #f3fff3;
+      color: #444;
+      line-height: 1.6;
+    }
     header {
       background: url('https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg') center/cover no-repeat;
       height: 100vh;
@@ -22,7 +27,7 @@
     }
     header h1 { font-size: 3em; margin-bottom: 10px; }
     nav {
-      background: #f4e4ea;
+      background: #e1f2e1;
       padding: 10px;
       text-align: center;
       position: sticky;
@@ -31,7 +36,7 @@
     }
     nav a {
       margin: 0 15px;
-      color: #a03c5d;
+      color: #2e7d32;
       text-decoration: none;
       font-weight: bold;
     }
@@ -45,7 +50,7 @@
     section h2 {
       font-size: 2em;
       margin-bottom: 20px;
-      color: #a03c5d;
+      color: #2e7d32;
       text-align: center;
       animation: fadeInUp 1s ease;
     }
@@ -80,7 +85,7 @@
       margin-top: 10px;
     }
     .slider-nav button {
-      background: #a03c5d;
+      background: #2e7d32;
       border: none;
       color: white;
       padding: 8px 12px;
@@ -108,7 +113,7 @@
       border-radius: 5px;
     }
     form button {
-      background: #a03c5d;
+      background: #2e7d32;
       color: white;
       border: none;
       padding: 10px;
@@ -116,7 +121,7 @@
       cursor: pointer;
     }
     form button:hover {
-      background: #872e4e;
+      background: #256c28;
     }
 
     iframe.map {
@@ -127,11 +132,42 @@
       margin-top: 30px;
     }
 
+    .instagram {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .instagram a {
+      display: inline-block;
+      background: #2e7d32;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .instagram a:hover {
+      background: #256c28;
+    }
+
+    .review-form {
+      margin-top: 40px;
+      animation: fadeIn 2s ease;
+    }
+    .review-form input, .review-form textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    .review-form input[type="file"] {
+      border: none;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
-      background: #f4e4ea;
-      color: #a03c5d;
+      background: #e1f2e1;
+      color: #2e7d32;
       margin-top: 60px;
     }
 
@@ -142,11 +178,6 @@
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      header h1 { font-size: 2em; }
-      nav a { display: inline-block; margin: 5px 10px; }
     }
   </style>
 </head>
@@ -194,12 +225,10 @@
     <h2>Портфолио</h2>
     <div class="slider">
       <div class="slides" id="slides">
-        <img src="https://https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Цветочный букет 1">
-        <img src="https://https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Цветочная композиция 2">
-        <img src="https://https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Свадебная арка 3">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Декор зала 4">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Декор зала 4">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Декор зала 4">
+        <img src="https://img.freepik.com/free-photo/beautiful-flower-bouquet-wedding_1150-11035.jpg" alt="Цветочный букет 1">
+        <img src="https://img.freepik.com/free-photo/colorful-bouquet-table_1203-5997.jpg" alt="Цветочная композиция 2">
+        <img src="https://img.freepik.com/free-photo/archway-wedding-decoration_23-2148738945.jpg" alt="Свадебная арка 3">
+        <img src="https://img.freepik.com/free-photo/flower-arrangement-modern-table_53876-14584.jpg" alt="Декор зала 4">
       </div>
     </div>
     <div class="slider-nav">
@@ -212,6 +241,12 @@
     <h2>Отзывы</h2>
     <div class="testimonial">«Самые красивые цветы! Всё было как в мечте!»</div>
     <div class="testimonial">«Вы сделали наш день ещё прекраснее. Спасибо!»</div>
+    <form class="review-form">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="file" accept="image/*">
+      <textarea placeholder="Ваш отзыв" rows="4" required></textarea>
+      <button type="submit">Оставить отзыв</button>
+    </form>
   </section>
 
   <section id="contact">
@@ -220,10 +255,12 @@
       <input type="text" name="name" placeholder="Ваше имя" required />
       <input type="tel" name="phone" placeholder="Номер WhatsApp" required />
       <textarea name="message" rows="4" placeholder="Комментарий или пожелание (необязательно)"></textarea>
-      <button type="submit">Отправить в WhatsApp</button>
+      <button type="submit">Заказать через WhatsApp</button>
     </form>
-
-    <iframe class="map" src="https://2gis.kz/pavlodar/geo/70030028436024341" allowfullscreen></iframe>
+    <iframe class="map" src="https://go.2gis.com/myxYI" allowfullscreen></iframe>
+    <div class="instagram">
+      <a href="https://www.instagram.com/kaz_flor_pvl?igsh=ZDJ1cmM3amUzd3Jr" target="_blank">Мы в Instagram @kaz_flor_pvl</a>
+    </div>
   </section>
 
   <footer>
@@ -247,7 +284,7 @@
       const phone = form.phone.value;
       const message = form.message.value;
       const text = `Здравствуйте! Меня зовут ${name}. Мой номер: ${phone}. ${message ? 'Комментарий: ' + message : ''}`;
-      const url = `https://wa.me/77001234567?text=${encodeURIComponent(text)}`;
+      const url = `https://wa.me/77055857488?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
     }
   </script>
