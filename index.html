@@ -10,7 +10,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Playfair Display', serif; background: #fffafc; color: #444; line-height: 1.6; }
     header {
-      background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?fit=crop&w=1950&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
       height: 100vh;
       display: flex;
       align-items: center;
@@ -154,8 +154,8 @@
 
   <header>
     <div>
-      <h1>Свадебные букеты & оформление</h1>
-      <p>Мы создаём атмосферу любви и красоты</p>
+      <h1>Цветы для вашей свадьбы</h1>
+      <p>Нежность. Аромат. Совершенство в каждом лепестке.</p>
     </div>
   </header>
 
@@ -169,23 +169,23 @@
 
   <section id="about">
     <h2>О нас</h2>
-    <p>Наша цветочная мастерская специализируется на создании свадебных букетов, оформлении залов, арок, фотозон и других элементов торжества. Более 5 лет мы создаём красоту в самых важных моментах вашей жизни.</p>
+    <p>Мы создаём индивидуальные композиции, учитывая каждую деталь вашей свадьбы. Наши флористы делают всё с душой и любовью к цветам.</p>
   </section>
 
   <section id="services">
     <h2>Услуги</h2>
     <div class="services">
       <div>
-        <h3>Свадебные букеты</h3>
-        <p>Авторские композиции по вашему стилю и запросу</p>
+        <h3>Букеты невесты</h3>
+        <p>Элегантные и нежные цветочные композиции на любой стиль</p>
       </div>
       <div>
         <h3>Оформление залов</h3>
-        <p>Декор столов, президиума, флористика и текстиль</p>
+        <p>Украшение банкетов живыми цветами, гирляндами и свечами</p>
       </div>
       <div>
-        <h3>Фотозоны</h3>
-        <p>Создание уникальных фотолокаций под стиль свадьбы</p>
+        <h3>Цветочные арки</h3>
+        <p>Романтичные арки для церемоний и фотосессий</p>
       </div>
     </div>
   </section>
@@ -194,9 +194,10 @@
     <h2>Портфолио</h2>
     <div class="slider">
       <div class="slides" id="slides">
-        <img src="https://images.unsplash.com/photo-1528479027500-6ca7f0f96007?fit=crop&w=900&q=80" alt="Букет 1">
-        <img src="https://images.unsplash.com/photo-1559925393-8f1f1f98c0c4?fit=crop&w=900&q=80" alt="Оформление 2">
-        <img src="https://images.unsplash.com/photo-1490111718993-d98654ce6cf7?fit=crop&w=900&q=80" alt="Фотозона 3">
+        <img src="https://images.unsplash.com/photo-1597575028944-4cfbdb7546a5?auto=format&fit=crop&w=900&q=80" alt="Цветочный букет 1">
+        <img src="https://images.unsplash.com/photo-1611076015724-e8046e5f3f77?auto=format&fit=crop&w=900&q=80" alt="Цветочная композиция 2">
+        <img src="https://images.unsplash.com/photo-1545665277-5937489579ed?auto=format&fit=crop&w=900&q=80" alt="Свадебная арка 3">
+        <img src="https://images.unsplash.com/photo-1610632380986-9291505f1f84?auto=format&fit=crop&w=900&q=80" alt="Декор зала 4">
       </div>
     </div>
     <div class="slider-nav">
@@ -207,24 +208,24 @@
 
   <section id="reviews">
     <h2>Отзывы</h2>
-    <div class="testimonial">«Спасибо за невероятно красивый букет! Все гости были в восторге!»</div>
-    <div class="testimonial">«Зал выглядел как в сказке. Вы превзошли все ожидания!»</div>
+    <div class="testimonial">«Самые красивые цветы! Всё было как в мечте!»</div>
+    <div class="testimonial">«Вы сделали наш день ещё прекраснее. Спасибо!»</div>
   </section>
 
   <section id="contact">
-    <h2>Оставьте свой номер для связи</h2>
-    <form onsubmit="sendToTelegram(event)">
+    <h2>Свяжитесь с нами</h2>
+    <form onsubmit="handleWhatsApp(event)">
       <input type="text" name="name" placeholder="Ваше имя" required />
       <input type="tel" name="phone" placeholder="Номер WhatsApp" required />
       <textarea name="message" rows="4" placeholder="Комментарий или пожелание (необязательно)"></textarea>
-      <button type="submit">Отправить</button>
+      <button type="submit">Отправить в WhatsApp</button>
     </form>
 
     <iframe class="map" src="https://2gis.kz/pavlodar/geo/70030028436024341" allowfullscreen></iframe>
   </section>
 
   <footer>
-    &copy; 2025 Цветочная мастерская — KAZ FLOR, Павлодар, Назарбаева 69. Все права защищены.
+    &copy; 2025 KAZ FLOR — Павлодар, Назарбаева 69. Все права защищены.
   </footer>
 
   <script>
@@ -237,38 +238,15 @@
       slides.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
 
-    function sendToTelegram(event) {
+    function handleWhatsApp(event) {
       event.preventDefault();
       const form = event.target;
       const name = form.name.value;
       const phone = form.phone.value;
       const message = form.message.value;
-      const text = `📥 Новая заявка:\n👤 Имя: ${name}\n📞 WhatsApp: ${phone}\n💬 Комментарий: ${message || '—'}`;
-
-      const telegramToken = '7778840806:AAFPoxIl1-jfoScg3cMYkD3D_UQ012wgGPQ';
-      const chatId = '5545422070';
-
-      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          alert('Спасибо! Мы скоро с вами свяжемся.');
-          form.reset();
-        } else {
-          alert('Ошибка отправки. Попробуйте позже.');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Ошибка подключения.');
-      });
+      const text = `Здравствуйте! Меня зовут ${name}. Мой номер: ${phone}. ${message ? 'Комментарий: ' + message : ''}`;
+      const url = `https://wa.me/77001234567?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
     }
   </script>
 </body>
