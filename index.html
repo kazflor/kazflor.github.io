@@ -271,15 +271,101 @@
 
  <section id="instagram" class="insta-section">
   <h2>Что о нас говорят</h2>
-  <div class="insta-grid">
-    <!-- Повтори столько блоков, сколько нужно -->
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
-    <div class="insta-item"><img src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt=""></div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; max-width: 1000px; margin: auto; padding: 20px;">
+
+  <!-- Фото 1 -->
+  <div>
+    <input type="checkbox" id="img1" hidden>
+    <label for="img1">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    " id="modal1">
+      <label for="img1" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img1:checked ~ #modal1 { display: flex; }</style>
   </div>
+
+  <!-- Фото 2 -->
+  <div>
+    <input type="checkbox" id="img2" hidden>
+    <label for="img2">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;" id="modal2">
+      <label for="img2" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img2:checked ~ #modal2 { display: flex; }</style>
+  </div>
+
+  <!-- Фото 3 -->
+  <div>
+    <input type="checkbox" id="img3" hidden>
+    <label for="img3">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;" id="modal3">
+      <label for="img3" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img3:checked ~ #modal3 { display: flex; }</style>
+  </div>
+
+  <!-- Фото 4 -->
+  <div>
+    <input type="checkbox" id="img4" hidden>
+    <label for="img4">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;" id="modal4">
+      <label for="img4" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img4:checked ~ #modal4 { display: flex; }</style>
+  </div>
+
+  <!-- Фото 5 -->
+  <div>
+    <input type="checkbox" id="img5" hidden>
+    <label for="img5">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;" id="modal5">
+      <label for="img5" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img5:checked ~ #modal5 { display: flex; }</style>
+  </div>
+
+  <!-- Фото 6 -->
+  <div>
+    <input type="checkbox" id="img6" hidden>
+    <label for="img6">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" style="width: 100%; border-radius: 10px; cursor: pointer;">
+    </label>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;" id="modal6">
+      <label for="img6" style="cursor: pointer;">
+        <img src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" style="max-width: 90vw; max-height: 90vh; border-radius: 10px;">
+      </label>
+    </div>
+    <style>#img6:checked ~ #modal6 { display: flex; }</style>
+  </div>
+
 </section>
 
 <style>
