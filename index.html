@@ -3,246 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Цветочная мастерская @kaz_flor_pvl</title>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <title>KAZ FLOR PVL — Цветочная Мастерская</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
     :root {
-      --main-color: #c71585;
-      --accent-color: #ffb6c1;
-      --light-bg: #fff0f5;
-      --radius: 18px;
+      --primary: #c71585;
+      --secondary: #ffe4e1;
+      --accent: #ffb6c1;
+      --dark: #1f1f1f;
+      --radius: 20px;
     }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
+
     body {
-      font-family: 'Unbounded', sans-serif;
-      background: linear-gradient(to bottom, var(--light-bg), #ffffff);
-      color: #333;
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #fffafd, #fff0f5);
+      color: var(--dark);
       scroll-behavior: smooth;
     }
+
     header {
-      background: white;
-      padding: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 999;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
+
     header h1 {
-      color: var(--main-color);
-      font-size: 2rem;
-      animation: bounceInDown 1.2s both;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.8rem;
     }
-    nav {
-      margin-top: 1rem;
-    }
+
     nav a {
-      margin: 0 0.5rem;
+      margin-left: 1.5rem;
       text-decoration: none;
-      background: var(--main-color);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius);
+      color: var(--dark);
+      font-weight: 500;
       transition: 0.3s;
-      font-size: 0.9rem;
     }
+
     nav a:hover {
-      background: #a0136f;
+      color: var(--primary);
     }
+
     .hero {
-      padding: 4rem 1.5rem;
+      height: 100vh;
+      background: url('https://source.unsplash.com/1600x900/?flowers,luxury') no-repeat center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      background: linear-gradient(to right, #fffafc, #ffe4e1);
+      color: white;
+      position: relative;
     }
-    .hero h2 {
-      font-size: 2rem;
-      color: var(--main-color);
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 2rem;
+    }
+
+    .hero-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
       margin-bottom: 1rem;
     }
-    .hero p {
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1rem;
+
+    .hero-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
-    .btn-primary {
+
+    .hero-content a {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.9rem 2.2rem;
-      background: var(--accent-color);
+      padding: 0.9rem 2rem;
+      background: var(--accent);
       color: #fff;
-      border: none;
       border-radius: var(--radius);
-      font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: transform 0.2s ease;
       text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    .btn-primary:hover {
-      transform: scale(1.05);
+
+    .hero-content a:hover {
+      background: var(--primary);
     }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: var(--primary);
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      padding: 3rem 1.5rem;
-    }
-    .card {
-      background: white;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s ease-in-out;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .card-content {
-      padding: 1rem;
-    }
-    .card-content h3 {
-      color: var(--main-color);
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .card-content p {
-      font-size: 0.95rem;
-      color: #555;
-    }
-    section#about {
-      padding: 3rem 1.5rem;
-      background: #fff5f8;
-      text-align: center;
-    }
-    section#about p {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    section#instagram {
-      padding: 3rem 1.5rem;
-      background: #fff0f7;
-      text-align: center;
-    }
-    iframe {
-      width: 100%;
-      max-width: 400px;
-      height: 500px;
-      border: none;
-      border-radius: 16px;
-    }
-    section#form {
-      padding: 4rem 1.5rem;
-      background: linear-gradient(to right, #fff0f5, #ffffff);
-      text-align: center;
-    }
-    form {
-      max-width: 480px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2rem;
-      border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-    }
-    .footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #999;
     }
 
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 1.5rem;
+    .gallery img {
+      width: 100%;
+      border-radius: var(--radius);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .about {
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .form-block {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .form-block input, .form-block textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+
+    .form-block button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-block button:hover {
+      background: #a0136f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .hero-content h2 {
+        font-size: 2rem;
       }
-      .hero h2 {
-        font-size: 1.5rem;
+      nav a {
+        margin-left: 1rem;
       }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Цветочная мастерская @kaz_flor_pvl</h1>
+    <h1>KAZ FLOR PVL</h1>
     <nav>
-      <a href="#catalog">Каталог</a>
+      <a href="#gallery">Галерея</a>
       <a href="#about">О нас</a>
-      <a href="#instagram">Instagram</a>
       <a href="#form">Заказ</a>
     </nav>
   </header>
 
   <section class="hero">
-    <h2>Букеты, наполненные чувствами</h2>
-    <p>Мы создаем не просто цветы, а эмоции. Закажите букет, который скажет всё без слов.</p>
-    <a href="#form" class="btn-primary">Сделать заказ</a>
+    <div class="hero-content" data-aos="zoom-in">
+      <h2>Цветы, которые говорят за тебя</h2>
+      <p>Уникальные букеты ручной работы. Каждая композиция — как признание в любви.</p>
+      <a href="#gallery">Смотреть галерею</a>
+    </div>
   </section>
 
-  <section id="catalog" class="gallery">
-    <div class="card animate__animated animate__fadeInUp">
-      <img src="https://source.unsplash.com/500x400/?flowers,bouquet" alt="Букет">
-      <div class="card-content">
-        <h3>Пудровая нежность</h3>
-        <p>Мягкие оттенки, воздушная гипсофила и романтика в каждом лепестке.</p>
-      </div>
-    </div>
-    <div class="card animate__animated animate__fadeInUp animate__delay-1s">
-      <img src="https://source.unsplash.com/500x400/?roses" alt="Розы">
-      <div class="card-content">
-        <h3>Классика любви</h3>
-        <p>Красные розы – символ страсти. Для самых важных признаний.</p>
-      </div>
-    </div>
-    <div class="card animate__animated animate__fadeInUp animate__delay-2s">
-      <img src="https://source.unsplash.com/500x400/?wedding,flowers" alt="Свадебный букет">
-      <div class="card-content">
-        <h3>Свадебный стиль</h3>
-        <p>Чистота, минимализм, светлые тона – ваш идеальный день начинается здесь.</p>
-      </div>
+  <section id="gallery">
+    <h2 class="section-title" data-aos="fade-up">Наши работы</h2>
+    <div class="gallery" data-aos="fade-up" data-aos-delay="100">
+      <img src="https://source.unsplash.com/600x800/?bouquet,luxury" alt="Букет 1">
+      <img src="https://source.unsplash.com/600x800/?wedding,flowers" alt="Букет 2">
+      <img src="https://source.unsplash.com/600x800/?roses,florist" alt="Букет 3">
+      <img src="https://source.unsplash.com/600x800/?flowers,pink" alt="Букет 4">
     </div>
   </section>
 
   <section id="about">
-    <h2>О нас</h2>
-    <p>Мы — команда флористов из Павлодара, с душой и любовью к цветам. Создаем композиции уже более 5 лет, оформляем свадьбы, мероприятия, дарим радость людям каждый день.</p>
-  </section>
-
-  <section id="instagram">
-    <h2>Instagram @kaz_flor_pvl</h2>
-    <iframe src="https://widgets.sociablekit.com/instagram-feed/iframe/26548282" allowfullscreen loading="lazy"></iframe>
+    <h2 class="section-title" data-aos="fade-up">О мастерской</h2>
+    <div class="about" data-aos="fade-up" data-aos-delay="100">
+      <p>Мы — команда флористов, создающих незабываемые букеты в Павлодаре. Используем только свежие цветы премиум-класса. Более 500 счастливых клиентов, свадьбы, фотосессии, индивидуальные композиции и корпоративные заказы — всё с душой и вниманием к деталям.</p>
+    </div>
   </section>
 
   <section id="form">
-    <h2>Заказать букет</h2>
-    <form action="mailto:your@email.com" method="POST" enctype="text/plain">
-      <input type="text" name="name" placeholder="Ваше имя" required />
-      <input type="tel" name="phone" placeholder="Телефон или WhatsApp" required />
-      <textarea name="message" rows="4" placeholder="Комментарий, состав, дата..."></textarea>
-      <button type="submit" class="btn-primary">Отправить</button>
+    <h2 class="section-title" data-aos="fade-up">Оформить заказ</h2>
+    <form class="form-block" data-aos="fade-up" data-aos-delay="100" onsubmit="event.preventDefault(); alert('Заявка отправлена! Мы с вами свяжемся.');">
+      <input type="text" placeholder="Ваше имя" required />
+      <input type="tel" placeholder="Телефон для связи" required />
+      <textarea rows="4" placeholder="Какие цветы/повод/дата?" required></textarea>
+      <button type="submit">Отправить заявку</button>
     </form>
   </section>
 
-  <div class="footer">
-    &copy; 2025 @kaz_flor_pvl — Цветочная магия из Павлодара
-  </div>
+  <footer>
+    &copy; 2025 KAZ FLOR PVL — Все права защищены | Instagram: @kaz_flor_pvl
+  </footer>
 
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
 </body>
 </html>
