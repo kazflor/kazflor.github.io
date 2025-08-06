@@ -1,114 +1,151 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KAZ FLOR PVL — Цветочный бутик</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<style>
-  /* Цветовая схема: графит, крем, бронза, зелень */
-  :root {
-    --dark-bg: #2b2b2b;
-    --cream: #f5f0e8;
-    --bronze: #8c6e58;
-    --green: #556b2f;
-    --radius: 20px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--dark-bg);line-height:1.6;}
-  a{color:var(--green);text-decoration:none;}
-  header{position:sticky;top:0;background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;z-index:1000;}
-  header h1{font-family:'Playfair Display',serif;color:var(--green);font-size:1.8rem;}
-  nav a{margin-left:1.5rem;font-weight:500;transition:0.3s;}
-  nav a:hover{color:var(--bronze);}
-  .hero{position:relative;height:100vh;background: url('https://source.unsplash.com/1600x900/?luxury,flowers') center/cover no-repeat;}
-  .hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45);}
-  .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:2rem;}
-  .hero-content h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1rem;}
-  .hero-content p{font-size:1.2rem;max-width:700px;margin:auto;}
-  .hero-content a{display:inline-block;margin-top:2rem;padding:1rem 2rem;background:var(--bronze);border-radius:var(--radius);font-size:1rem;font-weight:600;transition:0.3s;}
-  .hero-content a:hover{background:var(--green);}
-  section{max-width:1200px;margin:auto;padding:4rem 2rem;}
-  .section-title{text-align:center;font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--green);margin-bottom:2.5rem;}
-  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-  .gallery a{position:relative;display:block;overflow:hidden;border-radius:var(--radius);}
-  .gallery img{width:100%;height:auto;transition:transform 0.4s ease;}
-  .gallery a:hover img{transform:scale(1.1);}
-  .lightbox-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:2000;}
-  .lightbox-bg img{max-width:90%;max-height:90%;border-radius:var(--radius);}
-  .about{text-align:center;font-size:1.1rem;color:var(--dark-bg);}
-  .form-block{background:var(--cream);border-radius:var(--radius);padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.1);}
-  .form-block input,.form-block textarea{width:100%;padding:1rem;margin-bottom:1rem;border:1px solid #ccc;border-radius:var(--radius);font-size:1rem;}
-  .form-block button{background:var(--green);color:#fff;border:none;padding:1rem 2rem;border-radius:var(--radius);font-size:1rem;cursor:pointer;transition:0.3s;}
-  .form-block button:hover{background:var(--bronze);}
-  footer{text-align:center;padding:2rem;font-size:0.9rem;color:#666;}
-  /* Кастомный курсор */
-  body{cursor:url('https://cdn.iconscout.com/icon/free/png-256/flower-1939879-1636526.png'),auto;}
-  @media(max-width:600px){.hero-content h2{font-size:2rem;}nav a{margin-left:1rem;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAZ FLOR PVL — Цветочная галерея</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --graphite: #2b2b2b;
+      --cream: #f7f4f0;
+      --bronze: #b08d57;
+      --green: #5a7151;
+      --radius: 18px;
+      --glass: rgba(255, 255, 255, 0.08);
+      --blur: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--graphite);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: absolute;
+      width: 100%;
+      z-index: 2;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--bronze);
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
+      color: var(--cream);
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      color: #e0deda;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2rem;
+      background: var(--bronze);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #a47b45;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>KAZ FLOR PVL</h1>
-  <nav><a href="#gallery">Галерея</a><a href="#about">О нас</a><a href="#form">Заказ</a></nav>
-</header>
-
-<section class="hero">
-  <div class="hero-content" data-aos="zoom-in">
-    <h2>Цветы премиального класса</h2>
-    <p>Каждая композиция — как произведение искусства. Эстетика, стиль и душа в одном букете.</p>
-    <a href="#gallery">Смотреть работы</a>
+  <div class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.coverr.co/videos/coverr-roses-blossom-5487/1080p.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <header>
+      <div class="logo">KAZ FLOR PVL</div>
+      <nav>
+        <a href="#gallery">Каталог</a>
+        <a href="#insta">Instagram</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </header>
+    <div class="hero-content">
+      <h1>Цветы, которые говорят за вас</h1>
+      <p>Премиальные композиции, ручная сборка, доставка день в день. Работы, в которые влюбляешься.</p>
+      <a class="btn-primary" href="#gallery">Смотреть каталог</a>
+    </div>
   </div>
-</section>
-
-<section id="gallery">
-  <h2 class="section-title" data-aos="fade-up">Наш Instagram</h2>
-  <div class="gallery" data-aos="fade-up" data-aos-delay="100">
-    <!-- заменяем ссылки на реальные из твоего инстаграма -->
-    <a href="https://instagram.com/p/Ссылка1" data-full="https://instagram.com/p/Ссылка1/media"><img src="https://via.placeholder.com/600x800?text=Фото" alt=""></a>
-    <a href="https://instagram.com/p/Ссылка2" data-full="https://instagram.com/p/Ссылка2/media"><img src="https://via.placeholder.com/600x800?text=Фото" alt=""></a>
-    <a href="https://instagram.com/p/Ссылка3" data-full="https://instagram.com/p/Ссылка3/media"><img src="https://via.placeholder.com/600x800?text=Фото" alt=""></a>
-    <a href="https://instagram.com/p/Ссылка4" data-full="https://instagram.com/p/Ссылка4/media"><img src="https://via.placeholder.com/600x800?text=Фото" alt=""></a>
-  </div>
-</section>
-
-<div class="lightbox-bg" id="lightbox"><img id="lightbox-img"></div>
-
-<section id="about">
-  <h2 class="section-title" data-aos="fade-up">О мастерской</h2>
-  <p class="about" data-aos="fade-up" data-aos-delay="100">Мы — команда флористов из Павлодара с 5+ лет опыта. Создаём букеты для важных моментов: свадьбы, праздники, фотосессии. У нас экологичные цветы премиум-класса и индивидуальный подход к каждому клиенту.</p>
-</section>
-
-<section id="form">
-  <h2 class="section-title" data-aos="fade-up">Оформить заказ</h2>
-  <form class="form-block" data-aos="fade-up" data-aos-delay="100" onsubmit="sendTelegram(event)">
-    <input type="text" name="name" placeholder="Ваше имя" required>
-    <input type="tel" name="phone" placeholder="Телефон" required>
-    <textarea name="details" rows="4" placeholder="Дата, состав букета..." required></textarea>
-    <button type="submit">Отправить в Telegram</button>
-  </form>
-</section>
-
-<footer>&copy; 2025 KAZ FLOR PVL | Павлодар | Instagram: @kaz_flor_pvl</footer>
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-  AOS.init({ duration:1000, once:true });
-  // lighbox
-  document.querySelectorAll('.gallery a').forEach(el=>{
-    el.addEventListener('click', e=>{
-      e.preventDefault();
-      document.getElementById('lightbox-img').src = el.dataset.full;
-      document.getElementById('lightbox').style.display = 'flex';
-    });
-  });
-  document.getElementById('lightbox').addEventListener('click', ()=>document.getElementById('lightbox').style.display='none');
-  // Telegram send placeholder
-  function sendTelegram(e){
-    e.preventDefault();
-    alert('Заявка отправлена! Токен Telegram надо вставить.');
-  }
-</script>
-</body>
-</html>
