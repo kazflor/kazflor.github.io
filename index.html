@@ -160,3 +160,86 @@
     <p>Роскошные букеты, уникальные композиции и свадебный декор с душой. Мы — KazFlor PVL.</p>
     <a href="#catalog" class="btn-primary">Смотреть каталог</a>
   </section>
+  <!-- Каталог букетов -->
+  <section id="catalog" style="padding: 6rem 2rem; background: #292929;">
+    <h2 style="text-align:center; font-family:'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 3rem; color: var(--cream);">
+      Каталог букетов
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+      <div style="background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden; transition: transform 0.3s ease;" class="animate__animated animate__fadeInUp">
+        <img src="https://i.imgur.com/ATrWZ1r.jpg" alt="Букет 1" style="width:100%; display:block;">
+        <div style="padding: 1rem;">
+          <h3 style="font-family:'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem;">Нежный рассвет</h3>
+          <p style="font-size: 0.95rem; color: #ccc;">Белые ранункулюсы, эвкалипт, садовая роза.</p>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden; transition: transform 0.3s ease;" class="animate__animated animate__fadeInUp animate__delay-1s">
+        <img src="https://i.imgur.com/NPjZqB2.jpg" alt="Букет 2" style="width:100%; display:block;">
+        <div style="padding: 1rem;">
+          <h3 style="font-family:'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem;">Летнее утро</h3>
+          <p style="font-size: 0.95rem; color: #ccc;">Пионы, кустовая роза, лаванда.</p>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden; transition: transform 0.3s ease;" class="animate__animated animate__fadeInUp animate__delay-2s">
+        <img src="https://i.imgur.com/zOnbGHv.jpg" alt="Букет 3" style="width:100%; display:block;">
+        <div style="padding: 1rem;">
+          <h3 style="font-family:'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem;">Ваниль и зелень</h3>
+          <p style="font-size: 0.95rem; color: #ccc;">Орхидея, белые розы, зелёные акценты.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+   <!-- О нас -->
+  <section id="about" style="padding: 6rem 2rem; background: linear-gradient(145deg, #2e2e2e, #1e1e1e);">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 2rem;">
+      <div style="flex: 1; min-width: 280px;">
+        <h2 style="font-family:'Playfair Display', serif; font-size: 2.5rem; color: var(--cream); margin-bottom: 1rem;">О нашей мастерской</h2>
+        <p style="font-size: 1.05rem; color: #ccc; line-height: 1.6;">
+          KazFlor PVL — это любовь к красоте, стиль и индивидуальный подход. Мы создаём уникальные композиции из лучших мировых сортов цветов.
+          Специализируемся на свадьбах, мероприятиях и трепетных моментах. Наши букеты живут в Instagram, в сердцах и на фото ваших самых важных дней.
+        </p>
+      </div>
+
+      <div style="flex: 1; min-width: 280px;">
+        <div style="position: relative; overflow: hidden; border-radius: var(--radius); backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.05);">
+          <img src="https://i.imgur.com/9Ax0O9I.jpg" alt="KazFlor" style="width: 100%; height: auto; display: block; opacity: 0.8;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telegram Форма -->
+  <section id="contact" style="padding: 6rem 2rem; background: #262626;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+      <h2 style="font-family:'Playfair Display', serif; font-size: 2.2rem; color: var(--cream); margin-bottom: 1.5rem;">Связаться с нами</h2>
+      <p style="color: #ccc; margin-bottom: 2rem;">Оставьте заявку — мы напишем вам в Telegram в течение 5 минут!</p>
+      <form action="https://t.me/kazflorpvl" target="_blank">
+        <input type="text" placeholder="Ваше имя" required style="width:100%; padding: 1rem; border:none; border-radius: var(--radius); margin-bottom: 1rem;">
+        <input type="text" placeholder="Ваш Telegram @username" required style="width:100%; padding: 1rem; border:none; border-radius: var(--radius); margin-bottom: 1rem;">
+        <button type="submit" class="btn-primary">Отправить</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Instagram Галерея -->
+  <section style="padding: 5rem 2rem; background: #1e1e1e;">
+    <h2 style="text-align:center; font-family:'Playfair Display', serif; font-size: 2.2rem; color: var(--cream); margin-bottom: 2rem;">
+      Наш Instagram
+    </h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <iframe src="https://lightwidget.com/widgets/your-widget-id.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%; border:0; overflow:hidden;"></iframe>
+      <!-- Заменить your-widget-id на реальный ID LightWidget. Или скажи, я вставлю готовый. -->
+    </div>
+  </section>
+
+   <!-- Футер -->
+  <footer style="background: #111; padding: 3rem 2rem; text-align: center; color: #888; font-size: 0.95rem;">
+    <p>&copy; 2025 KazFlor PVL. Все права защищены.</p>
+    <p>Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank" style="color: var(--bronze);">kaz_flor_pvl</a></p>
+  </footer>
+
+</body>
+</html>
