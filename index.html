@@ -224,15 +224,72 @@
     </div>
   </section>
 
-  <!-- Instagram Галерея -->
-  <section style="padding: 5rem 2rem; background: #1e1e1e;">
-    <h2 style="text-align:center; font-family:'Playfair Display', serif; font-size: 2.2rem; color: var(--cream); margin-bottom: 2rem;">
-      Наш Instagram
-    </h2>
-    <div style="max-width: 800px; margin: 0 auto;">
-      <iframe src="https://www.instagram.com/kaz_flor_pvl?igsh=ZDJ1cmM3amUzd3Jr" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%; border:0; overflow:hidden;"></iframe>
-      <!-- Заменить your-widget-id на реальный ID LightWidget. Или скажи, я вставлю готовый. -->
-    </div>
+ <section id="instagram" class="insta-section">
+  <h2>Мы в Instagram</h2>
+  <div class="insta-grid">
+    <!-- Повтори столько блоков, сколько нужно -->
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+    <div class="insta-item"><img src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" alt=""></div>
+  </div>
+</section>
+
+<style>
+.insta-section {
+  padding: 4rem 1rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+.insta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.insta-item {
+  overflow: hidden;
+  border-radius: 12px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.insta-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+.insta-item.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+</style>
+
+<script>
+// Анимация при скролле
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.insta-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  items.forEach(item => observer.observe(item));
+});
+</script>
   </section>
 
    <!-- Футер -->
