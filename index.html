@@ -3,290 +3,246 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Цветочная мастерская</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <title>Цветочная мастерская @kaz_flor_pvl</title>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --main-color: #c71585;
+      --accent-color: #ffb6c1;
+      --light-bg: #fff0f5;
+      --radius: 18px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Playfair Display', serif;
-      background: #f3fff3;
-      color: #444;
-      line-height: 1.6;
+      font-family: 'Unbounded', sans-serif;
+      background: linear-gradient(to bottom, var(--light-bg), #ffffff);
+      color: #333;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     header {
-      background: url('https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg') center/cover no-repeat;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 1px 1px 5px #000;
-      text-align: center;
-      animation: fadeIn 2s ease-in-out;
-    }
-    header h1 { font-size: 3em; margin-bottom: 10px; }
-    nav {
-      background: #e1f2e1;
-      padding: 10px;
-      text-align: center;
+      background: white;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 999;
+      text-align: center;
+    }
+    header h1 {
+      color: var(--main-color);
+      font-size: 2rem;
+      animation: bounceInDown 1.2s both;
+    }
+    nav {
+      margin-top: 1rem;
     }
     nav a {
-      margin: 0 15px;
-      color: #2e7d32;
+      margin: 0 0.5rem;
       text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    section h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      color: #2e7d32;
-      text-align: center;
-      animation: fadeInUp 1s ease;
-    }
-    .services, .portfolio {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      animation: fadeInUp 1.5s ease;
-    }
-    .services div {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .slider {
-      position: relative;
-      overflow: hidden;
-      max-width: 100%;
-    }
-    .slides {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-    .slides img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .slider-nav {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .slider-nav button {
-      background: #2e7d32;
-      border: none;
+      background: var(--main-color);
       color: white;
-      padding: 8px 12px;
-      margin: 0 5px;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      transition: 0.3s;
+      font-size: 0.9rem;
     }
-
-    .testimonial {
-      font-style: italic;
-      margin-bottom: 20px;
+    nav a:hover {
+      background: #a0136f;
+    }
+    .hero {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(to right, #fffafc, #ffe4e1);
+    }
+    .hero h2 {
+      font-size: 2rem;
+      color: var(--main-color);
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.9rem 2.2rem;
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 1.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      color: var(--main-color);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-content p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    section#about {
+      padding: 3rem 1.5rem;
+      background: #fff5f8;
       text-align: center;
     }
-
+    section#about p {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    section#instagram {
+      padding: 3rem 1.5rem;
+      background: #fff0f7;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      max-width: 400px;
+      height: 500px;
+      border: none;
+      border-radius: 16px;
+    }
+    section#form {
+      padding: 4rem 1.5rem;
+      background: linear-gradient(to right, #fff0f5, #ffffff);
+      text-align: center;
+    }
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-width: 500px;
-      margin: auto;
+      max-width: 480px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     }
     form input, form textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    form button {
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    form button:hover {
-      background: #256c28;
-    }
-
-    iframe.map {
       width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 30px;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      margin-bottom: 1rem;
     }
-
-    .instagram {
+    .footer {
       text-align: center;
-      margin-top: 40px;
-    }
-    .instagram a {
-      display: inline-block;
-      background: #2e7d32;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .instagram a:hover {
-      background: #256c28;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #999;
     }
 
-    .review-form {
-      margin-top: 40px;
-      animation: fadeIn 2s ease;
-    }
-    .review-form input, .review-form textarea {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #aaa;
-    }
-    .review-form input[type="file"] {
-      border: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #e1f2e1;
-      color: #2e7d32;
-      margin-top: 60px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .hero h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div>
-      <h1>Цветы для вашей свадьбы</h1>
-      <p>Нежность. Аромат. Совершенство в каждом лепестке.</p>
-    </div>
+    <h1>Цветочная мастерская @kaz_flor_pvl</h1>
+    <nav>
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#form">Заказ</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="#about">О нас</a>
-    <a href="#services">Услуги</a>
-    <a href="#portfolio">Портфолио</a>
-    <a href="#reviews">Отзывы</a>
-    <a href="#contact">Контакты</a>
-  </nav>
+  <section class="hero">
+    <h2>Букеты, наполненные чувствами</h2>
+    <p>Мы создаем не просто цветы, а эмоции. Закажите букет, который скажет всё без слов.</p>
+    <a href="#form" class="btn-primary">Сделать заказ</a>
+  </section>
+
+  <section id="catalog" class="gallery">
+    <div class="card animate__animated animate__fadeInUp">
+      <img src="https://source.unsplash.com/500x400/?flowers,bouquet" alt="Букет">
+      <div class="card-content">
+        <h3>Пудровая нежность</h3>
+        <p>Мягкие оттенки, воздушная гипсофила и романтика в каждом лепестке.</p>
+      </div>
+    </div>
+    <div class="card animate__animated animate__fadeInUp animate__delay-1s">
+      <img src="https://source.unsplash.com/500x400/?roses" alt="Розы">
+      <div class="card-content">
+        <h3>Классика любви</h3>
+        <p>Красные розы – символ страсти. Для самых важных признаний.</p>
+      </div>
+    </div>
+    <div class="card animate__animated animate__fadeInUp animate__delay-2s">
+      <img src="https://source.unsplash.com/500x400/?wedding,flowers" alt="Свадебный букет">
+      <div class="card-content">
+        <h3>Свадебный стиль</h3>
+        <p>Чистота, минимализм, светлые тона – ваш идеальный день начинается здесь.</p>
+      </div>
+    </div>
+  </section>
 
   <section id="about">
     <h2>О нас</h2>
-    <p>Мы создаём индивидуальные композиции, учитывая каждую деталь вашей свадьбы. Наши флористы делают всё с душой и любовью к цветам.</p>
+    <p>Мы — команда флористов из Павлодара, с душой и любовью к цветам. Создаем композиции уже более 5 лет, оформляем свадьбы, мероприятия, дарим радость людям каждый день.</p>
   </section>
 
-  <section id="services">
-    <h2>Услуги</h2>
-    <div class="services">
-      <div>
-        <h3>Букеты невесты</h3>
-        <p>Элегантные и нежные цветочные композиции на любой стиль</p>
-      </div>
-      <div>
-        <h3>Оформление залов</h3>
-        <p>Украшение банкетов живыми цветами, гирляндами и свечами</p>
-      </div>
-      <div>
-        <h3>Цветочные арки</h3>
-        <p>Романтичные арки для церемоний и фотосессий</p>
-      </div>
-    </div>
+  <section id="instagram">
+    <h2>Instagram @kaz_flor_pvl</h2>
+    <iframe src="https://widgets.sociablekit.com/instagram-feed/iframe/26548282" allowfullscreen loading="lazy"></iframe>
   </section>
 
-  <section id="portfolio">
-    <h2>Портфолио</h2>
-    <div class="slider">
-      <div class="slides" id="slides">
-        <img src="https://https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Цветочный букет 1">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Цветочная композиция 2">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Свадебная арка 3">
-        <img src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg" alt="Декор зала 4">
-      </div>
-    </div>
-    <div class="slider-nav">
-      <button onclick="moveSlide(-1)">&lt;</button>
-      <button onclick="moveSlide(1)">&gt;</button>
-    </div>
-  </section>
-
-  <section id="reviews">
-    <h2>Отзывы</h2>
-    <div class="testimonial">«Самые красивые цветы! Всё было как в мечте!»</div>
-    <div class="testimonial">«Вы сделали наш день ещё прекраснее. Спасибо!»</div>
-    <form class="review-form">
-      <input type="text" placeholder="Ваше имя" required>
-      <input type="file" accept="image/*">
-      <textarea placeholder="Ваш отзыв" rows="4" required></textarea>
-      <button type="submit">Оставить отзыв</button>
-    </form>
-  </section>
-
-  <section id="contact">
-    <h2>Свяжитесь с нами</h2>
-    <form onsubmit="handleWhatsApp(event)">
+  <section id="form">
+    <h2>Заказать букет</h2>
+    <form action="mailto:your@email.com" method="POST" enctype="text/plain">
       <input type="text" name="name" placeholder="Ваше имя" required />
-      <input type="tel" name="phone" placeholder="Номер WhatsApp" required />
-      <textarea name="message" rows="4" placeholder="Комментарий или пожелание (необязательно)"></textarea>
-      <button type="submit">Заказать через WhatsApp</button>
+      <input type="tel" name="phone" placeholder="Телефон или WhatsApp" required />
+      <textarea name="message" rows="4" placeholder="Комментарий, состав, дата..."></textarea>
+      <button type="submit" class="btn-primary">Отправить</button>
     </form>
-    <iframe class="map" src="https://go.2gis.com/myxYI" allowfullscreen></iframe>
-    <div class="instagram">
-      <a href="https://www.instagram.com/kaz_flor_pvl?igsh=ZDJ1cmM3amUzd3Jr" target="_blank">Мы в Instagram @kaz_flor_pvl</a>
-    </div>
   </section>
 
-  <footer>
-    &copy; 2025 KAZ FLOR — Павлодар, Назарбаева 69. Все права защищены.
-  </footer>
+  <div class="footer">
+    &copy; 2025 @kaz_flor_pvl — Цветочная магия из Павлодара
+  </div>
 
-  <script>
-    let currentSlide = 0;
-    const slides = document.getElementById('slides');
-
-    function moveSlide(direction) {
-      const totalSlides = slides.children.length;
-      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    function handleWhatsApp(event) {
-      event.preventDefault();
-      const form = event.target;
-      const name = form.name.value;
-      const phone = form.phone.value;
-      const message = form.message.value;
-      const text = `Здравствуйте! Меня зовут ${name}. Мой номер: ${phone}. ${message ? 'Комментарий: ' + message : ''}`;
-      const url = `https://wa.me/77055857488?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
-    }
-  </script>
 </body>
 </html>
