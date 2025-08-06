@@ -138,15 +138,24 @@
 </head>
 <body>
 
-  <!-- Видеофон -->
-  <video autoplay muted loop class="bg-video">
-    <source src="https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png" type="video/mp4">
-    Ваш браузер не поддерживает видео фон.
-  </video>
+<!-- Фотофон вместо видео -->
+<div style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.wedding-magazine.ru/wp-content/uploads/2022/05/screen-shot-2021-05-11-at-16.19.52.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.4;">
+</div>
 
   <!-- Хедер -->
   <header>
-    <h1>KazFlor PVL</h1>
+    <h1>KazFlor</h1>
     <nav>
       <a href="#catalog">Каталог</a>
       <a href="#about">О нас</a>
@@ -157,7 +166,7 @@
   <!-- Hero-секция -->
   <section class="hero">
     <h2>Цветы, которые говорят за вас</h2>
-    <p>Роскошные букеты, уникальные композиции и свадебный декор с душой. Мы — KazFlor PVL.</p>
+    <p>Роскошные букеты, уникальные композиции и свадебный декор с душой. Мы — KazFlor</p>
     <a href="#catalog" class="btn-primary">Смотреть каталог</a>
   </section>
   <!-- Каталог букетов -->
