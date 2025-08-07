@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Свадебная подписка — KAZFLOR</title>
+  <meta name="description" content="Свадебная подписка от KAZFLOR — Премиальное оформление свадеб.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #4e6c50;
+      --cream: #f9f6f2;
+      --bronze: #b08d57;
+      --dark: #121212;
+      --radius: 18px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: url('https://fv5-4.files.fm/thumb_show.php?i=6vy5jwbfzm&view&v=1') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Inter', sans-serif;
+      color: var(--cream);
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--bronze);
+    }
+
+    .subscription-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .subscription-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subscription-text {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      color: var(--cream);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: var(--green);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #3b4f3c;
+    }
+
+    @media (max-width: 600px) {
+      .subscription-title {
+        font-size: 2.2rem;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      nav a {
+        margin-left: 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KAZFLOR</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="contact.html">Контакты</a>
+    </nav>
+  </header>
+
+  <section class="subscription-container">
+    <h2 class="subscription-title">Свадебная подписка</h2>
+    <p class="subscription-text">
+      Мы предлагаем премиальную свадебную подписку для невест, в которую может входить:
+      <br><br>
+      — Персональный свадебный флорист<br>
+      — Индивидуальный подбор цветочной концепции<br>
+      — Регулярные поставки свежих цветов к мероприятиям<br>
+      — Оформление выездной церемонии и банкетного зала<br>
+      — Приятные бонусы, подарки и сервис White Glove<br>
+      <br>
+      Всё продумано до мелочей — чтобы ваш день был безупречным.
+    </p>
+    <a href="#" class="cta-button">Оформить подписку</a>
+  </section>
+</body>
+</html>
