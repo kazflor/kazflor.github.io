@@ -196,6 +196,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KAZFLOR — Каталог букетов</title>
   <meta name="description" content="Премиальные букеты от KAZFLOR. Закажите эксклюзивные цветочные композиции с доставкой.">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -322,20 +327,55 @@
 <section class="catalogue-section">
   <h2 class="section-title animate__animated animate__fadeInUp">Каталог букетов</h2>
 
-  <div class="swipe-gallery">
-    <div class="gallery-track">
-      <div class="gallery-slide animate__animated animate__fadeIn"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4&view" alt="Букет 1"></div>
-      <div class="gallery-slide animate__animated animate__fadeIn animate__delay-1s"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v&view" alt="Букет 2"></div>
-      <div class="gallery-slide animate__animated animate__fadeIn animate__delay-2s"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked&view" alt="Букет 3"></div>
-      <div class="gallery-slide animate__animated animate__fadeIn animate__delay-3s"><img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq&view" alt="Букет 4"></div>
-      <div class="gallery-slide animate__animated animate__fadeIn animate__delay-4s"><img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b&view" alt="Букет 5"></div>
-      <div class="gallery-slide animate__animated animate__fadeIn animate__delay-5s"><img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg&view" alt="Букет 6"></div>
+  <div class="swipe-gallery" id="gallery">
+    <div class="gallery-track" id="track">
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4&view" alt="Букет 1"></div>
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v&view" alt="Букет 2"></div>
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked&view" alt="Букет 3"></div>
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq&view" alt="Букет 4"></div>
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b&view" alt="Букет 5"></div>
+      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg&view" alt="Букет 6"></div>
     </div>
   </div>
 
   <div class="more-btn-container">
     <a href="catalog.html" class="btn-primary">Ещё букеты</a>
   </div>
+</section>
+
+<script>
+  const track = document.getElementById('track');
+  let startX = 0;
+  let currentIndex = 0;
+  const totalSlides = track.children.length;
+
+  function updateSlide() {
+    const offset = -currentIndex * window.innerWidth;
+    track.style.transform = `translateX(${offset}px)`;
+  }
+
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  track.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+
+    if (diff > 50 && currentIndex > 0) {
+      currentIndex--;
+    } else if (diff < -50 && currentIndex < totalSlides - 1) {
+      currentIndex++;
+    }
+
+    updateSlide();
+  });
+
+  window.addEventListener('resize', updateSlide);
+</script>
+
+</body>
+</html>
 </section>
 
 <script>
