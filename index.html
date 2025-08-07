@@ -138,22 +138,32 @@
 </head>
 <body>
 
+<!-- ФОН С ЗАТЕМНЕНИЕМ -->
 <div style="
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background-image: url('https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d');
+  z-index: -10;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 ">
 </div>
 
-<!-- Хедер -->
-<header style="display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem;">
+<!-- ХЕДЕР -->
+<header style="
+  width: 100%;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+">
   <div style="display: flex; align-items: center; gap: 12px;">
     <img src="https://kazflor.github.io/logo_no_bg.png" alt="Логотип KAZFLOR" style="
       height: 60px;
@@ -165,7 +175,7 @@
     <h1 style="
       margin: 0;
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       color: var(--cream);
       line-height: 1;
     ">
@@ -173,7 +183,7 @@
     </h1>
   </div>
   <nav>
-    <!-- сюда позже вставишь ссылки, если нужно -->
+    <!-- Место для ссылок -->
   </nav>
 </header>
 
