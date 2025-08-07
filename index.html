@@ -211,11 +211,12 @@
   overflow-x: auto;
   display: flex;
   gap: 2rem;
-  padding: 1rem 1rem 2rem 1rem; /* сверху, справа, снизу, слева */
+  padding: 1rem 1rem 2rem 1rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scroll-padding-left: 1rem;
   scroll-padding-right: 1rem;
+  min-height: 360px; /* добавлено! минимальная высота свайпера */
 ">
   <!-- КАРТОЧКА 1 -->
   <div style="
@@ -248,6 +249,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    scroll-snap-align: start; /* добавлено — делает свайп к кнопке возможным */
   ">
     <a href="catalog.html" style="
       display: inline-block;
@@ -265,6 +267,8 @@
       Ещё больше букетов →
     </a>
   </div>
+</div>
+
 
 
   </section>
