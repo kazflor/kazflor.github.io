@@ -18,12 +18,25 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background: linear-gradient(145deg, #1c1c1c, #0f0f0f); /* Тёмный градиент */
+      position: relative;
+      background: url('https://fv5-4.files.fm/thumb_show.php?i=6vy5jwbfzm&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d') no-repeat center center fixed;
+      background-size: cover;
       color: var(--cream);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
       scroll-behavior: smooth;
+      z-index: 1;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.65); /* затемнение фона */
+      z-index: 0;
+      pointer-events: none;
     }
 
     header {
@@ -57,6 +70,8 @@
     }
 
     .contact-container {
+      position: relative;
+      z-index: 1;
       max-width: 900px;
       margin: 0 auto;
       padding: 4rem 1.5rem;
@@ -162,8 +177,8 @@
     </p>
 
     <div class="contact-buttons">
-      <a href="https://wa.me/77074565744" target="_blank">Написать в Написать Назарбаева 69</a>
-      <a href="https://wa.me/77074565744" target="_blank">Написать в Маяковского 9</a>
+      <a href="#">Написать в WhatsApp (Назарбаева 69)</a>
+      <a href="#">Написать в WhatsApp (Маяковского 9)</a>
     </div>
 
     <div class="contact-address">
