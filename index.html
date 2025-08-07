@@ -186,25 +186,18 @@
   </section>
 <section style="padding: 4rem 1rem; background: var(--graphite);">
   <h2 style="text-align: center; font-family: 'Playfair Display', serif; color: var(--cream); font-size: 2.5rem; margin-bottom: 2rem;">
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAZFLOR — Каталог букетов</title>
   <meta name="description" content="Премиальные букеты от KAZFLOR. Закажите эксклюзивные цветочные композиции с доставкой.">
+
+  <!-- Шрифты и анимации -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
   <style>
     :root {
       --DarkOliveGreen: #2f352b;
@@ -233,7 +226,7 @@
       top: 0;
       width: 100%;
       padding: 1.2rem 2rem;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -320,124 +313,47 @@
 </head>
 <body>
 
-<header>
-  <h1>KAZFLOR</h1>
-</header>
+  <header>
+    <h1>KAZFLOR</h1>
+  </header>
 
-<section class="catalogue-section">
-  <h2 class="section-title animate__animated animate__fadeInUp">Каталог букетов</h2>
+  <section class="catalogue-section">
+    <h2 class="section-title animate__animated animate__fadeInUp">Каталог букетов</h2>
 
-  <div class="swipe-gallery" id="gallery">
-    <div class="gallery-track" id="track">
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4&view" alt="Букет 1"></div>
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v&view" alt="Букет 2"></div>
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked&view" alt="Букет 3"></div>
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq&view" alt="Букет 4"></div>
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b&view" alt="Букет 5"></div>
-      <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg&view" alt="Букет 6"></div>
+    <div class="swipe-gallery" id="gallery">
+      <div class="gallery-track" id="track">
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4&view" alt="Букет 1"></div>
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v&view" alt="Букет 2"></div>
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked&view" alt="Букет 3"></div>
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq&view" alt="Букет 4"></div>
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b&view" alt="Букет 5"></div>
+        <div class="gallery-slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg&view" alt="Букет 6"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="more-btn-container">
-    <a href="catalog.html" class="btn-primary">Ещё букеты</a>
-  </div>
-</section>
+    <div class="more-btn-container">
+      <a href="catalog.html" class="btn-primary">Ещё букеты</a>
+    </div>
+  </section>
 
-<script>
-  const track = document.getElementById('track');
-  let startX = 0;
-  let currentIndex = 0;
-  const totalSlides = track.children.length;
+  <!-- Скрипт для свайпа -->
+  <script>
+    const track = document.getElementById("track");
+    let position = 0;
 
-  function updateSlide() {
-    const offset = -currentIndex * window.innerWidth;
-    track.style.transform = `translateX(${offset}px)`;
-  }
-
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  track.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-
-    if (diff > 50 && currentIndex > 0) {
-      currentIndex--;
-    } else if (diff < -50 && currentIndex < totalSlides - 1) {
-      currentIndex++;
+    function nextSlide() {
+      position++;
+      if (position >= track.children.length) {
+        position = 0;
+      }
+      track.style.transform = `translateX(-${position * 100}%)`;
     }
 
-    updateSlide();
-  });
-
-  window.addEventListener('resize', updateSlide);
-</script>
+    setInterval(nextSlide, 4000);
+  </script>
 
 </body>
 </html>
-</section>
-
-<script>
-let track = document.querySelector('.gallery-track');
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let index = 0;
-
-function setPosition() {
-  track.style.transform = `translateX(${currentTranslate}px)`;
-}
-
-function touchStart(e) {
-  startX = e.touches[0].clientX;
-}
-
-function touchMove(e) {
-  const touchX = e.touches[0].clientX;
-  const move = touchX - startX;
-  currentTranslate = prevTranslate + move;
-  setPosition();
-}
-
-function touchEnd(e) {
-  const screenWidth = window.innerWidth;
-  const moveBy = currentTranslate - prevTranslate;
-
-  if (moveBy < -50 && index < track.children.length - 1) {
-    index++;
-  } else if (moveBy > 50 && index > 0) {
-    index--;
-  }
-
-  currentTranslate = -index * screenWidth;
-  prevTranslate = currentTranslate;
-  setPosition();
-}
-
-track.addEventListener('touchstart', touchStart);
-track.addEventListener('touchmove', touchMove);
-track.addEventListener('touchend', touchEnd);
-</script>
-
-</body>
-</html>
-</section>
-
-</body>
-</html>
-</section>
-
-<style>
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-</style>
 
   </section>
   
