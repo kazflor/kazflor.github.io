@@ -206,52 +206,66 @@
     Каталог букетов
   </h2>
 
+ <!-- Свайпер-каталог -->
+<div style="
+  overflow-x: auto;
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 1rem 2rem 1rem; /* сверху, справа, снизу, слева */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-left: 1rem;
+  scroll-padding-right: 1rem;
+">
+  <!-- КАРТОЧКА 1 -->
   <div style="
-    overflow-x: auto;
-    display: flex;
-    gap: 2rem;
-    padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  ">
-    <!-- КАРТОЧКА -->
-    <div style="flex: 0 0 auto; width: 280px; scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.2);" class="animate__animated animate__fadeInUp">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" style="width: 100%; display: block;">
-    </div>
+    flex: 0 0 auto;
+    width: min(280px, 80vw);
+    scroll-snap-align: start;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  " class="animate__animated animate__fadeInUp">
+    <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" style="width: 100%; display: block;">
+  </div>
 
-    <div style="flex: 0 0 auto; width: 280px; scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.2);" class="animate__animated animate__fadeInUp animate__delay-1s">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" style="width: 100%; display: block;">
-    </div>
+  <!-- КАРТОЧКА 2 -->
+  <div style="
+    flex: 0 0 auto;
+    width: min(280px, 80vw);
+    scroll-snap-align: start;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  " class="animate__animated animate__fadeInUp animate__delay-1s">
+    <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" style="width: 100%; display: block;">
+  </div>
 
   <!-- КНОПКА: Ещё больше букетов -->
-<div style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 280px;">
-  <a href="catalog.html" style="
-    display: inline-block;
-    padding: 14px 24px;
-    background-color: var(--green);
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    transition: background-color 0.3s ease;
-  " onmouseover="this.style.backgroundColor='#3b4f3c'" onmouseout="this.style.backgroundColor='var(--green)'">
-    Ещё больше букетов →
-  </a>
-</div>
-</section>
+  <div style="
+    flex: 0 0 auto;
+    width: min(280px, 80vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  ">
+    <a href="catalog.html" style="
+      display: inline-block;
+      padding: 14px 24px;
+      background-color: var(--green);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    " onmouseover="this.style.backgroundColor='#3b4f3c'" onmouseout="this.style.backgroundColor='var(--green)'">
+      Ещё больше букетов →
+    </a>
+  </div>
 
-<style>
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-</style>
 
   </section>
   
