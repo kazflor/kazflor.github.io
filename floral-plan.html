@@ -1,148 +1,459 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Свадебная подписка — KAZFLOR</title>
-  <meta name="description" content="Свадебная подписка от KAZFLOR — Премиальное оформление свадеб.">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KAZFLOR — Luxe Edition</title>
+<meta name="description" content="KAZFLOR — премиальная флористика. Букеты, свадьбы, подписки.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --green: #4e6c50;
-      --cream: #f9f6f2;
-      --bronze: #b08d57;
-      --dark: #121212;
-      --radius: 18px;
-    }
+<style>
+  :root{
+    --bg1: #0b0b0b;
+    --khaki: #4e6c50;
+    --khaki-2:#556B2F;
+    --cream:#f9f6f2;
+    --muted:#cfcfcf;
+    --glass: rgba(255,255,255,0.04);
+    --accent: #b08d57;
+    --radius:20px;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    color:var(--cream);
+    background:linear-gradient(180deg,#060606 0%, #0b0b0b 100%);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* decorative leaves/parallax layer */
+  .parallax{
+    position:fixed;
+    inset:0;
+    z-index:-30;
+    background:
+      radial-gradient(1200px 400px at 10% 10%, rgba(78,108,80,0.12), transparent 20%),
+      radial-gradient(900px 300px at 90% 85%, rgba(176,141,87,0.08), transparent 20%),
+      url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
+    background-size:cover;
+    background-position:center;
+    transform:translateZ(0);
+    filter: contrast(0.95) saturate(0.95) brightness(0.9);
+  }
 
-    body {
-      background: url('https://fv5-4.files.fm/thumb_show.php?i=6vy5jwbfzm&view&v=1') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Inter', sans-serif;
-      color: var(--cream);
-      line-height: 1.6;
-    }
+  /* subtle grain overlay */
+  .grain{ position:fixed; inset:0; pointer-events:none; background-image:linear-gradient(transparent 50%, rgba(0,0,0,0.02) 50%); background-size:100% 6px; mix-blend-mode:overlay; z-index:-10; opacity:0.35 }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: 0;
-      pointer-events: none;
-    }
+  .site{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:36px 22px;
+    position:relative;
+  }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(18, 18, 18, 0.85);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 0;
+    margin-bottom:16px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:14px;
+  }
+  .brand img{height:60px; width:auto; object-fit:contain; filter:brightness(0) invert(1)}
+  .brand h1{font-family:'Playfair Display',serif; margin:0; font-size:1.6rem; letter-spacing:0.6px}
+  nav a{ color:var(--muted); text-decoration:none; margin-left:12px; font-weight:600; padding:6px 10px; border-radius:10px}
+  nav a:hover{ color:var(--cream); background:rgba(255,255,255,0.03) }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--cream);
-    }
+  /* Hero split card - glass */
+  .hero-wrap{
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:28px;
+    align-items:center;
+    min-height:72vh;
+    margin-bottom:40px;
+  }
+  @media (max-width:980px){ .hero-wrap{ grid-template-columns: 1fr; padding-top:26px } }
 
-    nav a {
-      margin-left: 1.5rem;
-      color: var(--cream);
-      text-decoration: none;
-      font-weight: 600;
-    }
+  .hero-left{
+    position:relative;
+  }
+  .kicker{ font-size:0.9rem; color:var(--muted); text-transform:uppercase; letter-spacing:2px}
+  .hero-title{
+    font-family:'Playfair Display',serif;
+    font-size:3.1rem;
+    margin:10px 0 12px;
+    line-height:1.02;
+    color:var(--cream);
+  }
+  .hero-desc{ color:#e6e3df; max-width:74ch; font-size:1.05rem }
 
-    nav a:hover {
-      color: var(--bronze);
-    }
+  .hero-cta{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap }
+  .btn{
+    border-radius:999px;
+    padding:12px 20px;
+    text-decoration:none;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:2px solid transparent;
+    transition:all .25s ease;
+    cursor:pointer;
+  }
+  .btn-outline{ background:transparent; color:var(--cream); border-color:rgba(255,255,255,0.14); box-shadow:0 10px 30px rgba(0,0,0,0.45) }
+  .btn-outline:hover{ background:var(--cream); color:#111; transform:translateY(-4px) }
+  .btn-solid{ background:linear-gradient(180deg,var(--khaki),var(--khaki-2)); color:var(--cream); box-shadow:0 10px 30px rgba(0,0,0,0.45) }
+  .btn-solid:hover{ transform:translateY(-4px); filter:brightness(0.95) }
 
-    .subscription-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+  /* right teal glass card */
+  .hero-right{
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+    border-radius:18px;
+    padding:20px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .promo-title{ font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:6px; color:var(--cream) }
+  .promo-sub{ color:var(--muted); font-size:0.95rem; margin-bottom:14px }
+  .promo-list{ list-style:none; padding:0; margin:0; color:#eee }
+  .promo-list li{ margin:10px 0; position:relative; padding-left:18px }
+  .promo-list li::before{ content:""; position:absolute; left:0; top:6px; width:8px;height:8px;border-radius:50%; background:var(--accent) }
 
-    .subscription-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      margin-bottom: 1.5rem;
-    }
+  /* decorative SVG flourish */
+  .flourish{
+    width:160px; height:160px; position:absolute; right:-40px; top:-40px; opacity:0.13; transform:rotate(8deg);
+  }
+  @media(max-width:980px){ .flourish{ display:none } }
 
-    .subscription-text {
-      font-size: 1.1rem;
-      max-width: 650px;
-      margin: 0 auto 2.5rem;
-      color: var(--cream);
-    }
+  /* Catalog big swipe (fullscreen feel on mobile) */
+  .catalog{
+    margin-top:8px;
+  }
+  .swipe{
+    position:relative;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 24px 70px rgba(0,0,0,0.6);
+  }
+  .track{ display:flex; transition:transform .45s cubic-bezier(.22,.9,.28,1); will-change:transform }
+  .slide{ min-width:100%; height:62vh; position:relative }
+  .slide img{ width:100%; height:100%; object-fit:cover; display:block }
+  .slide .meta{
+    position:absolute; left:28px; bottom:28px; color:var(--cream); background:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.5)); padding:10px 16px; border-radius:12px; font-weight:700; backdrop-filter:blur(4px)
+  }
+  .controls{ display:flex; justify-content:center; gap:10px; margin-top:12px }
+  .dot{ width:12px;height:12px;border-radius:50%; background:rgba(255,255,255,0.12); transition:all .2s }
+  .dot.active{ background:var(--cream); transform:scale(1.2) }
 
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background-color: var(--green);
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: var(--radius);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-    }
+  /* grid preview */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+    margin-top:20px;
+  }
+  .grid .card{
+    border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.02); box-shadow:0 12px 30px rgba(0,0,0,0.45);
+  }
+  .grid img{ width:100%; height:200px; object-fit:cover; display:block }
 
-    .cta-button:hover {
-      background-color: #3b4f3c;
-    }
+  /* subscription full-bleed accent */
+  .subscription{
+    margin-top:28px;
+    border-radius:18px;
+    padding:26px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:flex;
+    gap:18px;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 18px 44px rgba(0,0,0,0.45);
+    flex-wrap:wrap;
+  }
+  .sub-left h3{ font-family:'Playfair Display',serif; margin:0 0 8px }
+  .sub-left p{ color:var(--muted); margin:0 }
 
-    @media (max-width: 600px) {
-      .subscription-title {
-        font-size: 2.2rem;
-      }
+  /* gallery small images */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:18px }
+  .gallery img{ width:100%; height:100px; object-fit:cover; border-radius:10px; cursor:pointer; transition:transform .23s }
+  .gallery img:hover{ transform:scale(1.03) }
 
-      header h1 {
-        font-size: 1.4rem;
-      }
+  /* contacts */
+  .contacts{ display:flex; gap:16px; flex-wrap:wrap; margin-top:18px }
+  .contact-card{
+    background:rgba(255,255,255,0.02); padding:16px; border-radius:12px; min-width:220px; box-shadow:0 12px 30px rgba(0,0,0,0.45)
+  }
 
-      nav a {
-        margin-left: 1rem;
-        font-size: 0.95rem;
-      }
-    }
-  </style>
+  footer{ margin-top:40px; padding:40px 0; text-align:center; color:var(--muted) }
+
+  @media(max-width:980px){
+    .hero-title{ font-size:2rem }
+    .hero-wrap{ gap:18px }
+    .slide{ height:52vh }
+  }
+  @media(max-width:560px){
+    .hero-title{ font-size:1.5rem }
+    .brand img{ height:46px }
+    .hero-right{ order:2 }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>KAZFLOR</h1>
-    <nav>
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="contacts.html">Контакты</a>
-    </nav>
-  </header>
 
-  <section class="subscription-container">
-    <h2 class="subscription-title">Свадебная подписка</h2>
-    <p class="subscription-text">
-      Мы предлагаем премиальную свадебную подписку для невест, в которую может входить:
-      <br><br>
-      — Персональный свадебный флорист<br>
-      — Индивидуальный подбор цветочной концепции<br>
-      — Регулярные поставки свежих цветов к мероприятиям<br>
-      — Оформление выездной церемонии и банкетного зала<br>
-      — Приятные бонусы, подарки и сервис White Glove<br>
-      <br>
-      Всё продумано до мелочей — чтобы ваш день был безупречным.
-    </p>
-    <a href="#" class="cta-button">Оформить подписку</a>
-  </section>
+  <div class="parallax" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="site">
+
+    <!-- header -->
+    <header>
+      <div class="brand">
+        <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR">
+        <h1>KAZFLOR</h1>
+      </div>
+      <nav aria-label="Навигация" class="main-nav">
+        <a href="#home">Главная</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#subscription">Подписка</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </header>
+
+    <!-- hero -->
+    <section id="home" class="hero-wrap" role="region" aria-label="Главная секция">
+      <div class="hero-left">
+        <div class="kicker animate__animated animate__fadeInUp">Авторская флористика</div>
+        <h2 class="hero-title animate__animated animate__fadeInUp">Цветы для тех, кто ценит детали — <span style="color:var(--accent)">элегантно</span> и <span style="color:var(--khaki)">изысканно</span></h2>
+        <p class="hero-desc animate__animated animate__fadeInUp">Мы создаём композиции с архитектурой и чувством цвета — букеты, которые работают в кадре, в зале и в памяти ваших гостей.</p>
+
+        <div class="hero-cta animate__animated animate__fadeInUp">
+          <a href="#catalog" class="btn btn-outline" aria-label="Смотреть каталог">Смотреть каталог</a>
+          <a href="#contacts" class="btn btn-solid" aria-label="Связаться">Связаться</a>
+        </div>
+
+        <!-- decorative svg -->
+        <svg class="flourish" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="none" stroke="#b08d57" stroke-width="1.2" stroke-linecap="round" opacity="0.9">
+            <path d="M10 140 C40 120, 80 100, 120 110 S190 150, 190 150"/>
+            <path d="M20 120 C50 100, 90 80, 130 90 S180 130, 180 130"/>
+          </g>
+        </svg>
+      </div>
+
+      <aside class="hero-right animate__animated animate__fadeInUp" aria-hidden="false">
+        <div class="promo-title">Свадебное оформление</div>
+        <div class="promo-sub">Персональная концепция, примерочные букетов, точная подсадка и монтаж.</div>
+        <ul class="promo-list">
+          <li>Персональный флорист</li>
+          <li>Примерочные: букет + бутоньерка</li>
+          <li>Декор церемонии и банкета</li>
+        </ul>
+        <div style="margin-top:14px; text-align:center;">
+          <a class="btn btn-outline" href="#subscription">Узнать пакеты</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- catalog -->
+    <section id="catalog" class="catalog">
+      <h2 class="section-title">Коллекция избранных работ</h2>
+      <p class="section-sub">Подборка наших фаворитов — идеальна для вдохновения и заказа.</p>
+
+      <div class="swipe" role="region" aria-label="Карусель букетов" tabindex="0">
+        <div class="track" id="track">
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика" loading="lazy"><div class="meta">Пудровая романтика</div></div>
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика" loading="lazy"><div class="meta">Свадебная классика</div></div>
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония" loading="lazy"><div class="meta">Цветочная симфония</div></div>
+        </div>
+      </div>
+      <div class="controls" id="dots" aria-hidden="false"></div>
+
+      <div class="grid" aria-hidden="false">
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет 1" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет 2" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет 3" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Букет 4" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Букет 5" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Букет 6" loading="lazy"></div>
+      </div>
+    </section>
+
+    <!-- subscription -->
+    <section id="subscription">
+      <h2 class="section-title">Bridal Floral Plan</h2>
+      <p class="section-sub">Персональная подписка для невест — VIP-сервис и регулярная поддержка подготовки.</p>
+
+      <div class="subscription">
+        <div class="sub-left">
+          <h3>Что входит</h3>
+          <p class="sub-desc">Все пакеты настраиваются под ваши даты и масштаб: от бутоньерок до полного декора зала.</p>
+          <ul class="sub-list">
+            <li>Персональный флорист</li>
+            <li>Пробные букеты и подборка</li>
+            <li>Доставка и монтаж</li>
+            <li>Срочная поддержка в день события</li>
+          </ul>
+        </div>
+        <div class="sub-right" style="text-align:center">
+          <a class="btn btn-solid" href="#contacts">Оформить подписку</a>
+          <div style="margin-top:10px;color:var(--muted)">Индивидуальные условия для крупных заказов</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- gallery/testimonials -->
+    <section aria-label="Отзывы">
+      <h2 class="section-title">Отзывы и моменты</h2>
+      <p class="section-sub">Нажми на фото, чтобы увеличить.</p>
+
+      <div class="gallery" id="gallery">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" data-src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" alt="Фото 1" loading="lazy">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" data-src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" alt="Фото 2" loading="lazy">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" data-src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" alt="Фото 3" loading="lazy">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" data-src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" alt="Фото 4" loading="lazy">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" data-src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Фото 5" loading="lazy">
+        <img data-full="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" data-src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" alt="Фото 6" loading="lazy">
+      </div>
+    </section>
+
+    <!-- contacts -->
+    <section id="contacts">
+      <h2 class="section-title">Контакты</h2>
+      <p class="section-sub">Пишите в мессенджеры — ответим быстро.</p>
+
+      <div class="contacts">
+        <div class="contact-card">
+          <h3>Павлодар — Маяковского 9</h3>
+          <p>Пн–Сб: 10:00–20:00</p>
+          <p style="margin-top:12px"><a class="btn btn-solid" href="https://wa.me/77074565744" target="_blank" rel="noopener">WhatsApp</a></p>
+        </div>
+        <div class="contact-card">
+          <h3>Назарбаева 69</h3>
+          <p>По договорённости</p>
+          <p style="margin-top:12px"><a class="btn btn-outline" href="https://t.me/ВАША_ССЫЛКА" target="_blank" rel="noopener">Telegram</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="max-width:var(--maxw); margin:0 auto">
+        <p style="margin:0">&copy; KAZFLOR — 2025</p>
+        <p style="margin:6px 0 0; color:var(--muted)">Instagram: <a href="https://instagram.com/kaz_flor_pvl" style="color:var(--accent); text-decoration:none" target="_blank">@kaz_flor_pvl</a></p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" style="position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.9); z-index:9999; padding:18px">
+    <img id="modalImg" alt="preview" style="max-width:94vw; max-height:94vh; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,0.7)">
+  </div>
+
+<script>
+/* ====== tiny carousel (touch + dots + autoplay) ====== */
+(function(){
+  const track = document.getElementById('track');
+  if(!track) return;
+  const slides = Array.from(track.children);
+  const dotsWrap = document.getElementById('dots');
+  let idx = 0, playing = true;
+  const total = slides.length;
+
+  // create dots
+  for(let i=0;i<total;i++){
+    const d = document.createElement('div'); d.className='dot' + (i===0?' active':'');
+    d.addEventListener('click', ()=>go(i));
+    dotsWrap.appendChild(d);
+  }
+
+  function go(i){
+    idx = (i+total)%total;
+    track.style.transform = `translateX(-${idx*100}%)`;
+    updateDots();
+  }
+  function updateDots(){
+    dotsWrap.querySelectorAll('.dot').forEach((d,ii)=> d.classList.toggle('active', ii===idx));
+  }
+
+  // autoplay
+  let timer = setInterval(()=> go(idx+1), 5200);
+
+  // touch support
+  let startX=0, dragging=false;
+  track.addEventListener('touchstart', e=>{ clearInterval(timer); startX=e.touches[0].clientX; dragging=true }, {passive:true});
+  track.addEventListener('touchmove', e=>{ if(!dragging) return; const x=e.touches[0].clientX; const diff = x - startX; track.style.transform = `translateX(calc(-${idx*100}% + ${diff}px))`; }, {passive:true});
+  track.addEventListener('touchend', e=>{ dragging=false; const endX=e.changedTouches[0].clientX; const diff=endX-startX; if(diff>60) go(idx-1); else if(diff<-60) go(idx+1); timer = setInterval(()=> go(idx+1), 5200); });
+
+  // keyboard
+  window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') go(idx-1); if(e.key==='ArrowRight') go(idx+1) });
+})();
+
+/* ====== modal for gallery images (delegation) ====== */
+(function(){
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+
+  function open(src, alt=''){
+    modalImg.src = src;
+    modalImg.alt = alt;
+    modal.style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    modal.style.display='none';
+    modalImg.src='';
+    document.body.style.overflow='';
+  }
+
+  // grid cards & gallery
+  document.addEventListener('click', e=>{
+    const c = e.target.closest('.card, .gallery img');
+    if(!c) return;
+    if(c.classList && c.classList.contains('card')){
+      const src = c.dataset.full || c.querySelector('img')?.src;
+      if(src) open(src);
+      return;
+    }
+    if(c.tagName === 'IMG' && c.dataset.full){
+      open(c.dataset.full, c.alt);
+      return;
+    }
+  });
+  modal.addEventListener('click', close);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') close() });
+})();
+
+/* ====== lazy-load data-src images (basic) ====== */
+(function(){
+  const imgs = document.querySelectorAll('img[data-src]');
+  const obs = 'IntersectionObserver' in window ? new IntersectionObserver((entries, io)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        io.unobserve(img);
+      }
+    });
+  }, {rootMargin:'200px'}) : null;
+
+  imgs.forEach(img=>{
+    if(obs) obs.observe(img);
+    else img.src = img.dataset.src;
+  });
+})();
+</script>
+
 </body>
 </html>
