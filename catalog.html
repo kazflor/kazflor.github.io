@@ -1,434 +1,173 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>KAZFLOR — Премиальные букеты</title>
-<meta name="description" content="KAZFLOR — премиальная цветочная мастерская. Букеты, свадьбы, подписки и доставка.">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAZFLOR — Каталог</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-
 <style>
 :root{
-  --khaki:#556B2F; --khaki-dark:#4e6c50; --cream:#f9f6f2; --bronze:#b08d57;
-  --muted:#cfcfcf; --glass: rgba(255,255,255,0.06); --radius:18px; --max-width:1200px;
-  --shadow-strong:0 20px 50px rgba(0,0,0,0.55);
+  --khaki:#556B2F;
+  --cream:#f9f6f2;
+  --bronze:#b08d57;
+  --muted:#cfcfcf;
+  --glass: rgba(255,255,255,0.06);
+  --radius:18px;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial;background:#0f0f0f;color:var(--cream);-webkit-font-smoothing:antialiased;line-height:1.45;overflow-x:hidden}
-.wrap{max-width:var(--max-width);margin:0 auto;padding:24px}
-.bg{position:fixed;inset:0;z-index:-20;background-image:linear-gradient(rgba(0,0,0,0.58),rgba(0,0,0,0.58)),url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");background-size:cover;background-position:center;filter:saturate(0.95) contrast(0.96)}
-
-/* Header */
-.header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-.brand{display:flex;gap:12px;align-items:center}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:#0f0f0f;
+  color:var(--cream);
+  line-height:1.45;
+}
+.bg {
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
+  background-size:cover;
+  background-position:center;
+}
+.wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:36px 20px;
+}
+header.site-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 0;
+}
+.brand{display:flex;gap:14px;align-items:center}
 .brand img{height:56px;filter:brightness(0) invert(1)}
-.brand h1{font-family:'Playfair Display',serif;margin:0;font-size:1.4rem}
-.nav{display:flex;gap:12px;align-items:center}
-.nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px}
-.nav a:hover{background:rgba(255,255,255,0.03);color:var(--cream)}
+.brand h1{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+}
+nav.main-nav{display:flex;gap:16px}
+nav.main-nav a{
+  color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;
+  transition:all .22s ease;font-size:0.95rem;
+}
+nav.main-nav a:hover{color:var(--cream);background:rgba(255,255,255,0.03)}
 
-/* Top bar actions */
-.top-actions{display:flex;gap:10px;align-items:center}
-.icon-btn{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 10px;cursor:pointer;color:var(--cream);border:0}
-.cart-badge{background:var(--khaki);color:#fff;padding:2px 8px;border-radius:999px;font-size:0.85rem;margin-left:6px}
+.section-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;
+  margin-bottom:30px;
+}
 
-/* Hero */
-.hero{display:grid;gap:8px;align-items:center;text-align:center;padding:30px 0}
-.hero h2{font-family:'Playfair Display',serif;font-size:2.6rem;margin:0}
-.hero p{color:#e6e3df;margin:0 auto;max-width:760px}
+.catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:16px;
+}
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+  background:var(--glass);
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  cursor:pointer;
+  transform:scale(1);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.card img{
+  width:100%;height:200px;object-fit:cover;display:block;
+  transition:transform .4s ease;
+}
+.card:hover{transform:scale(1.03);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+.card:hover img{transform:scale(1.05)}
 
-/* Sections */
-.section{padding:44px 0}
-.section .title{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:8px;text-align:center}
-.section .sub{color:var(--muted);text-align:center;margin-bottom:20px}
+/* modal */
+.modal {
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.85); z-index:99999; padding:20px;
+}
+.modal img{ max-width:92vw; max-height:92vh; border-radius:10px; box-shadow:0 24px 60px rgba(0,0,0,0.7) }
+.modal.show{ display:flex }
 
-/* Carousel */
-.carousel{max-width:1100px;margin:12px auto;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-strong);position:relative;background:linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.04))}
-.viewport{overflow:hidden;position:relative}
-.track{display:flex;transition:transform .45s cubic-bezier(.22,.9,.28,1);will-change:transform}
-.slide{min-width:100%;flex-shrink:0;position:relative;user-select:none}
-.slide img{width:100%;height:60vh;object-fit:cover;display:block;transition:transform .45s}
-.slide .label{position:absolute;left:24px;bottom:20px;background:linear-gradient(180deg,rgba(0,0,0,0.28),rgba(0,0,0,0.46));padding:10px 14px;border-radius:10px;color:var(--cream);font-weight:600;backdrop-filter:blur(4px)}
+footer.site-footer{
+  padding:36px 0;
+  text-align:center;
+  color:var(--muted);
+}
 
-/* arrows */
-.arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);cursor:pointer}
-.arrow svg{width:20px;height:20px;fill:var(--cream)}
-.arrow.left{left:12px} .arrow.right{right:12px}
-
-/* dots */
-.dots{display:flex;gap:8px;justify-content:center;padding:12px 0}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer;transition:transform .2s}
-.dot.active{background:var(--cream);transform:scale(1.15)}
-
-/* Catalog grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
-.card{background:var(--glass);border-radius:14px;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,0.45);cursor:pointer;position:relative;transition:transform .28s,box-shadow .28s}
-.card img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .5s}
-.card:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(0,0,0,0.6)}
-.card:hover img{transform:scale(1.06)}
-.card .meta{padding:12px;color:#eee}
-.card .meta h4{margin:0 0 6px;font-family:'Playfair Display',serif}
-.card .meta p{margin:0;color:var(--muted);font-size:0.95rem}
-.card .price{margin-top:6px;font-weight:700;color:var(--khaki)}
-
-/* About and steps */
-.about{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center}
-.about img{width:320px;border-radius:12px;object-fit:cover}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
-.step{background:rgba(255,255,255,0.02);padding:14px;border-radius:12px;text-align:center}
-
-/* Certificate block */
-.certificate{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:18px;background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(0,0,0,0.04));border-radius:12px}
-.cert-img{width:220px;border-radius:10px;object-fit:cover}
-.cert-content{flex:1;min-width:220px}
-
-/* Contact / footer */
-.contacts{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;text-align:center}
-.contact-card{background:var(--glass);padding:14px;border-radius:12px;min-width:220px}
-
-/* Cart modal */
-.cart-modal{position:fixed;right:18px;top:70px;width:360px;max-width:calc(100% - 36px);background:#111;border-radius:14px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,0.7);display:none;z-index:9999}
-.cart-modal.show{display:block}
-.cart-modal h3{margin:0 0 12px}
-.cart-items{max-height:320px;overflow:auto;margin-bottom:12px}
-.cart-row{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-.cart-row img{width:56px;height:56px;object-fit:cover;border-radius:8px}
-.cart-row .title{flex:1}
-.cart-row .qty{display:flex;gap:6px;align-items:center}
-
-/* form */
-.form-row{display:flex;gap:8px;flex-wrap:wrap}
-.input,textarea,select{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:10px;color:var(--cream);width:100%}
-
-/* responsive */
-@media(max-width:720px){ .about{flex-direction:column-reverse} .hero h2{font-size:1.6rem} .slide img{height:48vh} .cart-modal{left:12px;right:12px;top:auto;bottom:18px} }
+@media(max-width:520px){
+  .brand img{height:48px}
+  .brand h1{font-size:1.3rem}
+  nav.main-nav{display:none}
+  .card img{height:160px}
+}
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
+<div class="bg"></div>
 <div class="wrap">
-
-  <!-- header -->
-  <header class="header" role="banner">
+  <header class="site-header">
     <div class="brand">
-      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo">
       <h1>KAZFLOR</h1>
     </div>
-    <nav class="nav" role="navigation" aria-label="Главная навигация">
-      <a href="#home">Главная</a>
-      <a href="#catalog">Каталог</a>
-      <a href="#about">О нас</a>
-      <a href="#contacts">Контакты</a>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
     </nav>
-    <div class="top-actions" aria-hidden="false">
-      <button id="certBtn" class="icon-btn" title="Купить сертификат">Сертификат</button>
-      <button id="cartBtn" class="icon-btn" aria-expanded="false" title="Корзина">Корзина <span id="cartCount" class="cart-badge">0</span></button>
-    </div>
   </header>
 
-  <!-- hero -->
-  <main id="home" class="hero" role="main">
-    <h2 class="animate__animated animate__fadeInUp">Цветы, которые говорят за вас — лаконично, роскошно и с душой.</h2>
-    <p class="animate__animated animate__fadeInUp">Авторские букеты, свадебные проекты и подарочные сертификаты — всё для важных моментов.</p>
-  </main>
+  <h2 class="section-title animate__animated animate__fadeInUp">Каталог — избранные работы</h2>
 
-  <!-- catalog with carousel -->
-  <section id="catalog" class="section">
-    <div class="title">Коллекция — избранные работы</div>
-    <div class="sub">Минимализм, натуральность и премиальное исполнение</div>
-
-    <div class="carousel" aria-roledescription="carousel">
-      <div class="viewport" id="viewport">
-        <div class="track" id="track" role="list">
-          <div class="slide" role="listitem"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика"><div class="label">Пудровая романтика</div></div>
-          <div class="slide" role="listitem"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика"><div class="label">Свадебная классика</div></div>
-          <div class="slide" role="listitem"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония"><div class="label">Цветочная симфония</div></div>
-        </div>
-      </div>
-      <button class="arrow left" id="prev" aria-label="Предыдущий"><svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-      <button class="arrow right" id="next" aria-label="Следующий"><svg viewBox="0 0 24 24"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg></button>
-      <div class="dots" id="dots" role="tablist"></div>
+  <div class="catalog-grid">
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Фото 1">
     </div>
-
-    <!-- grid with items -->
-    <div class="grid" id="productGrid" aria-live="polite">
-      <!-- product cards: id, title, price, img -->
-      <div class="card" data-id="b1" data-title="Пудровая романтика" data-price="45.00" tabindex="0">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика">
-        <div class="meta"><h4>Пудровая романтика</h4><p>Нежный букет из пионов и роз.</p><div class="price">₸45 000</div></div>
-        <div style="padding:10px;display:flex;gap:8px;justify-content:space-between">
-          <button class="btn-premium add-to-cart">Добавить в корзину</button>
-          <button class="btn-premium btn-filled quick-view">Просмотр</button>
-        </div>
-      </div>
-
-      <div class="card" data-id="b2" data-title="Свадебная классика" data-price="70.00" tabindex="0">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика">
-        <div class="meta"><h4>Свадебная классика</h4><p>Классический свадебный букет.</p><div class="price">₸70 000</div></div>
-        <div style="padding:10px;display:flex;gap:8px;justify-content:space-between">
-          <button class="btn-premium add-to-cart">Добавить в корзину</button>
-          <button class="btn-premium btn-filled quick-view">Просмотр</button>
-        </div>
-      </div>
-
-      <div class="card" data-id="b3" data-title="Цветочная симфония" data-price="55.00" tabindex="0">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония">
-        <div class="meta"><h4>Цветочная симфония</h4><p>Букет с акцентом на текстуру и форму.</p><div class="price">₸55 000</div></div>
-        <div style="padding:10px;display:flex;gap:8px;justify-content:space-between">
-          <button class="btn-premium add-to-cart">Добавить в корзину</button>
-          <button class="btn-premium btn-filled quick-view">Просмотр</button>
-        </div>
-      </div>
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Фото 2">
     </div>
-  </section>
-
-  <!-- about -->
-  <section id="about" class="section">
-    <div class="title">О нас</div>
-    <div class="sub">Несколько слов о том, как мы создаём красоту</div>
-    <div class="about">
-      <div style="max-width:640px">
-        <p>KazFlor — студия авторской флористики. Мы работаем с натуральными материалами, создаём декор и букеты для свадьбы, корпоратива и личных событий.</p>
-        <div class="steps" aria-hidden="false">
-          <div class="step"><strong>1.</strong><div>Консультация</div></div>
-          <div class="step"><strong>2.</strong><div>Подбор концепции</div></div>
-          <div class="step"><strong>3.</strong><div>Доставка и монтаж</div></div>
-          <div class="step"><strong>4.</strong><div>Поддержка в день</div></div>
-        </div>
-      </div>
-      <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" alt="Команда" loading="lazy">
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Фото 3">
     </div>
-  </section>
-
-  <!-- certificate block -->
-  <section id="certificate" class="section">
-    <div class="title">Подарочный сертификат</div>
-    <div class="sub">Подарите эмоцию — сертификат приходит на почту и действует 1 год.</div>
-    <div class="certificate">
-      <img class="cert-img" src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Сертификат">
-      <div class="cert-content">
-        <h3>Сертификат — от ₸5 000</h3>
-        <p>Выберите сумму и оформите подарок. Мы вышлем красивую электронную карту с кодом.</p>
-        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-          <select id="certAmount" class="input">
-            <option value="5000">₸5 000</option>
-            <option value="10000">₸10 000</option>
-            <option value="20000">₸20 000</option>
-            <option value="50000">₸50 000</option>
-          </select>
-          <button id="buyCert" class="btn-premium btn-filled">Купить сертификат</button>
-        </div>
-      </div>
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Фото 4">
     </div>
-  </section>
-
-  <!-- contact & footer -->
-  <section id="contacts" class="section">
-    <div class="title">Контакты</div>
-    <div class="sub">Свяжитесь с нами любым удобным способом</div>
-    <div class="contacts">
-      <div class="contact-card">
-        <h4>Бутик — Павлодар</h4><p class="muted">ул. Маяковского 9<br>Пн–Сб: 10:00–20:00</p>
-        <p style="margin-top:8px"><a class="btn-premium btn-filled" href="https://wa.me/77074565744">WhatsApp</a></p>
-      </div>
-      <div class="contact-card">
-        <h4>Назарбаева</h4><p class="muted">Назарбаева 69<br>По договорённости</p>
-      </div>
-      <div style="min-width:320px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
-        <form id="contactForm">
-          <div style="display:flex;gap:8px;margin-bottom:8px">
-            <input name="name" placeholder="Имя" class="input" required>
-            <input name="phone" placeholder="Телефон" class="input" required>
-          </div>
-          <textarea name="message" placeholder="Сообщение" class="input" rows="3"></textarea>
-          <div style="margin-top:8px"><button class="btn-premium">Отправить</button></div>
-        </form>
-      </div>
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Фото 5">
     </div>
-  </section>
-
-  <footer style="padding:20px 0;text-align:center;color:var(--muted)">&copy; KAZFLOR — 2025</footer>
-</div>
-
-<!-- cart modal -->
-<div id="cartModal" class="cart-modal" role="dialog" aria-hidden="true">
-  <h3>Корзина</h3>
-  <div class="cart-items" id="cartItems"></div>
-  <div style="display:flex;gap:8px;justify-content:space-between;align-items:center">
-    <div><strong>Итого:</strong> <span id="cartTotal">₸0</span></div>
-    <div style="display:flex;gap:8px">
-      <button id="clearCart" class="btn-premium">Очистить</button>
-      <button id="checkout" class="btn-premium btn-filled">Оформить</button>
+    <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Фото 6">
     </div>
   </div>
+
+  <footer class="site-footer">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+  </footer>
+
+<div style="text-align:center; margin: 40px 0;">
+  <a class="btn-premium" href="index.html">На главную</a>
 </div>
 
-<!-- quick view modal -->
-<div id="quickModal" class="cart-modal" style="left:50%;transform:translateX(-50%);display:none;" role="dialog" aria-hidden="true">
-  <h3 id="quickTitle"></h3>
-  <img id="quickImg" src="" alt="" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin:8px 0">
-  <div id="quickDesc" style="color:var(--muted)"></div>
-  <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
-    <button id="quickAdd" class="btn-premium">Добавить в корзину</button>
-    <button id="quickClose" class="btn-premium btn-filled">Закрыть</button>
-  </div>
+</div>
+
+<div id="modal" class="modal">
+  <img id="modalImg" src="" alt="">
 </div>
 
 <script>
-/* ---------- Carousel (robust) ---------- */
 (function(){
-  const track = document.getElementById('track');
-  const slides = Array.from(track.children);
-  const dots = document.getElementById('dots');
-  const prev = document.getElementById('prev');
-  const next = document.getElementById('next');
-  const viewport = document.getElementById('viewport');
-  let idx = 0, isDown=false, startX=0, autoplay;
-
-  // dots
-  slides.forEach((s,i)=>{
-    const d = document.createElement('button');
-    d.className = 'dot' + (i===0?' active':'');
-    d.addEventListener('click', ()=> go(i));
-    dots.appendChild(d);
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  document.querySelectorAll('.card').forEach(el=>{
+    el.addEventListener('click',()=>{
+      modalImg.src = el.dataset.full;
+      modal.classList.add('show');
+    });
   });
-  function updateDots(){ dots.querySelectorAll('.dot').forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-
-  function go(i){
-    idx = (i + slides.length) % slides.length;
-    track.style.transform = `translateX(-${idx*100}%)`;
-    updateDots();
-  }
-  prev.addEventListener('click', ()=> go(idx-1));
-  next.addEventListener('click', ()=> go(idx+1));
-
-  // pointer/touch support
-  viewport.addEventListener('pointerdown', e=>{
-    isDown = true; startX = e.clientX; track.style.transition='none'; clearInterval(autoplay);
-  });
-  window.addEventListener('pointermove', e=>{
-    if(!isDown) return;
-    const dx = e.clientX - startX; const percent = dx/viewport.offsetWidth*100;
-    track.style.transform = `translateX(${ -idx*100 + percent }%)`;
-  });
-  window.addEventListener('pointerup', e=>{
-    if(!isDown) return; isDown=false; track.style.transition='transform .45s cubic-bezier(.22,.9,.28,1)';
-    const dx = e.clientX - startX;
-    if(Math.abs(dx) > viewport.offsetWidth*0.18){
-      if(dx < 0) idx = Math.min(idx+1, slides.length-1);
-      else idx = Math.max(idx-1, 0);
-    }
-    go(idx); startAutoplay();
-  });
-
-  function startAutoplay(){ clearInterval(autoplay); autoplay = setInterval(()=> go(idx+1), 5200); }
-  startAutoplay();
+  modal.addEventListener('click',()=> modal.classList.remove('show'));
 })();
-
-/* ---------- Cart logic ---------- */
-const cart = [];
-const cartBtn = document.getElementById('cartBtn');
-const cartModal = document.getElementById('cartModal');
-const cartCount = document.getElementById('cartCount');
-const cartItemsEl = document.getElementById('cartItems');
-const cartTotalEl = document.getElementById('cartTotal');
-const clearCartBtn = document.getElementById('clearCart');
-const checkoutBtn = document.getElementById('checkout');
-
-function formatPrice(amount){ return '₸' + (amount).toLocaleString('ru-RU'); }
-
-function updateCartUI(){
-  cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
-  cartItemsEl.innerHTML = '';
-  let total = 0;
-  cart.forEach(item=>{
-    total += item.qty * item.price;
-    const row = document.createElement('div'); row.className='cart-row';
-    row.innerHTML = `<img src="${item.img}"><div class="title"><strong>${item.title}</strong><div style="color:var(--muted);font-size:0.9rem">₸${(item.price).toFixed(0)}</div></div>
-      <div class="qty"><button data-id="${item.id}" class="minus">−</button><div style="min-width:22px;text-align:center">${item.qty}</div><button data-id="${item.id}" class="plus">+</button></div>`;
-    cartItemsEl.appendChild(row);
-  });
-  cartTotalEl.textContent = formatPrice(total);
-  cartBtn.setAttribute('aria-expanded', cart.length>0);
-}
-
-function addToCart(obj){
-  const found = cart.find(i=>i.id===obj.id);
-  if(found) found.qty++;
-  else cart.push({...obj, qty:1});
-  updateCartUI();
-  cartModal.classList.add('show');
-  setTimeout(()=> cartModal.classList.remove('show'), 2200);
-}
-
-// product add buttons
-document.querySelectorAll('.add-to-cart').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    const card = e.target.closest('.card');
-    const id = card.getAttribute('data-id');
-    const title = card.getAttribute('data-title');
-    const price = parseFloat(card.getAttribute('data-price'));
-    const img = card.querySelector('img').src;
-    addToCart({id,title,price,img});
-  });
-});
-
-// cart open
-cartBtn.addEventListener('click', ()=>{
-  cartModal.classList.toggle('show');
-});
-
-// qty controls (delegation)
-cartItemsEl.addEventListener('click', e=>{
-  const id = e.target.dataset.id;
-  if(!id) return;
-  const item = cart.find(i=>i.id===id);
-  if(e.target.classList.contains('plus')){ item.qty++; }
-  if(e.target.classList.contains('minus')){ item.qty = Math.max(0, item.qty-1); if(item.qty===0) cart.splice(cart.indexOf(item),1); }
-  updateCartUI();
-});
-
-clearCartBtn.addEventListener('click', ()=>{ cart.length=0; updateCartUI(); });
-
-checkoutBtn.addEventListener('click', ()=>{
-  if(cart.length===0){ alert('Корзина пуста'); return; }
-  alert('Спасибо! Заказ отправлен (имитация).'); cart.length=0; updateCartUI();
-});
-
-/* ---------- Certificate purchase (mock) ---------- */
-document.getElementById('buyCert').addEventListener('click', ()=>{
-  const amount = parseInt(document.getElementById('certAmount').value,10);
-  const id = 'cert_'+Date.now();
-  addToCart({id,title:'Подарочный сертификат',price:amount,img:document.querySelector('.cert-img').src});
-  alert('Сертификат добавлен в корзину. Оформите покупку в корзине.');
-});
-
-document.getElementById('certBtn').addEventListener('click', ()=>{
-  document.getElementById('certificate').scrollIntoView({behavior:'smooth'});
-});
-
-/* ---------- Quick view ---------- */
-const quickModal = document.getElementById('quickModal');
-document.querySelectorAll('.quick-view').forEach(btn=> btn.addEventListener('click', e=>{
-  const card = e.target.closest('.card');
-  const title = card.querySelector('.meta h4').textContent;
-  const img = card.querySelector('img').src;
-  const desc = card.querySelector('.meta p').textContent;
-  document.getElementById('quickTitle').textContent = title;
-  document.getElementById('quickImg').src = img;
-  document.getElementById('quickDesc').textContent = desc;
-  quickModal.style.display = 'block';
-  document.getElementById('quickAdd').onclick = ()=>{ addToCart({id:card.dataset.id,title,price:parseFloat(card.dataset.price),img}); quickModal.style.display='none'; };
-}));
-document.getElementById('quickClose').addEventListener('click', ()=> quickModal.style.display='none');
-
-/* ---------- Contact form (mock) ---------- */
-document.getElementById('contactForm').addEventListener('submit', e=>{ e.preventDefault(); alert('Спасибо! Мы получили вашу заявку.'); e.target.reset(); });
-
-// expose updateCartUI initially
-updateCartUI();
 </script>
 </body>
 </html>
