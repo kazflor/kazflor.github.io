@@ -97,15 +97,17 @@
   }
   .hero-desc{ color:#e6e3df; max-width:74ch; font-size:1.05rem }
 
-  .hero-cta{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap }
+  /* ================== ПРАВКИ: центрирование и уменьшение кнопок ================== */
+  .hero-cta{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
   .btn{
     border-radius:999px;
-    padding:12px 20px;
+    padding:10px 18px;        /* чуть меньше */
+    font-size:0.95rem;        /* уменьшенный размер шрифта */
     text-decoration:none;
     font-weight:700;
     display:inline-flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
     border:2px solid transparent;
     transition:all .25s ease;
     cursor:pointer;
@@ -114,6 +116,13 @@
   .btn-outline:hover{ background:var(--cream); color:#111; transform:translateY(-4px) }
   .btn-solid{ background:linear-gradient(180deg,var(--khaki),var(--khaki-2)); color:var(--cream); box-shadow:0 10px 30px rgba(0,0,0,0.45) }
   .btn-solid:hover{ transform:translateY(-4px); filter:brightness(0.95) }
+
+  /* большая кнопка под галереей */
+  .btn-big{
+    font-size:1.1rem;
+    padding:14px 26px;
+  }
+  /* ================================================================================ */
 
   /* right teal glass card */
   .hero-right{
@@ -260,7 +269,7 @@
 
       <div class="swipe" role="region" aria-label="Карусель букетов" tabindex="0">
         <div class="track" id="track">
-          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика" loading="lazy"><div class="meta">Пудровая романтика</div></div>
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика" loading="lazy"><div.class="meta">Пудровая романтика</div></div>
           <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика" loading="lazy"><div class="meta">Свадебная классика</div></div>
           <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония" loading="lazy"><div class="meta">Цветочная симфония</div></div>
         </div>
@@ -313,6 +322,13 @@
         <img data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" data-src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Фото 5" loading="lazy">
         <img data-full="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" data-src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" alt="Фото 6" loading="lazy">
       </div>
+
+      <!-- === Добавленная большая кнопка под галереей === -->
+      <div style="text-align:center; margin-top:26px;">
+        <a href="#contacts" class="btn btn-solid btn-big" aria-label="Связаться с нами">Связаться с нами</a>
+      </div>
+      <!-- =================================================== -->
+
     </section>
 
     <!-- contacts -->
