@@ -333,6 +333,37 @@
     object-fit: contain !important;
   }
 }
+
+/* === CSS-only carousel tweaks (scroll-snap, mobile-friendly) === */
+.catalog-swiper.css-snap{
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; /* Firefox */
+  -ms-overflow-style:none; /* IE 10+ */
+}
+.catalog-swiper.css-snap::-webkit-scrollbar{ display: none; }
+.swipe-track.snap-track{
+  display:flex;
+  gap:0;
+  width:auto;
+}
+.slide{
+  scroll-snap-align:center;
+  flex:0 0 100%;
+  min-width:100%;
+  height:60vh;
+  position:relative;
+}
+.slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+/* make labels less intrusive on mobile */
+.slide .label{ left:18px; bottom:18px; padding:10px 14px; font-size:0.95rem; }
+/* Desktop: show as before but still snap nicely */
+@media (min-width:900px){
+  .catalog-swiper.css-snap{ overflow:hidden; }
+  .swipe-track.snap-track{ display:flex; }
+  .slide{ min-width:100%; }
+}
 </style>
 </head>
 <body>
@@ -375,9 +406,10 @@
       <h2 class="section-title">Каталог — избранные работы</h2>
       <p class="section-sub">Яркие, нежные, минималистичные — коллекции, которые подходят для любви и важных событий.</p>
 
-      <!-- Swipe carousel -->
-      <div class="catalog-swiper" aria-hidden="false" tabindex="0">
-        <div class="swipe-track" id="track">
+      
+      <!-- Swipe carousel (CSS-only scroll-snap, mobile-friendly) -->
+      <div class="catalog-swiper css-snap" aria-hidden="false" tabindex="0">
+        <div class="swipe-track snap-track" id="track">
           <div class="slide">
             <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет — Пудровая романтика">
             <div class="label">Пудровая романтика</div>
@@ -393,7 +425,8 @@
         </div>
       </div>
 
-      <div class="dots" id="dots" aria-hidden="true"></div>
+      <!-- Дальше оставляем существующий блок dots (он будет статическим, можно скрыть или оставить) -->
+<div class="dots" id="dots" aria-hidden="true"></div>
 
       <!-- Grid -->
       <div class="catalog-grid" style="margin-top:28px;">
@@ -464,7 +497,7 @@
 
       <div class="contacts">
         <div class="contact-card">
-          <h3>Павлодар</h3>
+          <h3> Павлодар</h3>
           <p>ул. Маяковского 9<br>Пн–Сб: 10:00–20:00</p>
           <p style="margin-top:10px">
             <a class="btn-premium btn-filled" href="https://wa.me/77074565744" target="_blank" rel="noopener">WhatsApp</a>
@@ -489,83 +522,6 @@
   </div>
 
 <script>
-/* ====== Carousel (touch + dots + keyboard) ====== */
-(function(){
-  const track = document.getElementById('track');
-  const slides = Array.from(track.children);
-  const dotsContainer = document.getElementById('dots');
-
-  let index = 0;
-  let slideWidth = 0;
-  let startX = 0, isDragging = false;
-  const total = slides.length;
-
-  function setSlideWidth(){
-    slideWidth = track.clientWidth;
-    track.style.transform = `translateX(-${index * slideWidth}px)`;
-  }
-  window.addEventListener('resize', setSlideWidth);
-  window.addEventListener('orientationchange', setSlideWidth);
-  setSlideWidth();
-
-  // create dots
-  dotsContainer.innerHTML = '';
-  slides.forEach((_,i)=>{
-    const d = document.createElement('div');
-    d.className='dot' + (i===0?' active':'');
-    d.dataset.i = i;
-    d.addEventListener('click', ()=>{ goTo(i) });
-    dotsContainer.appendChild(d);
-  });
-
-  function goTo(i){
-    index = (i + total) % total;
-    track.style.transition = 'transform 0.4s ease';
-    track.style.transform = `translateX(-${index * slideWidth}px)`;
-    updateDots();
-  }
-
-  function updateDots(){
-    document.querySelectorAll('.dot').forEach((d,idx)=>{
-      d.classList.toggle('active', idx===index);
-    });
-  }
-
-  // auto play
-  let autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
-
-  // touch events
-  track.addEventListener('touchstart', (e)=>{
-    clearInterval(autoplay);
-    startX = e.touches[0].clientX;
-    isDragging = true;
-    track.style.transition = 'none';
-  }, {passive:true});
-
-  track.addEventListener('touchmove', (e)=>{
-    if(!isDragging) return;
-    const diff = e.touches[0].clientX - startX;
-    track.style.transform = `translateX(${ -index * slideWidth + diff }px)`;
-  }, {passive:true});
-
-  track.addEventListener('touchend', (e)=>{
-    if(!isDragging) return;
-    isDragging = false;
-    const diff = e.changedTouches[0].clientX - startX;
-    const threshold = slideWidth * 0.2;
-    if(diff > threshold && index > 0) index--;
-    else if(diff < -threshold && index < total-1) index++;
-    goTo(index);
-    autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
-  });
-
-  // keyboard
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'ArrowRight') goTo(index+1);
-    if(e.key === 'ArrowLeft') goTo(index-1);
-  });
-})();
-
 /* ====== Gallery modal (click images to open) ====== */
 (function(){
   const modal = document.getElementById('modal');
