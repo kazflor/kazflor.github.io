@@ -325,6 +325,14 @@
     .hero h2{ font-size:1.6rem }
     .contact-card{ min-width:100% }
   }
+
+@media (max-width: 600px) {
+  .slide img {
+    height: auto !important;
+    max-height: 80vh !important;
+    object-fit: contain !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -499,17 +507,6 @@
   const total = slides.length;
   let startX = 0, isDragging = false;
 
-  // Исправление размеров картинок на мобилках
-  slides.forEach(slide => {
-    const img = slide.querySelector('img');
-    if (img) {
-      img.style.width = '100%';
-      img.style.height = 'auto';
-      img.style.objectFit = 'cover';
-      img.style.maxHeight = '420px';
-    }
-  });
-
   // create dots
   slides.forEach((_,i)=>{
     const d = document.createElement('div');
@@ -533,7 +530,7 @@
   // auto play
   let autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
 
-  // свайп с учётом ширины контейнера
+  // Touch handling with proper slide width
   track.addEventListener('touchstart', (e)=>{
     clearInterval(autoplay);
     startX = e.touches[0].clientX;
@@ -565,7 +562,9 @@
     if(e.key === 'ArrowRight') goTo(index+1);
     if(e.key === 'ArrowLeft') goTo(index-1);
   });
-})();/* ====== Gallery modal (click images to open) ====== */
+})();
+
+/* ====== Gallery modal (click images to open) ====== */
 (function(){
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modalImg');
