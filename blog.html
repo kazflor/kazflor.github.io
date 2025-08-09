@@ -1,139 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KAZ FLOR — шаблон</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plombir Flowers — Шаблон</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
-    :root{--bg:#fff;--black:#111;--muted:#777;--accent-radius:12px}
-    *{box-sizing:border-box}
-    body{font-family:Montserrat,system-ui,Arial,sans-serif;margin:0;background:var(--bg);color:var(--black);-webkit-font-smoothing:antialiased}
-
-    /* header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #eee;position:sticky;top:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(4px);z-index:30}
-    .hamburger{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center}
-    .hamburger button{background:none;border:0;font-size:22px}
-    .logo img{height:36px}
-    .cart{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center}
-
-    /* hero images */
-    .hero{max-width:1000px;margin:12px auto 20px;padding:0 16px}
-    .hero img{width:100%;display:block;border-radius:6px}
-
-    .center-title{padding:28px 16px 10px;text-align:center}
-    .center-title h1{font-family:'Montserrat',sans-serif;font-size:26px;margin:0;font-weight:700}
-    .center-title p{font-family:'Playfair Display',serif;margin:8px 0 0;color:var(--muted);font-size:16px}
-
-    /* free shipping bar */
-    .promo{background:#f7f7f7;padding:8px 16px;text-align:center;font-size:14px;border-top:1px solid #eee}
-
-    /* content / footer */
-    main{padding:18px 16px 60px}
-
-    .cta{display:block;margin:18px 0;padding:12px 18px;background:var(--black);color:#fff;border-radius:10px;text-align:center;font-weight:600;text-decoration:none}
-
-    footer{border-top:1px solid #eee;padding:22px 16px;background:var(--bg)}
-    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:0 auto}
-    .footer-grid h4{margin:0 0 8px;font-weight:700}
-    .small{font-size:13px;color:var(--muted)}
-
-    /* floating chat */
-    .chat{position:fixed;right:14px;bottom:18px;width:56px;height:56px;border-radius:50%;background:#fff;border:1px solid #eee;display:flex;align-items:center;justify-content:center;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-
-    /* mobile menu (off-canvas) */
-    .menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.35);display:none;z-index:50}
-    .side-menu{position:fixed;left:0;top:0;bottom:0;width:86%;max-width:420px;background:#fff;padding:26px;transform:translateX(-110%);transition:transform .28s ease;overflow:auto;z-index:60}
-    .side-menu.open{transform:translateX(0)}
-    .menu-close{position:absolute;right:16px;top:16px;font-size:22px}
-    .menu-list{list-style:none;padding:0;margin:40px 0 20px}
-    .menu-list li{padding:14px 0;border-bottom:1px solid #f1f1f1;font-weight:600}
-    .socials{display:flex;gap:10px;margin:18px 0}
-    .call-btn{display:inline-block;padding:12px 18px;background:#111;color:#fff;border-radius:10px;text-decoration:none}
-
-    @media(min-width:900px){header{padding:18px 30px}.hero{padding:0}} 
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .swiper {
+      width: 100%;
+      height: 80vh;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .swiper {
+        height: 50vh;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="hamburger"><button id="openMenu" aria-label="menu">☰</button></div>
-    <div class="logo"><img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZ FLOR"></div>
-    <div class="cart">🛍</div>
-  </header>
 
-  <div class="hero">
-    <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="hero1">
-  </div>
+  <header>Plombir Flowers</header>
 
-  <div class="center-title">
-    <h1>ЛЕТНИЕ ПОСТАВКИ</h1>
-    <p>георгин и гортензий</p>
-  </div>
-
-  <div class="hero">
-    <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="hero2">
-  </div>
-
-  <div class="promo">БЕСПЛАТНАЯ ДОСТАВКА ОТ 4000₽ ШТАТНЫМ КУРЬЕРОМ</div>
-
-  <main>
-    <a class="cta" href="#">СМОТРЕТЬ НА КАРТЕ</a>
-
-    <p style="color:var(--muted);font-size:15px">Ответы на частые вопросы можно найти <a href="#">тут</a></p>
-  </main>
-
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:10px">KAZ FLOR</div>
-        <h4>Г. САНКТ ПЕТЕРБУРГ</h4>
-        <p class="small">📍 ПР. ДОБРОЛЮБОВА, 27<br/>Каждый день с 9 до 21</p>
-        <p class="small">📍 УЛ. КИРОЧНАЯ, 85<br/>Каждый день с 8 до 22</p>
-        <p style="margin:8px 0">info@kazflor.ru<br/><strong>+7 981 9672833</strong></p>
-      </div>
-
-      <div>
-        <h4>ИНСТАГРАМ</h4>
-        <p class="small">ТЕЛЕГРАМ-КАНАЛ</p>
-        <p class="small" style="margin-top:18px">ИП Сомов Никита Кириллович<br/>ИНН 781439865355</p>
-      </div>
+  <!-- Слайдер -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="https://fv5-3.files.fm/thumb_show.php?i=zue24f23nw&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Фото 1"></div>
+      <div class="swiper-slide"><img src="https://fv5-3.files.fm/thumb_show.php?i=zue24f23nw&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Фото 2"></div>
+      <div class="swiper-slide"><img src="https://fv5-3.files.fm/thumb_show.php?i=zue24f23nw&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Фото 3"></div>
     </div>
-    <div style="max-width:1000px;margin:18px auto 0;font-size:13px;color:var(--muted)">КОНФИДЕНЦИАЛЬНОСТЬ · ДОГОВОР ОФЕРТЫ · 2018 - 2025 KAZ FLOR</div>
-  </footer>
+    <!-- Навигация -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
 
-  <div class="chat" title="Чат">💬</div>
-
-  <div class="menu-backdrop" id="backdrop"></div>
-  <nav class="side-menu" id="sideMenu" aria-hidden="true">
-    <button class="menu-close" id="closeMenu" aria-label="close">✕</button>
-    <ul class="menu-list">
-      <li>КАТАЛОГ ▾</li>
-      <li>МАСТЕР-КЛАССЫ</li>
-      <li>ОФОРМЛЕНИЕ ▾</li>
-      <li>ЦВЕТОЧНАЯ ПОДПИСКА</li>
-      <li>СВАДЕБНАЯ КОПИЛКА</li>
-      <li>ВАКАНСИИ</li>
-      <li>КЛИЕНТАМ ▾</li>
-      <li>БЛОГ</li>
-      <li>КОНТАКТЫ</li>
-    </ul>
-    <div class="socials">
-      <div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #ddd">✈</div>
-      <div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #ddd">🟢</div>
-    </div>
-    <a class="call-btn" href="tel:+79819672833">ПОЗВОНИТЬ НАМ</a>
-  </nav>
-
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    const open = document.getElementById('openMenu');
-    const close = document.getElementById('closeMenu');
-    const side = document.getElementById('sideMenu');
-    const backdrop = document.getElementById('backdrop');
-    function openMenu(){side.classList.add('open');backdrop.style.display='block';side.setAttribute('aria-hidden','false')}
-    function closeMenu(){side.classList.remove('open');backdrop.style.display='none';side.setAttribute('aria-hidden','true')}
-    open.addEventListener('click',openMenu);
-    close.addEventListener('click',closeMenu);
-    backdrop.addEventListener('click',closeMenu);
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
   </script>
 </body>
 </html>
