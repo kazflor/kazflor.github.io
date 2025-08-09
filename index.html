@@ -318,13 +318,26 @@
     .hero h2{ font-size:2rem }
     .slide{ height:56vh }
   }
-  @media (max-width:520px){
-    .brand img{ height:48px }
-    .brand h1{ font-size:1.3rem }
-    nav.main-nav{ display:none } /* simplify nav on mobile */
-    .hero h2{ font-size:1.6rem }
-    .contact-card{ min-width:100% }
+ @media (max-width:520px) {
+  /* Компактная карусель на телефоне */
+  .slide {
+    height: 320px; /* вместо процентов от экрана */
   }
+
+  /* Фото показываются полностью */
+  .slide img {
+    object-fit: contain;
+    background-color: #000; /* фон вокруг */
+  }
+
+  /* Подписи меньше и ближе к углу */
+  .slide .label {
+    left: 16px;
+    bottom: 14px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
 </style>
 </head>
 <body>
