@@ -334,11 +334,12 @@
   }
 }
 
-.swipe-track {
-  width: calc(100% * 3);
-}
-.slide {
-  width: 100%;
+@media (max-width: 600px) {
+  .slide img {
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+  }
 }
 </style>
 </head>
@@ -525,8 +526,7 @@
 
   function goTo(i){
     index = (i+total)%total;
-    const slideWidth = track.offsetWidth / total;
-    track.style.transform = `translateX(-${index * slideWidth}px)`;
+    track.style.transform = `translateX(-${index*100}%)`;
     updateDots();
   }
   function updateDots(){
@@ -538,7 +538,6 @@
   // auto play
   let autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
 
-  // Touch handling with slide width in px
   track.addEventListener('touchstart', (e)=>{
     clearInterval(autoplay);
     startX = e.touches[0].clientX;
@@ -547,18 +546,16 @@
 
   track.addEventListener('touchmove', (e)=>{
     if(!isDragging) return;
-    const slideWidth = track.offsetWidth / total;
     const x = e.touches[0].clientX;
     const diff = x - startX;
-    track.style.transform = `translateX(${ -index * slideWidth + diff }px)`;
+    const percentDiff = (diff / track.offsetWidth) * 100;
+    track.style.transform = `translateX(${ -index*100 + percentDiff }%)`;
   }, {passive:true});
 
   track.addEventListener('touchend', (e)=>{
     isDragging=false;
-    const slideWidth = track.offsetWidth / total;
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-    const threshold = slideWidth * 0.2;
+    const diff = e.changedTouches[0].clientX - startX;
+    const threshold = track.offsetWidth * 0.2;
     if(diff > threshold && index > 0) index--;
     else if(diff < -threshold && index < total-1) index++;
     goTo(index);
