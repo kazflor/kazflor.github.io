@@ -3,47 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KAZ FLOR — шаблон</title>
+  <title>Plombir Flowers — шаблон</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --max-width:980px;
-      --accent:#111;
-      --bg:#fff;
-    }
+    :root{ --max-width:980px; --accent:#111; --muted:#777; --bg:#fff }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family: 'Montserrat', sans-serif;
-      background:var(--bg);
-      color:var(--accent);
-    }
+    body{font-family:'Montserrat',sans-serif;color:var(--accent);background:var(--bg);-webkit-font-smoothing:antialiased}
     .page{max-width:var(--max-width);margin:0 auto}
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 16px;position:sticky;top:0;background:#fff;z-index:40;border-bottom:1px solid #f0f0f0
-    }
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;position:sticky;top:0;background:#fff;z-index:40;border-bottom:1px solid #f0f0f0}
     .icon-btn{background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
-    .logo{font-family:'Playfair Display', serif;font-size:28px;text-align:center}
-    .cart{width:28px;height:28px}
+    .logo{font-family:'Playfair Display',serif;font-size:28px;text-align:center}
 
     /* Slider */
     .slider{position:relative;overflow:hidden;width:100%}
     .slides{display:flex;transition:transform 0.5s ease-in-out}
-    .slides img{width:100%;flex-shrink:0}
-    .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.7);border:none;padding:8px;cursor:pointer;z-index:5}
+    .slides img{width:100%;flex-shrink:0;display:block}
+    .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.85);border:none;padding:8px;border-radius:6px;cursor:pointer;z-index:5}
     .prev{left:10px}
     .next{right:10px}
 
-    .section-center{text-align:center;padding:28px 16px}
-    .headline{font-weight:700;font-size:22px;letter-spacing:1px}
-    .subscript{font-family:'Great Vibes', cursive;font-size:22px;margin-top:6px}
-    .brand-mark{font-family:'Playfair Display', serif;margin-top:14px;font-size:20px}
-
-    .image-wrap{position:relative}
-    .ribbon{position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.95);padding:6px 12px;border-radius:999px;font-weight:600}
+    /* About section */
+    .about{padding:28px 16px}
+    .about h2{font-size:34px;font-weight:300;letter-spacing:1px;margin-bottom:14px}
+    .about .lead{font-weight:700;font-size:18px;margin-bottom:12px}
+    .about p{color:var(--muted);line-height:1.5;margin-bottom:16px}
+    .about-img{margin-top:20px;border-radius:14px;overflow:hidden}
+    .about-img img{width:100%;display:block}
 
     .chat-btn{position:fixed;right:18px;bottom:84px;width:56px;height:56px;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.14);border:none;z-index:50}
     .promo{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;padding:10px 16px;text-align:center;font-weight:600;z-index:45}
+
+    @media(min-width:780px){
+      .about{padding:48px}
+      .about h2{font-size:48px}
+    }
   </style>
 </head>
 <body>
@@ -58,26 +51,35 @@
       </button>
     </header>
 
-    <!-- Slider -->
+    <!-- Slider (photo duplicated) -->
     <div class="slider">
       <div class="slides">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 1" />
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 2" />
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 3" />
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 1">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 2">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Слайд 3">
       </div>
-      <button class="nav-btn prev">&#10094;</button>
-      <button class="nav-btn next">&#10095;</button>
+      <button class="nav-btn prev" aria-label="previous">&#10094;</button>
+      <button class="nav-btn next" aria-label="next">&#10095;</button>
     </div>
 
-    <section class="section-center">
-      <h1 class="headline">ЛЕТНИЕ ПОСТАВКИ</h1>
-      <div class="subscript">георгин и гортензий</div>
-      <div class="brand-mark">KAZ FLOR <span style="font-size:12px;display:block">with love</span></div>
-    </section>
+    <!-- О НАС блок: заменено на твоё фото -->
+    <section class="about">
+      <h2>О НАС</h2>
 
-    <section class="image-wrap">
-      <img src="images/hero-hydrangeas.jpg" alt="Гортензии" />
-      <div class="ribbon">KAZ FLOR</div>
+      <div class="lead">НЕПОВТОРИМАЯ ФЛОРИСТИКА</div>
+      <p>Мы обладаем своим индивидуальным и узнаваемым стилем. В первую очередь это наши пломбирные букеты, которые никого не оставляют равнодушными.</p>
+      <p>Также у нас представлена коллекция интерьерных букетов, каждый из которых украшает ваш дом и наполняет его жизнью.</p>
+
+      <div class="lead">СЕРВИС ВЫСОКОГО УРОВНЯ</div>
+      <p>Наши флористы и менеджеры постоянно проходят обучение, чтобы дарить вам высший уровень заботы. Для нас сервис — это забота о госте. Мы делаем все, чтобы вы совершали заказы быстро и с удовольствием.</p>
+
+      <div class="lead">ГАРАНТИЯ КАЧЕСТВА</div>
+      <p>Если вы остались недовольны собранным букетом, сообщите нам об этом в течение 2-х часов с момента его получения.</p>
+
+      <div class="about-img">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="О нас — фото">
+      </div>
+
     </section>
 
     <div style="height:120px"></div>
@@ -87,22 +89,27 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" fill="#111"/></svg>
   </button>
 
-  <div class="promo">БЕСПЛАТНАЯ ДОСТАВКА</div>
+  <div class="promo">БЕСПЛАТНАЯ ДОСТАВКА ОТ 4000₽ ШТАТНЫМ КУРЬЕРОМ</div>
 
   <script>
+    // Simple slider logic with touch support
     const slides = document.querySelector('.slides');
-    const slideImages = document.querySelectorAll('.slides img');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    let index = 0;
+    const slideCount = document.querySelectorAll('.slides img').length;
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    let idx = 0;
+    let startX = 0;
+    let isDown = false;
 
-    function showSlide(i){
-      index = (i + slideImages.length) % slideImages.length;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-    }
-    prevBtn.addEventListener('click',()=>showSlide(index-1));
-    nextBtn.addEventListener('click',()=>showSlide(index+1));
-    setInterval(()=>showSlide(index+1),4000);
+    function go(i){ idx = (i + slideCount) % slideCount; slides.style.transform = `translateX(-${idx*100}%)`; }
+    prev.addEventListener('click', ()=>go(idx-1));
+    next.addEventListener('click', ()=>go(idx+1));
+    let autoplay = setInterval(()=>go(idx+1),4000);
+
+    // touch
+    slides.addEventListener('touchstart', e=>{ startX = e.touches[0].clientX; isDown=true; clearInterval(autoplay); });
+    slides.addEventListener('touchmove', e=>{ if(!isDown) return; const diff = e.touches[0].clientX - startX; slides.style.transform = `translateX(${-idx*100 + diff / slides.clientWidth * 100}%)`; });
+    slides.addEventListener('touchend', e=>{ isDown=false; const endX = (e.changedTouches && e.changedTouches[0].clientX) || startX; const diff = endX - startX; if(Math.abs(diff) > 50){ if(diff < 0) go(idx+1); else go(idx-1); } else go(idx); autoplay = setInterval(()=>go(idx+1),4000); });
   </script>
 </body>
 </html>
