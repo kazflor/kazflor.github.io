@@ -362,51 +362,27 @@
       </div>
     </main>
 
-    <!-- Catalog section (swiper + grid) -->
-    <section id="catalog" aria-label="Каталог букетов">
-      <h2 class="section-title">Каталог — избранные работы</h2>
-      <p class="section-sub">Яркие, нежные, минималистичные — коллекции, которые подходят для любви и важных событий.</p>
+    <!-- catalog -->
+    <section id="catalog" class="catalog">
+      <h2 class="section-title">Коллекция избранных работ</h2>
+      <p class="section-sub">Подборка наших фаворитов — идеальна для вдохновения и заказа.</p>
 
-      <!-- Swipe carousel -->
-      <div class="catalog-swiper" aria-hidden="false" tabindex="0">
-        <div class="swipe-track" id="track">
-          <div class="slide">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет — Пудровая романтика">
-            <div class="label">Пудровая романтика</div>
-          </div>
-          <div class="slide">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет — Свадебная классика">
-            <div class="label">Свадебная классика</div>
-          </div>
-          <div class="slide">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет — Цветочная симфония">
-            <div class="label">Цветочная симфония</div>
-          </div>
+      <div class="swipe" role="region" aria-label="Карусель букетов" tabindex="0">
+        <div class="track" id="track">
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика" loading="lazy"><div class="meta">Пудровая романтика</div></div>
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика" loading="lazy"><div class="meta">Свадебная классика</div></div>
+          <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония" loading="lazy"><div class="meta">Цветочная симфония</div></div>
         </div>
       </div>
+      <div class="controls" id="dots" aria-hidden="false"></div>
 
-      <div class="dots" id="dots" aria-hidden="true"></div>
-
-      <!-- Grid -->
-      <div class="catalog-grid" style="margin-top:28px;">
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет 1">
-        </div>
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет 2">
-        </div>
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет 3">
-        </div>
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Букет 4">
-        </div>
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Букет 5">
-        </div>
-        <div class="card" tabindex="0" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Букет 6">
-        </div>
+      <div class="grid" aria-hidden="false">
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет 1" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет 2" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет 3" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Букет 4" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Букет 5" loading="lazy"></div>
+        <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Букет 6" loading="lazy"></div>
       </div>
     </section>
 
