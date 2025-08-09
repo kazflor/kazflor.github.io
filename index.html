@@ -318,25 +318,26 @@
     .hero h2{ font-size:2rem }
     .slide{ height:56vh }
   }
- @media (max-width:520px) {
-  /* Компактная карусель на телефоне */
+ /* ✅ NEW — правка для карусели на телефоне */
+@media (max-width:520px) {
   .slide {
-    height: 320px; /* вместо процентов от экрана */
+    height: 320px; /* фиксированная высота */
   }
-
-  /* Фото показываются полностью */
   .slide img {
-    object-fit: contain;
+    object-fit: contain; /* показывать фото целиком */
     background-color: #000; /* фон вокруг */
   }
-
-  /* Подписи меньше и ближе к углу */
   .slide .label {
     left: 16px;
     bottom: 14px;
     font-size: 0.9rem;
     padding: 8px 12px;
   }
+}
+
+/* ✅ NEW — разрешаем горизонтальный свайп */
+.catalog-swiper {
+  touch-action: pan-y;
 }
 </style>
 </head>
@@ -502,7 +503,6 @@
   </div>
 
 <script>
-/* ====== Carousel (touch + dots + keyboard) ====== */
 (function(){
   const track = document.getElementById('track');
   const slides = Array.from(track.children);
@@ -510,7 +510,7 @@
 
   let index = 0;
   const total = slides.length;
-  let startX = 0, current = 0, isDragging=false;
+  let startX = 0, isDragging = false;
 
   // create dots
   slides.forEach((_,i)=>{
@@ -520,6 +520,54 @@
     d.addEventListener('click', ()=>{ goTo(i) });
     dotsContainer.appendChild(d);
   });
+
+  function goTo(i){
+    index = (i+total)%total;
+    track.style.transform = `translateX(-${index*100}%)`;
+    updateDots();
+  }
+  function updateDots(){
+    document.querySelectorAll('.dot').forEach((d,idx)=>{
+      d.classList.toggle('active', idx===index);
+    });
+  }
+
+  // auto play
+  let autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
+
+  /* ✅ NEW свайп с учётом ширины контейнера */
+  const slideWidth = track.offsetWidth;
+
+  track.addEventListener('touchstart', (e)=>{
+    clearInterval(autoplay);
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, {passive:true});
+
+  track.addEventListener('touchmove', (e)=>{
+    if(!isDragging) return;
+    const x = e.touches[0].clientX;
+    const diff = x - startX;
+    track.style.transform = `translateX(${ -index * slideWidth + diff }px)`;
+  }, {passive:true});
+
+  track.addEventListener('touchend', (e)=>{
+    isDragging=false;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+    const threshold = slideWidth * 0.2;
+    if(diff > threshold && index > 0) index--;
+    else if(diff < -threshold && index < total-1) index++;
+    goTo(index);
+    autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
+  });
+
+  // keyboard
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') goTo(index+1);
+    if(e.key === 'ArrowLeft') goTo(index-1);
+  });
+})();
 
   function goTo(i){
     index = (i+total)%total;
