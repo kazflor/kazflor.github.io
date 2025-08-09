@@ -1,438 +1,442 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KAZ FLOR — premium v2</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KAZ FLOR — corporate premium v3</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --max-w:1200px;
-      --bg:#faf8f6;
-      --text:#0e0e0e;
-      --muted:#7e7e7e;
-      --burgundy:#7b1722;
-      --gold:#c89a3a;
-      --glass: rgba(255,255,255,0.55);
-      --card:#fff;
-      --radius:16px;
-      --transition: .36s cubic-bezier(.2,.9,.3,1);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
-      background:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-    }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--max-w);margin:0 auto;padding:0 18px}
+<style>
+  :root{
+    --max-w:1300px;
+    --bg:#fbfaf8;
+    --text:#0c0c0c;
+    --muted:#6f6f6f;
+    --accent:#4e6c50; /* your button color */
+    --accent-2:#7b8b72;
+    --gold:#c8a84a;
+    --glass: rgba(255,255,255,0.6);
+    --radius:16px;
+    --ease: cubic-bezier(.2,.9,.3,1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+    color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;line-height:1.45;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
 
-    /* --- Top header (thin) --- */
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:8px 0;font-size:13px;color:var(--muted)
-    }
-    .topbar .left, .topbar .right{display:flex;gap:12px;align-items:center}
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:200;background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.85));
+    backdrop-filter: blur(6px);transition:box-shadow .28s var(--ease), transform .28s var(--ease);
+    border-bottom:1px solid rgba(0,0,0,0.04);
+  }
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:0.4px}
+  .brand small{display:block;font-size:11px;opacity:0.7;margin-top:3px}
+  .header-actions{display:flex;gap:10px;align-items:center}
 
-    /* --- Header --- */
-    header{
-      position:sticky;top:0;z-index:120;
-      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
-      backdrop-filter: blur(6px);
-      border-bottom:1px solid rgba(0,0,0,0.04);
-      transition: box-shadow .25s, transform .25s;
-    }
-    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-    .logo{font-family:'Playfair Display',serif;font-size:26px;line-height:1}
-    .logo small{display:block;font-size:12px;opacity:.7;margin-top:4px}
+  .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:10px 14px;border-radius:12px;cursor:pointer}
+  .btn-primary{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:#fff;padding:10px 16px;border-radius:12px;border:none;font-weight:700;cursor:pointer;
+    box-shadow:0 14px 40px rgba(78,108,80,0.12);transition:transform .22s var(--ease), box-shadow .22s var(--ease);
+  }
+  .btn-primary:hover{transform:translateY(-4px);box-shadow:0 22px 56px rgba(78,108,80,0.16)}
 
-    /* header actions */
-    .actions{display:flex;gap:12px;align-items:center}
-    .icon-btn{background:transparent;border:none;padding:8px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .18s}
-    .icon-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,16,16,0.06)}
-    .cta-btn{background:linear-gradient(90deg,var(--burgundy),var(--gold));color:#fff;padding:10px 14px;border-radius:12px;font-weight:700;border:none;cursor:pointer;box-shadow:0 12px 36px rgba(120,30,40,0.12)}
+  .icon-btn{background:transparent;border:none;padding:8px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .icon-btn:hover{background:rgba(0,0,0,0.02)}
 
-    /* --- Layout helpers --- */
-    .spacer{height:28px}
+  /* Fullscreen menu */
+  .menu-full{
+    position:fixed;inset:0;z-index:300;background:rgba(18,18,18,0.9);color:#fff;display:flex;flex-direction:column;transform:translateY(-100%);
+    transition:transform .46s var(--ease);
+    padding:42px 28px;
+  }
+  .menu-full.open{transform:translateY(0)}
+  .menu-top{display:flex;justify-content:space-between;align-items:center}
+  .menu-list{display:grid;grid-template-columns:1fr;gap:18px;margin-top:40px;align-items:start}
+  .menu-item{
+    font-weight:700;font-size:28px;letter-spacing:0.6px;color:#fff;opacity:0.98;transition:transform .32s var(--ease);
+  }
+  .menu-sub{color:rgba(255,255,255,0.85);font-weight:500;margin-top:6px;font-size:14px}
 
-    /* --- HERO with parallax-ish background --- */
-    .hero{
-      position:relative;overflow:visible;padding:28px 0 8px;
-    }
-    .hero-inner{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(16,16,16,0.08)}
-    .hero-media{height:560px;display:block;width:100%;object-fit:cover}
-    @media(max-width:900px){ .hero-media{height:420px} }
+  .menu-close{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:8px 12px;border-radius:10px;color:#fff;cursor:pointer}
 
-    .hero-overlay{
-      position:absolute;inset:0;pointer-events:none;
-      background:linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.06) 60%, rgba(0,0,0,0.12) 100%);
-      mix-blend-mode:multiply;
-    }
+  /* HERO FULLSCREEN SLIDER */
+  .hero-viewport{position:relative;overflow:hidden;height:86vh;min-height:560px;display:flex;align-items:center;justify-content:center}
+  .hero-slides{display:flex;height:100%;transition:transform .9s cubic-bezier(.2,.9,.3,1);will-change:transform}
+  .hero-slide{min-width:100%;height:100%;position:relative;display:block;overflow:hidden}
+  .hero-slide img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02) saturate(1.04)}
+  .hero-overlay{
+    position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,15,15,0.18) 20%, rgba(15,15,15,0.46) 60%, rgba(15,15,15,0.62) 100%);
+    pointer-events:none;
+  }
+  .hero-caption{
+    position:absolute;left:7.5%;top:50%;transform:translateY(-50%);max-width:540px;color:#fff;
+    text-shadow:0 18px 40px rgba(6,6,6,0.5);
+    transition:transform .8s var(--ease), opacity .6s var(--ease);
+  }
+  .hero-title{font-family:'Playfair Display',serif;font-size:56px;line-height:1;margin:0 0 8px}
+  @media(max-width:920px){ .hero-title{font-size:36px} .hero-caption{left:6%} }
+  .hero-lead{font-weight:500;font-size:18px;margin-bottom:18px;color:rgba(255,255,255,0.95)}
 
-    .hero-content{
-      position:absolute;left:40px;bottom:40px;color:#fff;max-width:640px;
-      text-shadow:0 12px 30px rgba(0,0,0,0.35);
-    }
-    .hero-title{font-family:'Playfair Display',serif;font-size:44px;margin:0 0 6px}
-    .hero-sub{font-family:'Great Vibes',cursive;font-size:26px;margin-bottom:12px;color:rgba(255,255,255,0.95)}
-    .hero-lead{font-weight:600;font-size:16px;margin-bottom:16px;color:rgba(255,255,255,0.92)}
+  .hero-controls{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;display:flex;gap:10px;z-index:40}
+  .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.45);cursor:pointer;transition:all .28s}
+  .dot.active{width:40px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 28px rgba(78,108,80,0.14)}
 
-    /* glass card on hero */
-    .hero-card{
-      display:inline-flex;gap:12px;align-items:center;padding:12px 16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.12)
-    }
-    .hero-card .muted{color:rgba(255,255,255,0.9);opacity:.95}
+  .arrow-hero{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;box-shadow:0 14px 40px rgba(8,8,8,0.08)}
+  .arrow-hero.left{left:28px}
+  .arrow-hero.right{right:28px}
 
-    /* --- Slider mini controls / dots would be custom later --- */
+  /* CONTENT SECTIONS */
+  .section{padding:56px 0}
+  .section .container{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:1000px){ .section .container{grid-template-columns:1fr 420px;align-items:start} }
 
-    /* --- Sections --- */
-    section{padding:36px 0}
-    .section-title{font-family:'Playfair Display',serif;font-size:28px;position:relative;display:inline-block;margin-bottom:14px}
-    .section-title::after{content:'';display:block;height:4px;width:76px;border-radius:8px;margin-top:10px;background:linear-gradient(90deg,var(--burgundy),var(--gold));box-shadow:0 8px 20px rgba(200,150,60,0.12)}
+  .section-title{font-family:'Playfair Display',serif;font-size:36px;margin:0 0 10px;position:relative}
+  .section-title::after{content:'';display:block;height:4px;width:86px;border-radius:8px;margin-top:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 10px 30px rgba(78,108,80,0.1)}
 
-    .two-col{display:grid;grid-template-columns:1fr;gap:20px}
-    @media(min-width:960px){ .two-col{grid-template-columns:1fr 420px} }
+  .text-muted{color:var(--muted);font-size:15px}
 
-    .card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 18px 50px rgba(14,14,14,0.05);}
+  .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 18px 48px rgba(12,12,12,0.06)}
 
-    .lead-strong{font-weight:700;font-size:18px;margin-bottom:8px}
+  .gallery{display:grid;gap:12px}
+  .gallery img{width:100%;height:260px;object-fit:cover;border-radius:12px;display:block;transition:transform .6s var(--ease), box-shadow .6s var(--ease)}
+  .gallery img:hover{transform:scale(1.03);box-shadow:0 20px 60px rgba(12,12,12,0.08)}
 
-    .about-img{border-radius:12px;overflow:hidden}
-    .about-img img{display:block;width:100%;height:100%;object-fit:cover}
+  /* CTA band */
+  .cta-band{display:flex;align-items:center;justify-content:center;padding:26px 0}
+  .cta-inner{display:inline-flex;gap:18px;align-items:center;padding:16px 22px;border-radius:14px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:700;box-shadow:0 22px 60px rgba(78,108,80,0.14)}
 
-    /* --- Visit places grid --- */
-    .places{display:grid;gap:12px}
-    @media(min-width:640px){ .places{grid-template-columns:1fr 1fr} }
-    .place{background:linear-gradient(180deg,#fff,#fcfbf9);padding:14px;border-radius:12px;border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+  /* FOOTER: minimal, clean */
+  footer{padding:30px 0;background:linear-gradient(180deg,#fff,#faf7f2);border-top:1px solid rgba(0,0,0,0.04)}
+  .footer-row{display:flex;flex-direction:column;gap:14px;align-items:center}
+  @media(min-width:960px){ .footer-row{flex-direction:row;justify-content:space-between;align-items:center} }
+  .footer-contact{color:var(--muted);font-size:14px}
+  .socials{display:flex;gap:10px}
 
-    /* --- Footer --- */
-    footer{padding:36px 0;background:linear-gradient(180deg,#fff,#f7f4f1);border-top:1px solid rgba(0,0,0,0.04)}
-    .footer-grid{display:grid;gap:20px}
-    @media(min-width:960px){ .footer-grid{grid-template-columns:1fr 1fr 1fr} }
-    .socials{display:flex;gap:12px}
+  /* TO TOP */
+  .to-top{position:fixed;right:20px;bottom:22px;width:52px;height:52px;border-radius:12px;background:#fff;box-shadow:0 12px 36px rgba(6,6,6,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .28s}
+  .to-top.show{opacity:1;pointer-events:auto;transform:translateY(-8px)}
 
-    /* --- Side menu (big premium) --- */
-    .overlay{position:fixed;inset:0;background:rgba(10,10,10,0.48);opacity:0;pointer-events:none;transition:opacity .28s;z-index:150}
-    .overlay.show{opacity:1;pointer-events:auto}
-    .side{
-      position:fixed;left:0;top:0;height:100%;width:360px;max-width:92%;z-index:160;
-      transform:translateX(-420px);transition:transform var(--transition);
-      background:linear-gradient(180deg,#fff,#fbf9f7);box-shadow:32px 0 90px rgba(10,10,10,0.12);padding:26px;border-radius:0 0 18px 0;
-    }
-    .side.open{transform:translateX(0)}
-    .side .close{background:transparent;border:none;font-size:28px;cursor:pointer;display:block;margin-left:auto}
-    .side .menu{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-    .side .menu a{padding:12px 10px;border-radius:10px;font-weight:700;color:var(--text)}
-    .side .menu a:hover{background:linear-gradient(90deg, rgba(123,23,34,0.04), rgba(200,150,60,0.02));transform:translateX(6px)}
-
-    /* --- Back to top --- */
-    .to-top{position:fixed;right:18px;bottom:28px;width:52px;height:52px;border-radius:12px;background:linear-gradient(180deg,#fff,#faf6f3);box-shadow:0 10px 28px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .24s}
-    .to-top.show{opacity:1;pointer-events:auto;transform:translateY(-6px)}
-
-    /* --- small screens tweaks --- */
-    @media(max-width:520px){
-      .hero-title{font-size:28px}
-      .hero-sub{font-size:20px}
-      .hero-lead{font-size:14px}
-      .hero-content{left:18px;right:18px;max-width:unset}
-      .logo{font-size:20px}
-    }
-  </style>
+  /* Reveal helpers */
+  .reveal{opacity:0;transform:translateY(18px);transition:all .8s var(--ease)}
+  .reveal.visible{opacity:1;transform:none}
+</style>
 </head>
 <body>
 
-  <!-- overlay & side menu -->
-  <div class="overlay" id="overlay" aria-hidden="true"></div>
-
-  <aside class="side" id="sideMenu" aria-hidden="true" aria-label="Сайд меню">
-    <button class="close" id="menuClose" aria-label="Закрыть меню">&times;</button>
-    <div style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div style="font-family:'Playfair Display',serif;font-size:20px">KAZ FLOR</div>
-        <div style="font-size:13px;color:var(--muted)">flowers & interiors</div>
-      </div>
-      <div style="text-align:right;font-size:13px;color:var(--muted)">Ежедневно<br>9:00 — 21:00</div>
+<!-- FULLSCREEN MENU -->
+<div class="menu-full" id="menuFull" aria-hidden="true">
+  <div class="menu-top">
+    <div style="display:flex;gap:18px;align-items:center">
+      <div style="font-family:'Playfair Display',serif;font-size:20px">KAZ FLOR</div>
+      <div style="color:rgba(255,255,255,0.85)">Сеть студий • Павлодар</div>
     </div>
-
-    <nav class="menu" aria-label="Главное меню" style="margin-top:18px">
-      <a href="#">Каталог</a>
-      <a href="#">Мастер-классы</a>
-      <a href="#">Оформление</a>
-      <div style="margin-top:6px">
-        <a href="#">Цветочная подписка ›</a>
-        <div style="font-size:13px;color:var(--muted);padding-left:10px;margin-top:6px">Месячные боксы · Подарочные подписки</div>
-      </div>
-      <a href="#">Свадебная копилка</a>
-      <a href="#">Вакансии</a>
-      <a href="#">Клиентам</a>
-      <a href="#">Блог</a>
-      <a href="#">Контакты</a>
-    </nav>
-
-    <div style="margin-top:auto">
-      <div style="display:flex;gap:10px;margin-top:18px;margin-bottom:12px">
-        <a href="#" style="font-size:13px;color:var(--muted)">Instagram</a>
-        <a href="#" style="font-size:13px;color:var(--muted)">Telegram</a>
-        <a href="#" style="font-size:13px;color:var(--muted)">WhatsApp</a>
-      </div>
-      <a href="tel:+79819672833" class="cta-btn" style="display:block;width:100%;text-align:center">ПОЗВОНИТЬ: +7 981 967 28 33</a>
-    </div>
-  </aside>
-
-  <!-- page content -->
-  <div class="container">
-    <div class="topbar">
-      <div class="left"><div class="muted">Бесплатная доставка от 4000₸</div></div>
-      <div class="right"><div class="muted">Павлодар • Доставка по Казахстану</div></div>
-    </div>
-
-    <header id="header">
-      <div class="header-inner">
-        <button class="icon-btn" id="menuBtn" aria-label="Открыть меню">
-          <!-- hamburger -->
-          <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="2" rx="1" fill="#111"/><rect y="6" width="20" height="2" rx="1" fill="#111"/><rect y="12" width="20" height="2" rx="1" fill="#111"/></svg>
-        </button>
-
-        <div class="logo">KAZ FLOR <small>flowers</small></div>
-
-        <div class="actions">
-          <button class="icon-btn" aria-label="Поиск">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#111" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/></svg>
-          </button>
-          <button class="icon-btn" aria-label="Корзина">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#111" d="M7 4h-2l-1 2v1h2l3.6 7.59-1.35 2.45A1 1 0 0010 18h8v-2H11.42a.25.25 0 01-.23-.15L12 14h6a1 1 0 00.92-.62l2-5A1 1 0 0020 7H8.21l-.94-2z"/></svg>
-          </button>
-          <a class="cta-btn" href="#">Заказать</a>
-        </div>
-      </div>
-    </header>
-
-    <div class="spacer"></div>
-
-    <!-- HERO with slider-like parallax -->
-    <section class="hero" aria-label="Герой">
-      <div class="hero-inner" id="heroInner">
-        <picture>
-          <source media="(min-width:900px)" srcset="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1">
-          <img class="hero-media" src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1" alt="KAZ FLOR — hero image" loading="lazy">
-        </picture>
-
-        <div class="hero-overlay" aria-hidden="true"></div>
-
-        <div class="hero-content" role="region" aria-label="Главное сообщение">
-          <div class="hero-title">Подарите радость цветами</div>
-          <div class="hero-sub">KAZ FLOR — премиум-ботаника</div>
-          <div class="hero-lead">Авторские букеты, свадебные композиции и интерьерные решения.</div>
-
-          <div style="display:flex;gap:10px;align-items:center">
-            <a class="btn" href="#" style="background:linear-gradient(90deg,var(--burgundy),var(--gold));color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;box-shadow:0 16px 40px rgba(120,30,40,0.12)">Каталог</a>
-            <a class="btn ghost" href="#" style="background:transparent;border:2px solid rgba(255,255,255,0.18);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700">О нас</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Compact slider (carousel) below hero -->
-    <section aria-label="Слайдер" style="padding-top:12px;padding-bottom:6px">
-      <div style="display:flex;gap:18px;align-items:center;justify-content:center">
-        <div id="miniSlider" style="width:100%;max-width:980px;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(8,8,8,0.06)">
-          <div style="display:flex;transition:transform .6s cubic-bezier(.2,.9,.3,1)" id="miniSlides">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1" style="width:100%;height:320px;object-fit:cover;flex-shrink:0" loading="lazy" alt="">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" style="width:100%;height:320px;object-fit:cover;flex-shrink:0" loading="lazy" alt="">
-            <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1" style="width:100%;height:320px;object-fit:cover;flex-shrink:0" loading="lazy" alt="">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section aria-label="О нас" class="two-col">
-      <div>
-        <h2 class="section-title">О нас</h2>
-        <div class="lead-strong">Утончённая флористика</div>
-        <p class="muted">Мы создаём букеты из свежих цветов — каждая композиция собирается вручную нашими флористами. Стиль KAZ FLOR — это сдержанная роскошь, натуральные оттенки и тонкий вкус.</p>
-
-        <div style="display:flex;gap:12px;margin-top:12px">
-          <div class="card" style="flex:1">
-            <div style="font-weight:700">Гарантия качества</div>
-            <div class="muted" style="margin-top:6px">Если букет пришёл не тот — заменим или вернём деньги.</div>
-          </div>
-          <div class="card" style="width:200px">
-            <div style="font-weight:700">Сервис</div>
-            <div class="muted" style="margin-top:6px">Онлайн-консультант и быстрая доставка.</div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="card about-img" aria-hidden="false">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="О нас — фото" loading="lazy">
-      </aside>
-    </section>
-
-    <!-- VISIT -->
-    <section aria-label="Приходите в гости">
-      <h3 class="section-title">Приходите в гости</h3>
-      <div class="two-col" style="align-items:start;margin-top:12px">
-        <div>
-          <div class="lead-strong">Наши студии</div>
-          <p class="muted">Загляните, чтобы выбрать букет лично и увидеть наш стиль в живую.</p>
-
-          <div class="places" style="margin-top:12px">
-            <div class="place">
-              <div style="font-weight:700">Павлодар — Пр. Назарбаева, 69</div>
-              <div class="muted-small">Ежедневно 9:00 — 21:00</div>
-            </div>
-            <div class="place">
-              <div style="font-weight:700">Маяковского, 9</div>
-              <div class="muted-small">Ежедневно 9:00 — 21:00</div>
-            </div>
-            <a class="btn" href="#" style="width:220px">Смотреть на карте</a>
-          </div>
-        </div>
-
-        <div class="card about-img">
-          <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1" alt="Студия" loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA strip -->
-    <section style="padding:18px 0;text-align:center">
-      <div style="display:inline-block;padding:14px 18px;border-radius:12px;background:linear-gradient(90deg,var(--burgundy),var(--gold));color:#fff;font-weight:700;box-shadow:0 18px 48px rgba(120,30,40,0.14)">Закажите сейчас — бесплатная упаковка в подарок</div>
-    </section>
-
-    <!-- Footer -->
-    <footer aria-label="Футер">
-      <div class="footer-grid container" style="padding:18px 0">
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px">KAZ FLOR</div>
-          <div class="muted" style="margin-top:8px">Премиум-букеты • Оформление • Подписки</div>
-          <div style="margin-top:12px" class="socials">
-            <a href="#" aria-label="Instagram" title="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.06)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="#111" stroke-width="1.2" fill="none"/></svg></a>
-            <a href="#" aria-label="Telegram" title="Telegram" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.06)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L3 11.5 10 14l2.5 6L22 2z" stroke="#111" stroke-width="1.2" fill="none"/></svg></a>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-weight:700">Контакты</div>
-          <div class="muted" style="margin-top:8px">📍 Пр. Назарбаева 69, Павлодар<br>📍 Ул. Маяковского 9<br>✉️ <a href="mailto:info@kazflor.kz">info@kazflor.kz</a><br>☎️ <a href="tel:+79819672833">+7 981 967 28 33</a></div>
-        </div>
-
-        <div>
-          <div style="font-weight:700">Реквизиты</div>
-          <div class="muted" style="margin-top:8px">KAZ FLOR<br>ИНН 777<br><a href="#" style="color:var(--text)">Политика конфиденциальности</a></div>
-        </div>
-      </div>
-
-      <div style="text-align:center;color:var(--muted);font-size:13px;padding-bottom:18px">© KAZ FLOR 2018 — 2025</div>
-    </footer>
+    <button class="menu-close" id="menuClose">Закрыть</button>
   </div>
 
-  <!-- Back to top -->
-  <button class="to-top" id="toTop" aria-label="Наверх" title="Наверх">
-    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="#111"/></svg>
-  </button>
+  <nav class="menu-list" role="navigation" aria-label="Главное меню">
+    <a class="menu-item" href="#">Каталог</a>
+    <a class="menu-item" href="#">Мастер-классы</a>
+    <a class="menu-item" href="#">Оформление</a>
+    <a class="menu-item" href="#">Подписка</a>
+    <a class="menu-item" href="#">Свадебная копилка</a>
+    <a class="menu-item" href="#">Вакансии</a>
+    <a class="menu-item" href="#">Контакты</a>
+  </nav>
 
-  <!-- Inline JS: interactions, sliders, animations -->
-  <script>
-    // Side menu + overlay
-    const menuBtn = document.getElementById('menuBtn');
-    const side = document.getElementById('sideMenu');
-    const menuClose = document.getElementById('menuClose');
-    const overlay = document.getElementById('overlay');
+  <div style="margin-top:auto;color:rgba(255,255,255,0.85);font-size:14px">
+    <div style="margin-bottom:8px">☎ +7 981 967 28 33</div>
+    <div style="margin-bottom:6px">✉ <a href="mailto:info@kazflor.kz" style="color:inherit">info@kazflor.kz</a></div>
+    <div style="margin-top:12px" class="text-muted">Instagram • Telegram • WhatsApp</div>
+  </div>
+</div>
 
-    function openSide(){
-      side.classList.add('open');
-      overlay.classList.add('show');
-      side.setAttribute('aria-hidden','false');
-      overlay.setAttribute('aria-hidden','false');
-      // focus management
-      side.querySelector('a, button').focus();
-    }
-    function closeSide(){
-      side.classList.remove('open');
-      overlay.classList.remove('show');
-      side.setAttribute('aria-hidden','true');
-      overlay.setAttribute('aria-hidden','true');
-      menuBtn.focus();
-    }
-    menuBtn.addEventListener('click', openSide);
-    menuClose.addEventListener('click', closeSide);
-    overlay.addEventListener('click', closeSide);
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeSide(); });
+<!-- PAGE -->
+<div class="container" id="page">
 
-    // Mini slider autoplay
-    const miniSlides = document.getElementById('miniSlides');
-    const miniImgs = miniSlides.querySelectorAll('img');
-    let mIdx = 0, mN = miniImgs.length;
-    function miniGo(i){
-      mIdx = (i + mN) % mN;
-      miniSlides.style.transform = 'translateX(-' + (mIdx*100) + '%)';
-    }
-    let miniAuto = setInterval(()=> miniGo(mIdx+1), 3800);
-    // pause on hover
-    const miniSlider = document.getElementById('miniSlider');
-    miniSlider.addEventListener('mouseenter', ()=> clearInterval(miniAuto));
-    miniSlider.addEventListener('mouseleave', ()=> miniAuto = setInterval(()=> miniGo(mIdx+1), 3800));
+  <!-- header -->
+  <header id="header">
+    <div class="header-row">
+      <button class="icon-btn" id="openMenu" aria-label="Открыть меню">
+        <!-- hamburger -->
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><rect width="20" height="2" rx="1" fill="#111"/><rect y="6" width="20" height="2" rx="1" fill="#111"/><rect y="12" width="20" height="2" rx="1" fill="#111"/></svg>
+      </button>
 
-    // Header shrink on scroll & to-top
-    const header = document.getElementById('header');
-    const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', ()=> {
-      const y = window.scrollY;
-      if(y > 12) header.style.boxShadow = '0 12px 36px rgba(8,8,8,0.06)';
-      else header.style.boxShadow = 'none';
+      <div class="brand">KAZ FLOR <small>flowers</small></div>
 
-      if(y > 420){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
-    }, {passive:true});
-    toTop.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Поиск">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#111" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/></svg>
+        </button>
+        <!-- removed cart as requested -->
+        <a class="btn-primary" href="#" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))">Заказать</a>
+      </div>
+    </div>
+  </header>
 
-    // parallax hero slight movement on mouse
-    const heroInner = document.getElementById('heroInner');
-    heroInner.addEventListener('mousemove', (e)=>{
-      const w = heroInner.clientWidth, h = heroInner.clientHeight;
-      const x = (e.clientX - heroInner.getBoundingClientRect().left) - w/2;
-      const y = (e.clientY - heroInner.getBoundingClientRect().top) - h/2;
-      heroInner.style.transform = 'rotateX(' + (-y/120) + 'deg) rotateY(' + (x/180) + 'deg)';
+  <!-- HERO SLIDER -->
+  <section class="hero-viewport" aria-label="Главный баннер">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="slide1" loading="lazy">
+        <div class="hero-overlay"></div>
+        <div class="hero-caption">
+          <div class="hero-title">Сеть KAZ FLOR — цветы для важных моментов</div>
+          <div class="hero-lead">Павлодар • Алматы • доставка по всему Казахстану</div>
+          <div style="display:flex;gap:12px">
+            <a class="btn-primary" href="#">Каталог</a>
+            <a class="btn-ghost" href="#">О нас</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-slide">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="slide2" loading="lazy">
+        <div class="hero-overlay"></div>
+        <div class="hero-caption" style="transform:translateY(-30px)">
+          <div class="hero-title">Авторские букеты и корпоративные решения</div>
+          <div class="hero-lead">Команда флористов, оформление мероприятий и долгосрочные партнерства</div>
+          <div style="display:flex;gap:12px">
+            <a class="btn-primary" href="#">Связаться</a>
+            <a class="btn-ghost" href="#">Прайс</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-slide">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="slide3" loading="lazy">
+        <div class="hero-overlay"></div>
+        <div class="hero-caption" style="transform:translateY(-20px)">
+          <div class="hero-title">Студии сети — приходите в гости</div>
+          <div class="hero-lead">Увидеть образцы, выбрать оформление и получить консультацию</div>
+          <div style="display:flex;gap:12px">
+            <a class="btn-primary" href="#">Наши студии</a>
+            <a class="btn-ghost" href="#">Контакты</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- arrows & dots -->
+    <button class="arrow-hero left" id="heroPrev" aria-label="Предыдущий слайд">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#111"/></svg>
+    </button>
+    <button class="arrow-hero right" id="heroNext" aria-label="Следующий слайд">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" fill="#111"/></svg>
+    </button>
+
+    <div class="hero-controls" id="heroDots" aria-hidden="false"></div>
+  </section>
+
+  <!-- Sections: concise, big visual blocks -->
+  <section class="section" aria-label="О нас">
+    <div class="container">
+      <div>
+        <h2 class="section-title reveal">О сети KAZ FLOR</h2>
+        <p class="text-muted reveal">Большая сеть студий с высокими стандартами качества и масштабным покрытием. Мы работаем с корпоративными клиентами, ивент-агентствами и частными заказчиками по всему Казахстану.</p>
+
+        <div style="display:flex;gap:12px;margin-top:18px">
+          <div class="card reveal" style="flex:1">
+            <div style="font-weight:700">Масштаб</div>
+            <div class="text-muted" style="margin-top:8px">Несколько студий в ключевых городах и отлаженная логистика.</div>
+          </div>
+
+          <div class="card reveal" style="width:220px">
+            <div style="font-weight:700">Партнёрство</div>
+            <div class="text-muted" style="margin-top:8px">Корпоративные предложения и долгосрочные контракты.</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card about-img reveal" style="height:420px;overflow:hidden">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="about" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Галерея">
+    <div class="container" style="display:grid;grid-template-columns:1fr;gap:18px">
+      <h3 class="section-title reveal">Галерея</h3>
+      <div class="gallery reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=kzn7vk24s7&view&v=1" alt="" loading="lazy">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="" loading="lazy">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Приходите">
+    <div class="container">
+      <h3 class="section-title reveal">Приходите в студии</h3>
+      <div style="display:flex;gap:18px;align-items:center">
+        <div style="flex:1" class="reveal">
+          <div style="font-weight:700">Наши адреса</div>
+          <div class="text-muted" style="margin-top:8px">Павлодар — Пр. Назарбаева, 69<br>Маяковского, 9</div>
+          <div style="margin-top:12px">
+            <a class="btn-primary" href="#">Смотреть на карте</a>
+          </div>
+        </div>
+
+        <div class="card reveal" style="width:420px">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1" alt="studio" loading="lazy" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="cta-inner reveal">
+      <div>Бесплатная доставка от 4000₸</div>
+      <div style="opacity:.9;font-weight:700">•</div>
+      <div>Закажите корпоративную программу — узнайте условия</div>
+      <a class="btn-primary" href="#" style="margin-left:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2))">Узнать больше</a>
+    </div>
+  </section>
+
+  <!-- FOOTER minimal -->
+  <footer>
+    <div class="footer-row container">
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+        <div style="font-family:'Playfair Display',serif;font-size:18px">KAZ FLOR</div>
+        <div class="footer-contact">Премиум-сеть студий | Павлодар • Доставка по Казахстану</div>
+      </div>
+
+      <div class="socials" style="align-items:center">
+        <div class="footer-contact" style="margin-right:18px">✉ <a href="mailto:info@kazflor.kz">info@kazflor.kz</a></div>
+        <div class="footer-contact">☎ <a href="tel:+79819672833">+7 981 967 28 33</a></div>
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--muted);font-size:13px;margin-top:14px">© KAZ FLOR 2018 — 2025</div>
+  </footer>
+
+</div> <!-- /page container -->
+
+<!-- TO TOP -->
+<button class="to-top" id="toTop" aria-label="Наверх" title="Наверх">
+  <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 5l-7 7h4v7h6v-7h4z" fill="#111"/></svg>
+</button>
+
+<!-- SCRIPTS -->
+<script>
+  /* ---------- Menu open/close ---------- */
+  const openMenuBtn = document.getElementById('openMenu');
+  const menuFull = document.getElementById('menuFull');
+  const menuCloseBtn = document.getElementById('menuClose');
+  const toTop = document.getElementById('toTop');
+
+  openMenuBtn.addEventListener('click', ()=> {
+    menuFull.classList.add('open');
+    menuFull.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    // stagger animation for menu items
+    document.querySelectorAll('.menu-item').forEach((el,i)=>{
+      el.style.transform = 'translateY(18px)';
+      el.style.opacity = '0';
+      setTimeout(()=>{ el.style.transition = 'all .5s cubic-bezier(.2,.9,.3,1)'; el.style.transform = 'none'; el.style.opacity = '1'; }, i*70 + 120);
     });
-    heroInner.addEventListener('mouseleave', ()=> heroInner.style.transform = 'none');
+  });
+  menuCloseBtn.addEventListener('click', ()=> {
+    menuFull.classList.remove('open'); menuFull.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+  });
 
-    // reveal animations - simple
-    const reveals = document.querySelectorAll('.section-title, .lead-strong, .card, .places, .about-img, .hero-content, .two-col, .place, .btn');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.style.transition = 'opacity .9s ease, transform .9s cubic-bezier(.2,.9,.3,1)';
-          entry.target.style.opacity = 1;
-          entry.target.style.transform = 'none';
-          io.unobserve(entry.target);
-        } else {
-          entry.target.style.opacity = 0;
-          entry.target.style.transform = 'translateY(18px)';
-        }
-      });
-    }, {threshold:0.12});
+  // close menu on escape
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ menuFull.classList.remove('open'); menuFull.setAttribute('aria-hidden','true'); document.body.style.overflow=''; } });
 
-    reveals.forEach(r=> io.observe(r));
+  /* ---------- Hero slider (autoplay + dots + swipe + smooth) ---------- */
+  const slidesEl = document.getElementById('heroSlides');
+  const slides = slidesEl.querySelectorAll('.hero-slide');
+  const dotsWrap = document.getElementById('heroDots');
+  const prev = document.getElementById('heroPrev');
+  const next = document.getElementById('heroNext');
+  let current = 0, N = slides.length, autoplay=null, playing=true;
 
-    // accessibility small: trap focus in side when open (light)
-    side.addEventListener('keydown', (e)=>{
-      if(e.key !== 'Tab') return;
-      const focusables = side.querySelectorAll('a,button');
-      if(focusables.length === 0) return;
-      const first = focusables[0], last = focusables[focusables.length-1];
-      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  // make dots
+  for(let i=0;i<N;i++){
+    const b = document.createElement('button'); b.className='dot'; b.setAttribute('aria-label','Слайд '+(i+1));
+    b.addEventListener('click', ()=> goTo(i));
+    dotsWrap.appendChild(b);
+  }
+  const dots = dotsWrap.querySelectorAll('.dot');
+
+  function updateDots(){ dots.forEach((d,i)=> d.classList.toggle('active', i===current)); }
+
+  function goTo(i){
+    current = (i+N)%N;
+    slidesEl.style.transform = 'translateX(-'+(current*100)+'%)';
+    updateDots();
+  }
+  prev.addEventListener('click', ()=> { goTo(current-1); restartAuto(); });
+  next.addEventListener('click', ()=> { goTo(current+1); restartAuto(); });
+
+  function startAuto(){ autoplay = setInterval(()=>{ goTo(current+1); }, 4800); playing=true; }
+  function stopAuto(){ clearInterval(autoplay); playing=false; }
+  function restartAuto(){ stopAuto(); startAuto(); }
+
+  // pause on hover
+  slidesEl.parentElement.addEventListener('mouseenter', stopAuto);
+  slidesEl.parentElement.addEventListener('mouseleave', startAuto);
+
+  // touch/drag support
+  let startX=0, dx=0, dragging=false;
+  slidesEl.addEventListener('pointerdown', (e)=>{ dragging=true; startX = e.clientX; slidesEl.style.transition = 'none'; stopAuto(); });
+  window.addEventListener('pointermove', (e)=>{ if(!dragging) return; dx = e.clientX - startX; slidesEl.style.transform = 'translateX(' + ( -current*100 + dx / slidesEl.clientWidth * 100 ) + '%)'; });
+  window.addEventListener('pointerup', ()=>{ if(!dragging) return; dragging=false; slidesEl.style.transition = 'transform .9s cubic-bezier(.2,.9,.3,1)'; if(Math.abs(dx) > 60){ if(dx < 0) goTo(current+1); else goTo(current-1); } else goTo(current); dx=0; startAuto(); });
+
+  // init
+  goTo(0); startAuto();
+
+  /* ---------- Reveal on scroll ---------- */
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('visible'); entry.target.classList.add('reveal-visible'); entry.target.style.opacity = 1; entry.target.style.transform = 'none'; io.unobserve(entry.target); }
     });
+  },{threshold:0.14});
+  reveals.forEach(r=> io.observe(r));
 
-    // lazy load: for wider support use loading="lazy" on images already present
-    // finished
-  </script>
+  /* ---------- header shadow & to-top ---------- */
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y > 20) header.style.boxShadow = '0 10px 36px rgba(12,12,12,0.06)'; else header.style.boxShadow = 'none';
+    if(y > 420) toTop.classList.add('show'); else toTop.classList.remove('show');
+  }, {passive:true});
+  document.getElementById('toTop').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+  /* Accessibility: close menu when clicking outside (on menu-full) */
+  document.addEventListener('click', (e)=>{
+    if(menuFull.classList.contains('open') && !menuFull.contains(e.target) && !openMenuBtn.contains(e.target)){
+      menuFull.classList.remove('open'); document.body.style.overflow='';
+    }
+  });
+
+  // small polish: animate hero captions entrance on slide change
+  const heroCaptions = document.querySelectorAll('.hero-caption');
+  function animateCaption(){
+    heroCaptions.forEach((cap, idx)=>{
+      cap.style.transition = 'opacity .7s var(--ease), transform .7s var(--ease)';
+      if(idx === current){ cap.style.opacity = 1; cap.style.transform = 'translateY(0)'; }
+      else { cap.style.opacity = 0; cap.style.transform = 'translateY(20px)'; }
+    });
+  }
+  // call after goTo via overriding goTo function locally
+  const _goTo = goTo;
+  goTo = function(i){
+    current = (i+N)%N;
+    slidesEl.style.transform = 'translateX(-'+(current*100)+'%)';
+    updateDots(); animateCaption();
+  }
+  animateCaption(); // initial
+
+</script>
 </body>
 </html>
