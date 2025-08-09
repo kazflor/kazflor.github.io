@@ -3,191 +3,227 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Контакты — KAZFLOR</title>
-  <meta name="description" content="Контакты KAZFLOR — Премиальная цветочная мастерская в Казахстане.">
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  <title>KAZFLOR — Премиальные букеты</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --green: #4e6c50;
-      --cream: #f9f6f2;
+      --cream: #f8f5f0;
       --bronze: #b08d57;
-      --dark: #121212;
-      --radius: 18px;
+      --dark: #1a1a1a;
+      --green: #3d4d20;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      position: relative;
-      background: url('https://fv5-4.files.fm/thumb_show.php?i=6vy5jwbfzm&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
       color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      z-index: 1;
+      background-color: var(--dark);
+      overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.65); /* затемнение фона */
-      z-index: 0;
-      pointer-events: none;
-    }
-
+    /* Шапка */
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(18, 18, 18, 0.85);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.7);
+      backdrop-filter: blur(6px);
     }
-
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      margin-left: 1.5rem;
+      font-size: 1.4rem;
       color: var(--cream);
+    }
+    nav a {
+      color: var(--cream);
+      margin-left: 1rem;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 500;
       transition: color 0.3s ease;
     }
+    nav a:hover { color: var(--bronze); }
 
-    nav a:hover {
-      color: var(--bronze);
+    /* Герой с параллаксом */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-
-    .contact-container {
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      padding: 0 1rem;
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+    .hero-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: var(--bronze);
+      color: var(--dark);
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn:hover { background: #a17c46; }
+
+    /* Секции */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+    }
+    h3.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--bronze);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .about p {
+      color: #ddd;
+      line-height: 1.6;
+      font-size: 1rem;
       text-align: center;
     }
 
-    .contact-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      margin-bottom: 2rem;
+    /* Галерея */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.4s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
     }
 
-    .contact-subtext {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 3rem auto;
-      color: var(--cream);
+    /* Контакты */
+    .contacts {
+      text-align: center;
     }
-
-    .contact-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      align-items: center;
-    }
-
-    .contact-buttons a {
+    .contacts a {
       display: inline-block;
-      padding: 1rem 2.5rem;
-      background-color: var(--green);
+      margin: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--green);
       color: var(--cream);
+      border-radius: 4px;
       text-decoration: none;
-      font-size: 1.1rem;
       font-weight: bold;
-      border-radius: var(--radius);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-buttons a:hover {
-      background-color: #3b4f3c;
-    }
-
-    .contact-address {
-      margin-top: 3rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: #bbb;
-      line-height: 1.8;
-    }
-
-    .back-btn {
-      margin-top: 3rem;
-    }
-
-    .back-btn a {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background: var(--bronze);
-      color: var(--cream);
-      text-decoration: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 1rem;
       transition: background 0.3s ease;
     }
-
-    .back-btn a:hover {
-      background: #a87b47;
+    .contacts a:hover {
+      background: #2f3b17;
     }
 
-    @media (max-width: 600px) {
-      .contact-title {
-        font-size: 2.2rem;
-      }
-      header h1 {
-        font-size: 1.4rem;
-      }
-      nav a {
-        margin-left: 1rem;
-        font-size: 0.95rem;
-      }
-      .contact-buttons a {
-        width: 100%;
-      }
+    /* Футер */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      .hero-content h2 { font-size: 2rem; }
+      header { padding: 0.8rem 1rem; }
+      nav { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Шапка -->
   <header>
     <h1>KAZFLOR</h1>
     <nav>
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#contacts">Контакты</a>
     </nav>
   </header>
 
-  <section class="contact-container animate__animated animate__fadeInUp">
-    <h2 class="contact-title">Связаться с нами</h2>
-    <p class="contact-subtext">
-      Остались вопросы? Хотите оформить индивидуальный букет? Напишите нам — мы рядом.
-    </p>
-
-    <div class="contact-buttons">
-      <a href="#">Написать в WhatsApp (Назарбаева 69)</a>
-      <a href="#">Написать в WhatsApp (Маяковского 9)</a>
-    </div>
-
-    <div class="contact-address">
-      KAZFLOR<br>
-      г. Павлодар, ул.Маяковского 9<br>
-    </div>
-
-    <div class="back-btn">
-      <a href="index.html">← Назад на главную</a>
+  <!-- Герой -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Премиальные цветы для особых моментов</h2>
+      <p>Создаём композиции, которые влюбляют с первого взгляда</p>
+      <a href="#gallery" class="btn">Смотреть букеты</a>
     </div>
   </section>
+
+  <!-- О нас -->
+  <section id="about" class="about">
+    <h3 class="section-title">О нас</h3>
+    <p>KAZFLOR — это искусство флористики, воплощённое в премиальных букетах. Мы используем только свежие и редкие цветы, чтобы каждый заказ стал произведением искусства.</p>
+  </section>
+
+  <!-- Галерея -->
+  <section id="gallery">
+    <h3 class="section-title">Галерея</h3>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc" alt="Букет 1">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Букет 2">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Букет 3">
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contacts" class="contacts">
+    <h3 class="section-title">Свяжитесь с нами</h3>
+    <a href="https://t.me/ВАША_ССЫЛКА" target="_blank">Telegram</a>
+    <a href="https://wa.me/ВАШ_НОМЕР" target="_blank">WhatsApp</a>
+  </section>
+
+  <!-- Футер -->
+  <footer>
+    &copy; 2025 KAZFLOR. Все права защищены.
+  </footer>
+
 </body>
 </html>
