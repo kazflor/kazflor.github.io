@@ -497,7 +497,18 @@
 
   let index = 0;
   const total = slides.length;
-  let startX = 0, current = 0, isDragging=false;
+  let startX = 0, isDragging = false;
+
+  // Исправление размеров картинок на мобилках
+  slides.forEach(slide => {
+    const img = slide.querySelector('img');
+    if (img) {
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      img.style.objectFit = 'cover';
+      img.style.maxHeight = '420px';
+    }
+  });
 
   // create dots
   slides.forEach((_,i)=>{
@@ -519,30 +530,32 @@
     });
   }
 
-  // auto play (gentle)
+  // auto play
   let autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
 
-  // Touch handling
+  // свайп с учётом ширины контейнера
   track.addEventListener('touchstart', (e)=>{
     clearInterval(autoplay);
     startX = e.touches[0].clientX;
     isDragging = true;
-    current = index*window.innerWidth;
   }, {passive:true});
 
   track.addEventListener('touchmove', (e)=>{
     if(!isDragging) return;
+    const slideWidth = track.offsetWidth;
     const x = e.touches[0].clientX;
     const diff = x - startX;
-    track.style.transform = `translateX(${ -index*100 + (diff/window.innerWidth)*100 }%)`;
+    track.style.transform = `translateX(${ -index * slideWidth + diff }px)`;
   }, {passive:true});
 
   track.addEventListener('touchend', (e)=>{
     isDragging=false;
+    const slideWidth = track.offsetWidth;
     const endX = e.changedTouches[0].clientX;
     const diff = endX - startX;
-    if(diff > 60 && index>0) index--;
-    else if(diff < -60 && index<total-1) index++;
+    const threshold = slideWidth * 0.2;
+    if(diff > threshold && index > 0) index--;
+    else if(diff < -threshold && index < total-1) index++;
     goTo(index);
     autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
   });
@@ -552,10 +565,7 @@
     if(e.key === 'ArrowRight') goTo(index+1);
     if(e.key === 'ArrowLeft') goTo(index-1);
   });
-
-})();
-
-/* ====== Gallery modal (click images to open) ====== */
+})();/* ====== Gallery modal (click images to open) ====== */
 (function(){
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modalImg');
