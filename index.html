@@ -504,13 +504,16 @@
   const dotsContainer = document.getElementById('dots');
 
   let index = 0;
+  let slideWidth = 0;
+  let startX = 0, isDragging = false;
   const total = slides.length;
-  let startX = 0, isDragging = false, slideWidth = 0;
 
   function setSlideWidth(){
-    slideWidth = track.offsetWidth;
+    slideWidth = track.clientWidth;
+    track.style.transform = `translateX(-${index * slideWidth}px)`;
   }
   window.addEventListener('resize', setSlideWidth);
+  window.addEventListener('orientationchange', setSlideWidth);
   setSlideWidth();
 
   // create dots
@@ -524,11 +527,12 @@
   });
 
   function goTo(i){
-    index = (i+total)%total;
+    index = (i + total) % total;
     track.style.transition = 'transform 0.4s ease';
-    track.style.transform = `translateX(-${index*slideWidth}px)`;
+    track.style.transform = `translateX(-${index * slideWidth}px)`;
     updateDots();
   }
+
   function updateDots(){
     document.querySelectorAll('.dot').forEach((d,idx)=>{
       d.classList.toggle('active', idx===index);
@@ -548,8 +552,7 @@
 
   track.addEventListener('touchmove', (e)=>{
     if(!isDragging) return;
-    const x = e.touches[0].clientX;
-    const diff = x - startX;
+    const diff = e.touches[0].clientX - startX;
     track.style.transform = `translateX(${ -index * slideWidth + diff }px)`;
   }, {passive:true});
 
@@ -564,7 +567,7 @@
     autoplay = setInterval(()=>{ goTo(index+1); }, 5200);
   });
 
-  // keyboard navigation
+  // keyboard
   window.addEventListener('keydown', (e)=>{
     if(e.key === 'ArrowRight') goTo(index+1);
     if(e.key === 'ArrowLeft') goTo(index-1);
