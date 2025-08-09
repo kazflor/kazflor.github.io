@@ -1,479 +1,170 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>KAZFLOR — Мега Люкс</title>
-<meta name="description" content="KAZFLOR — премиальная флористика. Букеты, свадьбы, подписки.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Контакты — KAZFLOR</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===========================
-   ROOT COLORS & RESET
-   =========================== */
-:root{
-  --khaki: #4e6c50;
-  --khaki-deep: #556B2F;
-  --bronze: #b08d57;
-  --cream: #f9f6f2;
-  --muted: #cfcfcf;
-  --dark: #0f0f0f;
-  --glass: rgba(255,255,255,0.035);
-  --radius: 16px;
-  --maxw: 1200px;
-  --accent: #b08d57;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:linear-gradient(180deg,#060606,#0b0b0b);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:var(--cream);line-height:1.5;}
-
-/* ===========================
-   LAYOUT
-   =========================== */
-.wrapper{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;}
-
-/* ===========================
-   PARALLAX BACKGROUND (full screen hero)
-   =========================== */
-/* using user's exact background image link */
-.hero-viewport{
-  position:relative;
-  height:86vh;
-  min-height:520px;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,0.6);
-  margin:18px 0;
-}
-
-/* background layer (parallax) */
-.hero-bg{
-  position:absolute;inset:0;
-  background-image: url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d");
-  background-size:cover;background-position:center;
-  transform:translate3d(0,0,0);
-  will-change:transform;
-  filter:contrast(0.95) saturate(0.95) brightness(0.6);
-}
-
-/* overlay for readability */
-.hero-overlay{
-  position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));pointer-events:none;
-}
-
-/* content inside hero */
-.hero-content{
-  position:relative; z-index:5;
-  height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
-  padding:32px;
-}
-.kicker{font-size:0.82rem; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px}
-.hero-title{font-family:'Playfair Display',serif; font-size:2.8rem; line-height:1.02; margin-bottom:12px; color:var(--cream); text-shadow:0 10px 40px rgba(0,0,0,0.6)}
-.hero-desc{color:#e8e5e1; max-width:760px; font-size:1.05rem; margin-bottom:18px}
-
-/* hero buttons */
-.hero-cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
-.btn{
-  border-radius:999px; padding:12px 20px; font-weight:700; text-decoration:none; display:inline-flex; gap:10px; align-items:center; cursor:pointer;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-}
-.btn-primary{background:linear-gradient(180deg,var(--khaki),var(--khaki-deep)); color:var(--cream); border:1px solid rgba(255,255,255,0.03)}
-.btn-ghost{background:transparent; color:var(--cream); border:1px solid rgba(255,255,255,0.06)}
-.btn-primary:hover{transform:translateY(-4px)}
-.btn-ghost:hover{transform:translateY(-4px); background:rgba(255,255,255,0.02)}
-
-/* small brand header inside wrapper (sticky) */
-.header{
-  display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 0;
-  position:sticky; top:0; z-index:80; backdrop-filter: blur(6px); background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15)); border-bottom:1px solid rgba(255,255,255,0.02);
-}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{height:56px; width:auto; object-fit:contain; filter:brightness(0) invert(1)}
-.brand h1{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream)}
-.nav a{color:var(--muted); text-decoration:none; margin-left:12px; font-weight:600}
-.nav a:hover{color:var(--bronze)}
-
-/* ===========================
-   MAIN SECTIONS (About / Catalog / Subscription / Gallery / Contacts)
-   =========================== */
-.section{padding:28px 12px; margin-bottom:18px}
-.section .section-title{font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--bronze); text-align:center; margin-bottom:12px}
-.section .lead{max-width:980px;margin:0 auto;text-align:center;color:#e8e5e1}
-
-/* hero right promo card (desktop) */
-.promo-card{
-  position:absolute; right:28px; top:28px; width:320px;
-  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
-  border-radius:16px; padding:18px; box-shadow:0 20px 48px rgba(0,0,0,0.5);
-  backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,0.03);
-}
-.promo-card h3{font-family:'Playfair Display',serif;margin-bottom:6px}
-.promo-card p{color:var(--muted); font-size:0.95rem; margin-bottom:10px}
-.promo-card ul{list-style:none;padding-left:0;color:#eee}
-.promo-card li{padding-left:14px; position:relative;margin:8px 0}
-.promo-card li:before{content:""; position:absolute; left:0; top:9px; width:8px; height:8px; border-radius:50%; background:var(--accent)}
-
-/* ===========================
-   SWIPE CATALOG (carousel)
-   =========================== */
-.swipe-wrap{max-width:1200px;margin:18px auto;border-radius:16px;overflow:hidden; box-shadow:0 22px 70px rgba(0,0,0,0.55)}
-.track{display:flex; transition:transform .45s cubic-bezier(.22,.9,.28,1); will-change:transform}
-.slide{min-width:100%; height:60vh; position:relative; flex-shrink:0}
-.slide img{width:100%; height:100%; object-fit:cover; display:block}
-.slide .meta{position:absolute; left:20px; bottom:20px; background:linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.5)); padding:10px 14px; border-radius:10px; font-weight:700}
-.dots{display:flex; justify-content:center; gap:10px; margin-top:12px}
-.dot{width:10px;height:10px;border-radius:50%; background:rgba(255,255,255,0.12); transition:all .18s}
-.dot.active{transform:scale(1.4); background:var(--bronze)}
-
-/* ===========================
-   GRID PREVIEW
-   =========================== */
-.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:16px}
-.card{border-radius:12px; overflow:hidden; background:rgba(255,255,255,0.02); box-shadow:0 12px 30px rgba(0,0,0,0.45); cursor:pointer}
-.card img{width:100%; height:160px; object-fit:cover; display:block}
-
-/* ===========================
-   SUBSCRIPTION BLOCK
-   =========================== */
-.sub-block{margin-top:20px;border-radius:16px;padding:20px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)); box-shadow:0 18px 44px rgba(0,0,0,0.45); display:flex; gap:18px; align-items:center; justify-content:space-between; flex-wrap:wrap}
-.sub-left h3{font-family:'Playfair Display',serif;margin-bottom:6px}
-.sub-left p{color:var(--muted)}
-.sub-right{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.sub-right .btn{min-width:180px}
-
-/* ===========================
-   GALLERY (testimonials) with modal preview
-   =========================== */
-.gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-top:18px}
-.gallery img{width:100%;height:100px;object-fit:cover;border-radius:10px;cursor:pointer;transition:transform .2s}
-.gallery img:hover{transform:scale(1.03)}
-
-/* ===========================
-   CONTACTS
-   =========================== */
-.contacts{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
-.contact-card{background:rgba(255,255,255,0.02); padding:14px; border-radius:12px; min-width:200px; box-shadow:0 12px 30px rgba(0,0,0,0.45)}
-.contact-card h4{margin-bottom:6px}
-.contact-card p{color:var(--muted); font-size:0.95rem}
-
-/* ===========================
-   MODAL
-   =========================== */
-.modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:9999; background:rgba(0,0,0,0.9); padding:18px}
-.modal img{max-width:94vw; max-height:94vh; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,0.7)}
-
-/* ===========================
-   FOOTER
-   =========================== */
-footer{margin-top:26px;padding:30px 0;text-align:center;color:var(--muted)}
-
-/* ===========================
-   RESPONSIVE
-   =========================== */
-@media(max-width:980px){
-  .hero-title{font-size:2.2rem}
-  .promo-card{position:static;margin-top:18px;width:100%}
-  .slide{height:52vh}
-  .hero-viewport{border-radius:12px}
-}
-@media(max-width:560px){
-  .brand img{height:46px}
-  .hero-title{font-size:1.6rem}
-  .slide{height:48vh}
-  .sub-right{align-items:center;width:100%}
-}
+  :root{
+    --khaki:#556B2F;
+    --cream:#f9f6f2;
+    --muted:#cfcfcf;
+    --glass: rgba(255,255,255,0.06);
+    --radius:18px;
+    --max-width:1200px;
+  }
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:#0f0f0f;
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  .bg {
+    position:fixed;
+    inset:0;
+    z-index:-20;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+      url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
+    background-size:cover;
+    background-position:center;
+  }
+  .wrap{
+    max-width:var(--max-width);
+    margin:0 auto;
+    padding:36px 20px;
+  }
+  header.site-header{
+    width:100%;
+    padding:18px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  .brand img{
+    height:56px;
+    width:auto;
+    filter:brightness(0) invert(1);
+  }
+  .brand h1{
+    font-family:'Playfair Display',serif;
+    font-size:1.6rem;
+    margin:0;
+    color:var(--cream);
+  }
+  .section-title{
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    font-size:2.1rem;
+    margin-bottom:30px;
+  }
+  .contacts{
+    max-width:920px;
+    margin:0 auto;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .contact-card{
+    background:var(--glass);
+    padding:18px;
+    border-radius:14px;
+    min-width:260px;
+    box-shadow:0 12px 34px rgba(0,0,0,0.45);
+    text-align:center;
+  }
+  .contact-card h3{
+    font-family:'Playfair Display',serif;
+    margin-bottom:8px;
+  }
+  .btn-premium{
+    display:inline-block;
+    padding:12px 22px;
+    font-weight:700;
+    border-radius:40px;
+    text-decoration:none;
+    color:var(--cream);
+    transition:all .25s ease;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  }
+  .btn-whatsapp{
+    background:#25D366;
+    border:none;
+  }
+  .btn-whatsapp:hover{
+    background:#1ebe5d;
+    transform:translateY(-3px);
+  }
+  .btn-instagram{
+    background: linear-gradient(45deg, #feda75, #d62976, #962fbf, #4f5bd5);
+    border:none;
+  }
+  .btn-instagram:hover{
+    opacity:0.9;
+    transform:translateY(-3px);
+  }
+  .btn-outline{
+    background:transparent;
+    border:2px solid var(--cream);
+  }
+  .btn-outline:hover{
+    background:var(--cream);
+    color:#111;
+  }
+  footer.site-footer{
+    padding:36px 0;
+    text-align:center;
+    color:var(--muted);
+  }
 </style>
 </head>
 <body>
-
-<div class="wrapper">
-
-  <!-- HEADER -->
-  <header class="header" role="banner">
+<div class="bg"></div>
+<div class="wrap">
+  <header class="site-header">
     <div class="brand">
-      <!-- logo from your repo -->
-      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
       <h1>KAZFLOR</h1>
     </div>
-    <nav class="nav" role="navigation" aria-label="Главная навигация">
-      <a href="#home">Главная</a>
-      <a href="#catalog">Каталог</a>
-      <a href="#subscription">Подписка</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
   </header>
 
-  <!-- HERO WITH PARALLAX -->
-  <section id="home" class="hero-viewport" aria-label="Главная секция">
-    <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
+  <h2 class="section-title">Контакты</h2>
 
-    <div class="hero-content">
-      <div class="kicker">Авторская флористика</div>
-      <h2 class="hero-title">Цветы для тех, кто ценит детали — <span style="color:var(--bronze)">элегантно</span> и <span style="color:var(--khaki)">изысканно</span></h2>
-      <p class="hero-desc">Крупные композиции, свадебный декор и подписки. Мы делаем букеты, которые выглядят дорого вживую и на фото.</p>
-      <div class="hero-cta">
-        <a href="#catalog" class="btn btn-primary" aria-label="Открыть каталог">Смотреть каталог</a>
-        <a href="#contacts" class="btn btn-ghost" aria-label="Связаться">Связаться</a>
-      </div>
+  <div class="contacts">
+    <div class="contact-card">
+      <h3>Павлодар</h3>
+      <p>пр. Назарбаева 69<br>9:00–21:00</p>
+      <a class="btn-premium btn-whatsapp" href="https://wa.me/77055857488" target="_blank">WhatsApp</a>
     </div>
-
-    <!-- promo card anchored on hero for desktop -->
-    <aside class="promo-card" aria-hidden="false">
-      <h3>Свадебное оформление</h3>
-      <p>Персональная концепция, пробники букетов, монтаж и поддержка в день события.</p>
-      <ul>
-        <li>Персональный флорист</li>
-        <li>Пробные букеты</li>
-        <li>Декор церемонии и банкета</li>
-      </ul>
-      <div style="margin-top:12px;text-align:center">
-        <a href="#subscription" class="btn btn-ghost">Узнать пакеты</a>
-      </div>
-    </aside>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section" aria-label="О мастерской">
-    <h3 class="section-title">О мастерской</h3>
-    <p class="lead">KAZFLOR — это команда профессионалов, создающих авторские букеты и оформление для свадеб и мероприятий. Мы работаем с премиальными сортами, учитываем стиль и атмосферу события, делаем всё аккуратно и с любовью.</p>
-  </section>
-
-  <!-- CATALOG (carousel + grid preview) -->
-  <section id="catalog" class="section" aria-label="Каталог">
-    <h3 class="section-title">Коллекция избранных работ</h3>
-    <p class="lead">Вдохновляйтесь — свайпайте, увеличивайте, заказывайте.</p>
-
-    <!-- SWIPE CAROUSEL -->
-    <div class="swipe-wrap" aria-hidden="false">
-      <div class="track" id="track">
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Пудровая романтика"><div class="meta">Пудровая романтика</div></div>
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная классика"><div class="meta">Свадебная классика</div></div>
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Цветочная симфония"><div class="meta">Цветочная симфония</div></div>
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Насыщенная композиция"><div class="meta">Насыщенная композиция</div></div>
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Летнее утро"><div class="meta">Летнее утро</div></div>
-        <div class="slide"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Ваниль и зелень"><div class="meta">Ваниль и зелень</div></div>
-      </div>
+    <div class="contact-card">
+      <h3>Павлодар</h3>
+      <p>Маяковского 9<br>9:00-21:00</p>
+      <a class="btn-premium btn-whatsapp" href="https://wa.me/77055826554" target="_blank">WhatsApp</a>
     </div>
-    <div class="dots" id="dots" role="tablist" aria-label="Навигация карусели"></div>
-
-    <!-- GRID PREVIEW -->
-    <div class="grid" id="previewGrid" aria-hidden="false">
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет 1"></div>
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет 2"></div>
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет 3"></div>
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Букет 4"></div>
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Букет 5"></div>
-      <div class="card" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Букет 6"></div>
+    <div class="contact-card">
+      <h3>Instagram</h3>
+      <p>@kaz_flor_pvl</p>
+      <a class="btn-premium btn-instagram" href="https://instagram.com/kaz_flor_pvl" target="_blank">Instagram</a>
     </div>
-  </section>
+  </div>
 
-  <!-- SUBSCRIPTION -->
-  <section id="subscription" class="section" aria-label="Подписка">
-    <h3 class="section-title">Свадебная подписка — Bridal Plan</h3>
-    <p class="lead">Подписка для невест: персональный флорист, пробники букетов, доставка и сборка. Идеально для тех, кто хочет спокойствия и роскоши в подготовке.</p>
-
-    <div class="sub-block">
-      <div class="sub-left">
-        <h3>Что входит</h3>
-        <p class="sub-desc">Пакеты настраиваются индивидуально, примеры включают: регулярные консультации, пробные букеты, приоритетная доставка и сопровождение в день свадьбы.</p>
-        <ul style="margin-top:12px;color:#eee">
-          <li>Персональный менеджер и флорист</li>
-          <li>Две примерки букетов</li>
-          <li>Декор церемонии</li>
-          <li>Приоритетная служба доставки</li>
-        </ul>
-      </div>
-      <div class="sub-right">
-        <a href="#contacts" class="btn btn-primary">Оформить подписку</a>
-        <div style="color:var(--muted); font-size:0.95rem;">Индивидуальные условия для крупных мероприятий</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY / TESTIMONIALS -->
-  <section class="section" aria-label="Отзывы">
-    <h3 class="section-title">Отзывы и моменты</h3>
-    <p class="lead">Нажми на фото, чтобы увеличить.</p>
-
-    <div class="gallery" id="galleryImgs" aria-hidden="false">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" data-src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" alt="Фото 1">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" data-src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" alt="Фото 2">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" data-src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" alt="Фото 3">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" data-src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" alt="Фото 4">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" data-src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Фото 5">
-      <img data-full="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" data-src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" alt="Фото 6">
-    </div>
-  </section>
-
-  <!-- CONTACTS -->
-  <section id="contacts" class="section" aria-label="Контакты">
-    <h3 class="section-title">Контакты</h3>
-    <p class="lead">Пишите в мессенджеры — ответим быстро. Крупные заказы и срочные оформления обсуждаем заранее.</p>
-
-    <div class="contacts">
-      <div class="contact-card">
-        <h4>Павлодар — Маяковского 9</h4>
-        <p>Пн–Сб: 10:00–20:00</p>
-        <p style="margin-top:10px"><a class="btn btn-primary" href="https://wa.me/77074565744" target="_blank" rel="noopener">Написать в WhatsApp</a></p>
-      </div>
-
-      <div class="contact-card">
-        <h4>Назарбаева 69</h4>
-        <p>По договорённости</p>
-        <p style="margin-top:10px"><a class="btn btn-ghost" href="https://t.me/ВАША_ССЫЛКА" target="_blank" rel="noopener">Написать в Telegram</a></p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 KAZFLOR — все права защищены.</p>
-    <p style="margin-top:6px;color:var(--muted)">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank" style="color:var(--accent); text-decoration:none">@kaz_flor_pvl</a></p>
-  </footer>
-
+  <div style="text-align:center; margin-top:40px;">
+    <a class="btn-premium btn-outline" href="index.html">На главную</a>
+  </div>
 </div>
-
-<!-- IMAGE MODAL -->
-<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <img id="modalImg" alt="Просмотр">
-</div>
-
-<!-- SCRIPTS: parallax, carousel, touch, lazy-load, modal -->
-<script>
-/* ===== PARALLAX subtle movement on scroll ===== */
-(function(){
-  const bg = document.getElementById('heroBg');
-  if(!bg) return;
-  // on desktop use stronger parallax, on mobile use subtle
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const factor = isMobile ? 0.18 : 0.35;
-  let last = 0;
-  function onScroll(){
-    const sc = window.scrollY || window.pageYOffset;
-    // compute translateY negative so background moves slower upward
-    const y = sc * factor;
-    bg.style.transform = `translateY(${y}px)`;
-    last = sc;
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-})();
-
-/* ===== CAROUSEL (touch & dots & autoplay) ===== */
-(function(){
-  const track = document.getElementById('track');
-  if(!track) return;
-  const slides = Array.from(track.children);
-  const total = slides.length;
-  const dotsWrap = document.getElementById('dots');
-
-  let index = 0;
-  let autoplay = true;
-  let interval = null;
-
-  // create dots
-  function createDots(){
-    for(let i=0;i<total;i++){
-      const d = document.createElement('div'); d.className = 'dot' + (i===0? ' active':'');
-      d.addEventListener('click', ()=> go(i));
-      dotsWrap.appendChild(d);
-    }
-  }
-
-  function updateDots(){
-    const dots = dotsWrap.querySelectorAll('.dot');
-    dots.forEach((d,i)=> d.classList.toggle('active', i===index));
-  }
-
-  function go(i){
-    index = (i + total) % total;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function next(){ go(index+1) }
-
-  createDots();
-  interval = setInterval(next, 5200);
-
-  // touch support
-  let startX=0, dragging=false;
-  track.addEventListener('touchstart', e=>{ clearInterval(interval); startX = e.touches[0].clientX; dragging=true }, {passive:true});
-  track.addEventListener('touchmove', e=>{ if(!dragging) return; const x = e.touches[0].clientX; const diff = x - startX; track.style.transform = `translateX(calc(-${index*100}% + ${diff}px))`; }, {passive:true});
-  track.addEventListener('touchend', e=>{ dragging=false; const endX = e.changedTouches[0].clientX; const diff = endX - startX; if(diff > 60) go(index-1); else if(diff < -60) go(index+1); interval = setInterval(next, 5200); });
-
-  // keyboard navigation
-  window.addEventListener('keydown', e=>{
-    if(e.key === 'ArrowLeft') go(index-1);
-    if(e.key === 'ArrowRight') go(index+1);
-  });
-})();
-
-/* ===== MODAL PREVIEW: delegation for .card and gallery images ===== */
-(function(){
-  const modal = document.getElementById('modal');
-  const modalImg = document.getElementById('modalImg');
-
-  function open(src, alt){
-    modalImg.src = src;
-    modalImg.alt = alt || '';
-    modal.style.display = 'flex';
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function close(){
-    modal.style.display = 'none';
-    modalImg.src = '';
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  // delegation: grid cards
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('.card');
-    if(card){
-      const src = card.dataset.full || card.querySelector('img')?.src;
-      if(src) open(src);
-      return;
-    }
-    // gallery images
-    if(e.target.closest('.gallery img')){
-      const img = e.target.closest('img');
-      const src = img.dataset.full || img.src;
-      if(src) open(src, img.alt);
-    }
-  });
-
-  modal.addEventListener('click', close);
-  document.addEventListener('keydown', e=> { if(e.key === 'Escape') close() });
-})();
-
-/* ===== SIMPLE LAZYLOAD for data-src ===== */
-(function(){
-  const imgs = document.querySelectorAll('img[data-src]');
-  if('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          observer.unobserve(img);
-        }
-      });
-    }, {rootMargin: '200px'});
-    imgs.forEach(img => io.observe(img));
-  } else {
-    imgs.forEach(img => img.src = img.dataset.src);
-  }
-})();
-
-/* ===== ensure hero images load initially (some browsers) ===== */
-(function(){
-  const trackImgs = document.querySelectorAll('.track img');
-  trackImgs.forEach(img => { if(img.dataset.src && !img.src) img.src = img.dataset.src; });
-})();
-</script>
-
+<footer class="site-footer">
+  <p>&copy; KAZFLOR — 2025. Все права защищены.</p>
+</footer>
 </body>
 </html>
