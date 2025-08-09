@@ -364,6 +364,16 @@
   .swipe-track.snap-track{ display:flex; }
   .slide{ min-width:100%; }
 }
+
+@keyframes carouselAutoplay {
+  0%   { transform: translateX(0%); }
+  33%  { transform: translateX(-100%); }
+  66%  { transform: translateX(-200%); }
+  100% { transform: translateX(0%); }
+}
+.swipe-track {
+  animation: carouselAutoplay 15s infinite ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -479,7 +489,7 @@
             <a class="btn-premium btn-filled" href="https://wa.me/77074565744" target="_blank" rel="noopener">WhatsApp</a>
           </p>
         </div>
-      </div>
+
     </section>
 
     <!-- Footer -->
