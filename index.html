@@ -333,14 +333,6 @@
     object-fit: contain !important;
   }
 }
-
-@media (max-width: 600px) {
-  .slide img {
-    height: auto;
-    max-height: 80vh;
-    object-fit: contain;
-  }
-}
 </style>
 </head>
 <body>
@@ -511,6 +503,9 @@
   const slides = Array.from(track.children);
   const dotsContainer = document.getElementById('dots');
 
+  // ФИКС ширины трека
+  track.style.width = `${slides.length * 100}%`;
+
   let index = 0;
   const total = slides.length;
   let startX = 0, isDragging = false;
@@ -546,16 +541,15 @@
 
   track.addEventListener('touchmove', (e)=>{
     if(!isDragging) return;
-    const x = e.touches[0].clientX;
-    const diff = x - startX;
-    const percentDiff = (diff / track.offsetWidth) * 100;
+    const diff = e.touches[0].clientX - startX;
+    const percentDiff = (diff / track.offsetWidth) * 100 * total; 
     track.style.transform = `translateX(${ -index*100 + percentDiff }%)`;
   }, {passive:true});
 
   track.addEventListener('touchend', (e)=>{
     isDragging=false;
     const diff = e.changedTouches[0].clientX - startX;
-    const threshold = track.offsetWidth * 0.2;
+    const threshold = window.innerWidth * 0.2;
     if(diff > threshold && index > 0) index--;
     else if(diff < -threshold && index < total-1) index++;
     goTo(index);
