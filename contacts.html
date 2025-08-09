@@ -1,168 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Контакты — KAZFLOR</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
-  :root{
-    --khaki:#556B2F;
-    --cream:#f9f6f2;
-    --muted:#cfcfcf;
-    --glass: rgba(255,255,255,0.06);
-    --radius:18px;
-    --max-width:1200px;
-  }
-  body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background:#0f0f0f;
-    color:var(--cream);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
-  .bg {
-    position:fixed;
-    inset:0;
-    z-index:-20;
-    background-image:
-      linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-      url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
-    background-size:cover;
-    background-position:center;
-  }
-  .wrap{
-    max-width:var(--max-width);
-    margin:0 auto;
-    padding:36px 20px;
-  }
-  header.site-header{
-    width:100%;
-    padding:18px 0;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .brand{
-    display:flex;
-    gap:14px;
-    align-items:center;
-  }
-  .brand img{
-    height:56px;
-    width:auto;
-    filter:brightness(0) invert(1);
-  }
-  .brand h1{
-    font-family:'Playfair Display',serif;
-    font-size:1.6rem;
-    margin:0;
-    color:var(--cream);
-  }
-  .section-title{
-    text-align:center;
-    font-family:'Playfair Display',serif;
-    font-size:2.1rem;
-    margin-bottom:30px;
-  }
-  .contacts{
-    max-width:920px;
-    margin:0 auto;
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .contact-card{
-    background:var(--glass);
-    padding:18px;
-    border-radius:14px;
-    min-width:260px;
-    box-shadow:0 12px 34px rgba(0,0,0,0.45);
-    text-align:center;
-  }
-  .contact-card h3{
-    font-family:'Playfair Display',serif;
-    margin-bottom:8px;
-  }
-  .btn-premium{
-    display:inline-block;
-    padding:12px 22px;
-    font-weight:700;
-    border-radius:40px;
-    text-decoration:none;
-    color:var(--cream);
-    transition:all .25s ease;
-    box-shadow:0 8px 24px rgba(0,0,0,0.35);
-  }
-  .btn-whatsapp{
-    background:#25D366;
-    border:none;
-  }
-  .btn-whatsapp:hover{
-    background:#1ebe5d;
-    transform:translateY(-3px);
-  }
-  .btn-instagram{
-    background: linear-gradient(45deg, #feda75, #d62976, #962fbf, #4f5bd5);
-    border:none;
-  }
-  .btn-instagram:hover{
-    opacity:0.9;
-    transform:translateY(-3px);
-  }
-  .btn-outline{
-    background:transparent;
-    border:2px solid var(--cream);
-  }
-  .btn-outline:hover{
-    background:var(--cream);
-    color:#111;
-  }
-  footer.site-footer{
-    padding:36px 0;
-    text-align:center;
-    color:var(--muted);
-  }
+:root {
+  --khaki:#556B2F;
+  --cream:#f9f6f2;
+  --bronze:#b08d57;
+  --glass: rgba(255,255,255,0.06);
+  --radius:18px;
+  --max-width:1200px;
+}
+body {
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:#0f0f0f;
+  color:var(--cream);
+}
+.bg {
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+    url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
+  background-size:cover;
+  background-position:center;
+}
+.wrap {
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:36px 20px;
+}
+header.site-header {
+  padding:18px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand {
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.brand img {
+  height:56px;
+  filter:brightness(0) invert(1);
+}
+h1 {
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  margin:0;
+}
+.section-title {
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;
+  margin-bottom:30px;
+}
+.contacts {
+  max-width:920px;
+  margin:0 auto;
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.contact-card {
+  background:var(--glass);
+  padding:18px;
+  border-radius:14px;
+  min-width:260px;
+  text-align:center;
+  box-shadow:0 12px 34px rgba(0,0,0,0.45);
+}
+.contact-card h3 {
+  font-family:'Playfair Display',serif;
+  margin-bottom:8px;
+}
+.btn-premium {
+  display:inline-block;
+  padding:12px 22px;
+  font-weight:700;
+  border-radius:40px;
+  text-decoration:none;
+  border:2px solid var(--cream);
+  color:var(--cream);
+  transition:all .25s ease;
+}
+.btn-premium:hover {
+  background:var(--cream);
+  color:#111;
+}
+.btn-whatsapp {
+  background-color:#25D366;
+  border:none;
+  color:white;
+}
+.btn-instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border:none;
+  color:white;
+}
+.btn-main {
+  margin-top:40px;
+  display:block;
+  width:fit-content;
+  margin-left:auto;
+  margin-right:auto;
+}
+footer.site-footer {
+  padding:36px 0;
+  text-align:center;
+  color:#cfcfcf;
+}
 </style>
 </head>
 <body>
 <div class="bg"></div>
 <div class="wrap">
-  <header class="site-header">
-    <div class="brand">
-      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
-      <h1>KAZFLOR</h1>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="brand">
+    <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
+    <h1>KAZFLOR</h1>
+  </div>
+</header>
 
-  <h2 class="section-title">Контакты</h2>
+<h2 class="section-title animate__animated animate__fadeInDown">Контакты</h2>
 
-  <div class="contacts">
-    <div class="contact-card">
-      <h3>Павлодар</h3>
-      <p>пр. Назарбаева 69<br>9:00–21:00</p>
-      <a class="btn-premium btn-whatsapp" href="https://wa.me/77055857488" target="_blank">WhatsApp</a>
-    </div>
-    <div class="contact-card">
-      <h3>Павлодар</h3>
-      <p>Маяковского 9<br>9:00-21:00</p>
-      <a class="btn-premium btn-whatsapp" href="https://wa.me/77055826554" target="_blank">WhatsApp</a>
-    </div>
-    <div class="contact-card">
-      <h3>Instagram</h3>
-      <p>@kaz_flor_pvl</p>
-      <a class="btn-premium btn-instagram" href="https://instagram.com/kaz_flor_pvl" target="_blank">Instagram</a>
-    </div>
+<div class="contacts">
+  <div class="contact-card animate__animated animate__zoomIn animate__delay-1s">
+    <h3>Павлодар</h3>
+    <p>ул. Маяковского 9<br>9:00–21:00</p>
+    <a class="btn-premium btn-whatsapp" href="https://wa.me/77055826554" target="_blank">WhatsApp</a>
   </div>
 
-  <div style="text-align:center; margin-top:40px;">
-    <a class="btn-premium btn-outline" href="index.html">На главную</a>
+  <div class="contact-card animate__animated animate__zoomIn animate__delay-2s">
+    <h3>Павлодар</h3>
+    <p>пр.Назарбаева 69<br>9:00-21:00</p>
+    <a class="btn-premium btn-whatsapp" href="https://wa.me/77074565744" target="_blank">WhatsApp</a>
+  </div>
+
+  <div class="contact-card animate__animated animate__zoomIn animate__delay-3s">
+    <h3>Instagram</h3>
+    <p>@kaz_flor_pvl</p>
+    <a class="btn-premium btn-instagram" href="https://instagram.com/kaz_flor_pvl" target="_blank">Instagram</a>
   </div>
 </div>
+
+<a class="btn-premium btn-main animate__animated animate__fadeInUp animate__delay-4s" href="index.html">На главную</a>
+
+</div>
+
 <footer class="site-footer">
   <p>&copy; KAZFLOR — 2025. Все права защищены.</p>
 </footer>
