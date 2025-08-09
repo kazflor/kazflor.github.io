@@ -1,229 +1,242 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KAZFLOR — Премиальные букеты</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cream: #f8f5f0;
-      --bronze: #b08d57;
-      --dark: #1a1a1a;
-      --green: #3d4d20;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KAZFLOR — Премиальные букеты</title>
+<meta name="description" content="KAZFLOR — премиальные букеты, свадьбы, подписки.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:400,600,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--cream);
-      background-color: var(--dark);
-      overflow-x: hidden;
-    }
+<style>
+  :root{
+    --khaki:#4e6c50;
+    --khaki-deep:#556B2F;
+    --bronze:#b08d57;
+    --cream:#f9f6f2;
+    --muted:#cfcfcf;
+    --dark:#0f0f0f;
+    --glass: rgba(255,255,255,0.04);
+    --radius:16px;
+    --maxw:1100px;
+  }
 
-    /* Шапка */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      background: rgba(26, 26, 26, 0.7);
-      backdrop-filter: blur(6px);
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--cream);
-    }
-    nav a {
-      color: var(--cream);
-      margin-left: 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    nav a:hover { color: var(--bronze); }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    background:var(--dark);
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+  }
 
-    /* Герой с параллаксом */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      padding: 0 1rem;
-      animation: fadeInUp 1.2s ease-out forwards;
-    }
-    .hero-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    .hero-content p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      background: var(--bronze);
-      color: var(--dark);
-      border-radius: 4px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-    .btn:hover { background: #a17c46; }
+  /* ---------- PAGE LAYOUT ---------- */
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:18px; position:relative}
 
-    /* Секции */
-    section {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    h3.section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--bronze);
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .about p {
-      color: #ddd;
-      line-height: 1.6;
-      font-size: 1rem;
-      text-align: center;
-    }
+  /* ---------- HEADER ---------- */
+  header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 6px;
+    position:sticky;
+    top:0;
+    z-index:60;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(10,10,10,0.55), rgba(10,10,10,0.35));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:56px; width:auto; object-fit:contain; display:block; filter:brightness(0) invert(1)}
+  .brand h1{font-family:'Playfair Display',serif;font-size:1.3rem;margin:0;color:var(--cream);letter-spacing:0.6px}
+  nav a{color:var(--muted); text-decoration:none; margin-left:12px; font-weight:600; font-size:0.95rem}
+  nav a:hover{color:var(--bronze)}
 
-    /* Галерея */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-      transition: transform 0.4s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.03);
-    }
+  /* ---------- HERO with parallax ---------- */
+  .hero {
+    position:relative;
+    height:88vh;
+    min-height:520px;
+    border-radius:20px;
+    overflow:hidden;
+    margin:16px 0;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  }
 
-    /* Контакты */
-    .contacts {
-      text-align: center;
-    }
-    .contacts a {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: var(--green);
-      color: var(--cream);
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    .contacts a:hover {
-      background: #2f3b17;
-    }
+  /* Parallax background layer (we will move it slightly on scroll with JS) */
+  .hero__bg{
+    position:absolute;
+    inset:0;
+    background-image: url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d");
+    background-size:cover;
+    background-position:center;
+    transform:translateZ(0);
+    will-change:transform;
+    filter:brightness(0.5) contrast(1.02);
+  }
+  /* subtle overlay gradient to improve text contrast */
+  .hero__overlay{
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(2,2,2,0.35), rgba(8,8,8,0.6));
+    pointer-events:none;
+  }
 
-    /* Футер */
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
+  .hero__content{
+    position:relative;
+    z-index:10;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding: 24px;
+  }
+  .kicker{ font-family:Inter; color:var(--muted); font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:8px }
+  .hero__title{
+    font-family:'Playfair Display',serif;
+    font-size:2.6rem;
+    line-height:1.02;
+    margin:0 0 12px;
+    color:var(--cream);
+    text-shadow: 0 6px 24px rgba(0,0,0,0.6);
+  }
+  .hero__sub{ color:#e7e4e0; font-size:1.05rem; max-width:820px; margin-bottom:18px }
 
-    /* Анимации */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .hero__cta{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
 
-    /* Мобильная адаптация */
-    @media (max-width: 768px) {
-      .hero-content h2 { font-size: 2rem; }
-      header { padding: 0.8rem 1rem; }
-      nav { display: none; }
-    }
-  </style>
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 18px;
+    border-radius:999px;
+    font-weight:700;
+    text-decoration:none;
+    cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  }
+  .btn--primary{ background:linear-gradient(180deg,var(--khaki),var(--khaki-deep)); color:var(--cream); border:1px solid rgba(255,255,255,0.03) }
+  .btn--ghost{ background:transparent; color:var(--cream); border:1px solid rgba(255,255,255,0.06) }
+  .btn:active{ transform:translateY(1px) }
+  .btn--primary:hover{ transform:translateY(-4px) }
+  .btn--ghost:hover{ transform:translateY(-4px) }
+
+  /* ---------- INFO / ABOUT ---------- */
+  .section{ padding:28px 6px; margin-bottom:8px }
+  .section__title{ font-family:'Playfair Display',serif; color:var(--bronze); font-size:1.6rem; margin-bottom:12px; text-align:center }
+  .lead{ color:#e8e5e1; text-align:center; max-width:900px; margin:0 auto; font-size:1.02rem; line-height:1.6 }
+
+  /* ---------- GALLERY (Swipeable on mobile) ---------- */
+  .gallery-wrap{ margin-top:18px }
+  .swipe{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  }
+  .track{ display:flex; transition:transform .36s cubic-bezier(.22,.9,.28,1); will-change:transform }
+  .slide{ min-width:100%; flex-shrink:0; height:56vh; position:relative }
+  .slide img{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.94) }
+  .slide .label{
+    position:absolute; left:18px; bottom:18px; padding:8px 12px; border-radius:10px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.52));
+    color:var(--cream); font-weight:700; font-family:'Playfair Display',serif;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4)
+  }
+
+  .dots{ display:flex; gap:8px; justify-content:center; margin-top:12px }
+  .dot{ width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.12); transition:all .18s }
+  .dot.active{ transform:scale(1.4); background:var(--bronze) }
+
+  /* ---------- GRID PREVIEW ---------- */
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-top:18px }
+  .grid img{ width:100%; height:120px; object-fit:cover; border-radius:10px; cursor:pointer; display:block; box-shadow:0 8px 20px rgba(0,0,0,0.45) }
+  .grid .card{ overflow:hidden; border-radius:10px; }
+
+  /* ---------- SUBSCRIPTION CTA ---------- */
+  .cta-sub{
+    margin-top:22px;
+    padding:18px;
+    border-radius:14px;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    justify-content:space-between;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+    box-shadow:0 16px 40px rgba(0,0,0,0.5);
+  }
+  .cta-sub .left{ max-width:68% }
+  .cta-sub h4{ margin:0; font-family:'Playfair Display',serif; color:var(--cream) }
+  .cta-sub p{ margin:6px 0 0; color:var(--muted); font-size:0.95rem }
+
+  /* ---------- CONTACTS ---------- */
+  .contacts{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; justify-content:center }
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:12px 16px; border-radius:999px; font-weight:700; text-decoration:none; color:var(--cream);
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  }
+  .contact-btn.wh{ background:#25D366; color:#062f12 }
+  .contact-btn.tg{ background:linear-gradient(180deg,#0088cc,#006699); }
+
+  /* ---------- MODAL (image view) ---------- */
+  .modal{
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.94); z-index:200; padding:18px;
+  }
+  .modal img{ max-width:94vw; max-height:94vh; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,0.6) }
+  .modal .nav{ position:absolute; top:50%; transform:translateY(-50%); display:flex; gap:18px; width:100%; justify-content:space-between; pointer-events:none }
+  .modal .nav button{ pointer-events:auto; background:rgba(255,255,255,0.06); border:0; padding:12px; border-radius:50%; color:var(--cream); cursor:pointer; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:30px 6px 80px; text-align:center; color:var(--muted); font-size:0.95rem }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .hero__title{ font-size:2.1rem }
+    .slide{ height:56vh }
+    .hero{ min-height:60vh; height:72vh }
+  }
+  @media(max-width:520px){
+    .brand img{height:48px}
+    .hero{ height:66vh; min-height:520px }
+    .hero__title{ font-size:1.7rem }
+    .slide{ height:56vh }
+    .grid img{ height:100px }
+    .cta-sub{ flex-direction:column; align-items:flex-start }
+    .cta-sub .left{ max-width:100% }
+  }
+</style>
 </head>
+
 <body>
 
-  <!-- Шапка -->
-  <header>
-    <h1>KAZFLOR</h1>
-    <nav>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header role="banner">
+    <div class="brand" aria-hidden="false">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="LOGO KAZFLOR" />
+      <h1>KAZFLOR</h1>
+    </div>
+    <nav role="navigation" aria-label="Основное меню">
       <a href="#about">О нас</a>
       <a href="#gallery">Галерея</a>
       <a href="#contacts">Контакты</a>
     </nav>
   </header>
 
-  <!-- Герой -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Премиальные цветы для особых моментов</h2>
-      <p>Создаём композиции, которые влюбляют с первого взгляда</p>
-      <a href="#gallery" class="btn">Смотреть букеты</a>
-    </div>
-  </section>
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="home" aria-label="Главный баннер">
+      <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
 
-  <!-- О нас -->
-  <section id="about" class="about">
-    <h3 class="section-title">О нас</h3>
-    <p>KAZFLOR — это искусство флористики, воплощённое в премиальных букетах. Мы используем только свежие и редкие цветы, чтобы каждый заказ стал произведением искусства.</p>
-  </section>
-
-  <!-- Галерея -->
-  <section id="gallery">
-    <h3 class="section-title">Галерея</h3>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc" alt="Букет 1">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Букет 2">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Букет 3">
-    </div>
-  </section>
-
-  <!-- Контакты -->
-  <section id="contacts" class="contacts">
-    <h3 class="section-title">Свяжитесь с нами</h3>
-    <a href="https://t.me/ВАША_ССЫЛКА" target="_blank">Telegram</a>
-    <a href="https://wa.me/ВАШ_НОМЕР" target="_blank">WhatsApp</a>
-  </section>
-
-  <!-- Футер -->
-  <footer>
-    &copy; 2025 KAZFLOR. Все права защищены.
-  </footer>
-
-</body>
-</html>
+      <div class="hero__content" role="region" aria-label="Приветствие">
+        <div class="kicker">Авторская флорист
