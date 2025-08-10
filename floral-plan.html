@@ -1,641 +1,798 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>KAZ FLOR — Refined Minimal</title>
-  <meta name="description" content="KAZ FLOR — премиум минимал шаблон: белый фон, меню слева, hero фото, логотип внизу по центру, слайдер без стрелок, адаптив." />
-  <meta name="theme-color" content="#ffffff" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* ============================================================
-       KAZ FLOR — REFINED MINIMAL (BRAND-NEW IMPLEMENTATION)
-       - Single file
-       - Menu on the LEFT (slide-in)
-       - White background, premium typography
-       - Hero uses client's photo (central visual) + subtle parallax
-       - Slider WITHOUT arrows (dots + swipe + autoplay)
-       - Logo centered at bottom of hero
-       - No contact/feedback block included
-       - Accessibility: focus trap, keyboard controls
-       - Mobile-first, progressive enhancement
-       ============================================================ */
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KAZ FLOR — Премиум бутик цветов</title>
+<meta name="description" content="KAZ FLOR — премиум бутик цветов. Роскошь в каждом лепестке. Доставка по Казахстану." />
+<meta name="author" content="KAZ FLOR Studio">
 
-    :root{
-      --white: #ffffff;
-      --bg: var(--white);
-      --text: #071021;
-      --muted: #6b7280;
-      --accent: #c92f5b;
-      --accent-2: #ffb3c9;
-      --glass: rgba(7,16,35,0.04);
-      --radius: 16px;
-      --shadow-lg: 0 30px 80px rgba(7,16,35,0.08);
-      --shadow-sm: 0 10px 30px rgba(7,16,35,0.06);
-      --ease: cubic-bezier(.22,.9,.36,1);
-      --maxw:1200px;
-      --pad:18px;
-      --hero-img: url('https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v');
-      --hero-img-2: url('https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v');
-      --vh: 100vh;
-    }
+<!-- Premium fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    /* Reset */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      padding:var(--pad);
-      font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
-      color:var(--text);
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      -webkit-text-size-adjust:100%;
-      -webkit-tap-highlight-color:transparent;
-    }
+<style>
+/* ===========================
+   KAZ FLOR — PREMIUM SINGLE FILE
+   - White luxury theme
+   - Mobile-optimized
+   - Left slide menu
+   - Hero slider with parallax + swipe
+   - Gallery with lightbox
+   - No cart (per request)
+   =========================== */
 
-    /* Page container */
-    .page{
-      max-width:var(--maxw);
-      margin:0 auto;
-      position:relative;
-      min-height:100vh;
-    }
+:root{
+  --bg: #ffffff;
+  --paper:#fbfbfb;
+  --muted:#9ea3a8;
+  --ink:#0f1720;
+  --accent:#caa16f;
+  --radius:16px;
+  --max-width:1200px;
+  --shadow-1: 0 10px 30px rgba(16,24,40,0.06);
+  --shadow-2: 0 26px 80px rgba(16,24,40,0.08);
+}
 
-    /* LEFT MENU (hidden by default) */
-    .leftmenu-trigger{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      background:transparent;
-      border:1px solid rgba(7,16,35,0.04);
-      cursor:pointer;
-    }
-    .leftmenu-trigger:focus{outline:3px solid rgba(201,47,91,0.12)}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;
+  line-height:1.45;
+}
 
-    .leftmenu{
-      position:fixed;
-      top:var(--pad);
-      left:var(--pad);
-      height:calc(100% - (var(--pad) * 2));
-      width:360px;
-      max-width:92vw;
-      border-radius:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
-      box-shadow:0 50px 140px rgba(7,16,35,0.12);
-      transform:translateX(-118%);
-      transition:transform .46s var(--ease),opacity .36s var(--ease);
-      z-index:220;
-      overflow:auto;
-      padding:28px;
-    }
-    .leftmenu.open{transform:translateX(0);}
+/* ====== TOPBAR ====== */
+.topbar{
+  position:fixed;
+  left:0; right:0; top:0;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  z-index:2200;
+  background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.82));
+  backdrop-filter: blur(6px);
+  box-shadow:var(--shadow-1);
+}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 18px;width:100%}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{font-family:Playfair Display,serif;font-size:22px;font-weight:700}
+.tag{font-size:12px;color:var(--muted);text-transform:uppercase}
+.btn-menu{width:56px;height:56px;border-radius:12px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.menu-icon{width:22px;height:2px;background:var(--ink);position:relative;border-radius:2px}
+.menu-icon::before,.menu-icon::after{content:'';position:absolute;left:0;width:22px;height:2px;background:var(--ink)}
+.menu-icon::before{top:-7px}
+.menu-icon::after{top:7px}
 
-    .leftmenu .close{
-      display:inline-flex;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid rgba(7,16,35,0.04);cursor:pointer;background:transparent;
-    }
+/* ====== SIDE NAV ====== */
+nav.side{
+  position:fixed; left:0; top:0;
+  height:100vh; width:380px; max-width:86%;
+  transform:translateX(-110%);
+  background:var(--bg);
+  padding:28px;
+  box-shadow:var(--shadow-2);
+  z-index:2300;
+  border-top-right-radius:20px;
+  border-bottom-right-radius:20px;
+  transition:transform .45s cubic-bezier(.2,.9,.3,1);
+  display:flex;flex-direction:column;
+}
+nav.side.open{transform:translateX(0)}
+nav.side .close{display:block;margin-left:auto;border:none;background:none;font-size:20px;cursor:pointer}
+nav.side h3{font-family:Playfair Display,serif;margin:12px 0;font-size:20px}
+nav.side ul{list-style:none;padding:0;margin:8px 0;display:flex;flex-direction:column;gap:8px}
+nav.side a{display:block;padding:12px;border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600}
+nav.side a:hover{background:rgba(202,161,111,0.06)}
 
-    .leftmenu nav{display:flex;flex-direction:column;gap:16px;margin-top:18px}
-    .leftmenu nav a{font-size:18px;color:var(--text);text-decoration:none}
-    .leftmenu .meta{margin-top:auto;color:var(--muted);font-size:13px}
+.side-promo{margin-top:18px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(202,161,111,0.06),transparent);border:1px solid rgba(202,161,111,0.06)}
+.side-foot{margin-top:auto;padding-top:12px;border-top:1px dashed rgba(17,17,17,0.03);color:var(--muted);font-size:13px}
 
-    /* Brand header (top-left but decorative) */
-    .brand{
-      display:flex;align-items:center;gap:12px;
-    }
-    .brand .mark{
-      width:54px;height:54px;border-radius:12px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;color:white;font-weight:800;
-      box-shadow:0 12px 36px rgba(201,47,91,0.12);
-    }
-    .brand h1{font-family:'Playfair Display',serif;margin:0;font-size:18px}
-    .brand .slogan{font-size:13px;color:var(--muted)}
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(12,12,12,0.36);opacity:0;pointer-events:none;transition:opacity .3s;z-index:2250}
+.overlay.show{opacity:1;pointer-events:auto}
 
-    header{
-      position:fixed;left:var(--pad);right:var(--pad);top:var(--pad);
-      display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:200;
-    }
+/* ====== HERO / SLIDER ====== */
+main{margin-top:72px}
+.hero{position:relative;min-height:78vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:20px}
+.slider{width:100%;max-width:1360px;height:76vh;border-radius:20px;overflow:hidden;position:relative;box-shadow:var(--shadow-2);background:var(--bg)}
+.slides{display:flex;height:100%;transition:transform .72s cubic-bezier(.2,.9,.3,1);will-change:transform}
+.slide{min-width:100%;height:100%;position:relative;display:flex;align-items:center}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform 1s ease}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.0) 10%, rgba(255,255,255,0.92) 70%)}
 
-    /* HERO */
-    .hero-wrap{
-      margin-top:80px;
-      border-radius:20px;
-      overflow:clip;
-      position:relative;
-    }
-    .hero{
-      min-height:calc(var(--vh) - (var(--pad) * 2));
-      display:flex;align-items:center;justify-content:center;
-      border-radius:20px;
-      box-shadow:var(--shadow-lg);
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92));
-    }
-    .hero::before{
-      content:'';
-      position:absolute;inset:0;
-      background-image:var(--hero-img);
-      background-position:center center;
-      background-size:cover;
-      filter:contrast(.98) saturate(1.03) brightness(.98);
-      transform:scale(1.06);
-      transition:transform 1s var(--ease),filter .9s var(--ease);
-      z-index:0;
-      will-change:transform;
-    }
-    .hero::after{
-      content:'';
-      position:absolute;inset:0;
-      background:linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.94));
-      z-index:1;
-    }
-    .hero-inner{
-      position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;padding:64px 24px;max-width:1100px;width:100%;
-      text-align:center;
-    }
-    .hero .kicker{font-size:13px;color:var(--muted);letter-spacing:.06em}
-    .hero h2{font-family:'Playfair Display',serif;font-size:44px;line-height:1.02;margin:0}
-    .hero p{max-width:760px;margin:0;color:var(--muted)}
+.hero-card{
+  position:relative;z-index:30;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:28px;align-items:center;
+  padding:34px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.86),rgba(255,255,255,0.78));
+  margin:28px;
+}
+.hero-left h1{font-family:Playfair Display,serif;font-size:44px;margin:0 0 8px}
+.lead{color:var(--muted);font-size:16px;margin-bottom:12px}
+.cta-row{display:flex;gap:12px}
+.btn-cta{background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
+.btn-ghost{padding:12px 14px;border-radius:12px;border:1px solid rgba(17,17,17,0.06);background:transparent}
 
-    .hero .actions{display:flex;gap:12px;margin-top:12px}
-    .button{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;border-radius:12px;border:1px solid rgba(7,16,35,0.04);
-      background:var(--white);cursor:pointer;font-weight:700;
-    }
-    .button.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none;box-shadow:0 12px 36px rgba(201,47,91,0.12)}
+.hero-right{display:flex;flex-direction:column;gap:12px}
+.mini{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--bg);border:1px solid rgba(17,17,17,0.04)}
+.mini img{width:84px;height:84px;object-fit:cover;border-radius:10px}
+.mini .title{font-weight:700}
+.mini .price{color:var(--muted);font-size:14px}
 
-    .logo-center{
-      position:absolute;left:50%;transform:translateX(-50%);bottom:28px;z-index:6;padding:10px 22px;border-radius:999px;
-      background:rgba(255,255,255,0.96);font-family:'Playfair Display',serif;font-weight:700;box-shadow:0 12px 36px rgba(7,16,35,0.06)
-    }
+.nav-arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:12px;border:none;background:rgba(255,255,255,0.9);box-shadow:var(--shadow-1);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-arrow.left{left:18px}
+.nav-arrow.right{right:18px}
+.dots{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;display:flex;gap:10px;z-index:60}
+.dot{width:12px;height:12px;border-radius:999px;background:rgba(255,255,255,0.7);border:1px solid rgba(17,17,17,0.06);cursor:pointer}
+.dot.active{background:var(--ink)}
 
-    /* SLIDER - no arrows */
-    .slider{
-      margin-top:22px;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid rgba(7,16,35,0.03);
-      background:var(--white);
-      position:relative;
-    }
-    .slides{
-      display:flex;
-      transition:transform .66s var(--ease);
-      will-change:transform;
-    }
-    .slide{
-      min-width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-    .slide .card{
-      width:100%;
-      max-width:1100px;
-      height:420px;
-      border-radius:12px;
-      overflow:hidden;
-      background-size:cover;
-      background-position:center;
-      box-shadow:var(--shadow-sm);
-      transform-origin:center center;
-    }
+/* ====== CATALOG (NO CART) ====== */
+.catalog{padding:44px 20px}
+.wrap{max-width:var(--max-width);margin:0 auto}
+.section-head{display:flex;align-items:end;justify-content:space-between}
+.title{font-family:Playfair Display,serif;font-size:28px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:18px}
 
-    /* Dots */
-    .dots{display:flex;gap:10px;justify-content:center;padding:12px 0}
-    .dot{
-      width:12px;height:12px;border-radius:99px;background:rgba(7,16,35,0.08);cursor:pointer;border:1px solid rgba(255,255,255,0.6);
-    }
-    .dot.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 20px rgba(201,47,91,0.12)}
+.product-card{border-radius:14px;overflow:hidden;border:1px solid rgba(17,17,17,0.04);background:var(--bg);box-shadow:var(--shadow-1);transition:transform .28s,box-shadow .28s}
+.product-card:hover{transform:translateY(-10px);box-shadow:0 34px 80px rgba(16,24,40,0.08)}
+.product-photo{height:300px;background-size:cover;background-position:center}
+.product-info{padding:14px}
+.product-info h4{margin:0 0 6px}
+.product-info .muted{font-size:13px}
+.price{font-weight:700;margin-top:10px}
 
-    /* GALLERY grid */
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:14px;
-    }
-    .grid .photo{
-      border-radius:12px;overflow:hidden;position:relative;background:#fff;box-shadow:var(--shadow-sm);
-      min-height:220px;
-    }
-    .grid img{width:100%;height:100%;object-fit:cover;display:block}
-    .grid .overlay{position:absolute;inset:0;border-radius:12px;pointer-events:none}
+/* ====== GALLERY ====== */
+.gallery{padding:36px 20px}
+.gallery .title{font-family:Playfair Display,serif;font-size:24px;margin-bottom:10px}
+.gallery-rail{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
+.gallery-item{flex:0 0 320px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-1);cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
 
-    /* style treatments to avoid feeling 'same' */
-    .tint{filter:grayscale(.08) contrast(1.04) saturate(1.02)}
-    .soft{filter:blur(.6px) saturate(1.02)}
-    .frame{position:absolute;inset:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.4);pointer-events:none}
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:flex;align-items:center;justify-content:center;z-index:3000;opacity:0;pointer-events:none;transition:opacity .25s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:86vh;border-radius:10px}
 
-    /* Features */
-    .features{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(7,16,35,0.03);box-shadow:0 8px 24px rgba(7,16,35,0.04)}
+/* ====== REVIEWS ====== */
+.reviews{padding:38px 20px;background:linear-gradient(180deg,#fff,#fafafa)}
+.reviews .wrap{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.review-card{padding:18px;border-radius:12px;background:var(--bg);box-shadow:var(--shadow-1);border:1px solid rgba(17,17,17,0.03)}
+.review-card .name{font-weight:700;margin-top:8px}
 
-    /* About */
-    .about{margin-top:20px}
+/* ====== CONTACTS ====== */
+.contacts{padding:38px 20px}
+.contacts .cols{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:24px}
+.contacts input, .contacts textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(17,17,17,0.04);font-family:inherit}
 
-    /* Footer */
-    footer{margin-top:22px;padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(7,16,35,0.03);display:flex;justify-content:space-between;align-items:center}
+/* ====== FOOTER ====== */
+footer.site{padding:44px 20px;border-top:1px solid rgba(17,17,17,0.03);background:var(--bg)}
+.footer-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+.micro{font-size:13px;color:var(--muted)}
 
-    /* small utilities */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .u-mt-8{margin-top:8px}.u-mt-12{margin-top:12px}.u-mt-16{margin-top:16px}
+/* helpers */
+.fade-up{opacity:0;transform:translateY(8px);transition:opacity .55s ease, transform .55s ease}
+.in-view{opacity:1;transform:none}
 
-    /* reveal animations helper */
-    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-    .reveal.visible{opacity:1;transform:none}
-
-    /* responsive */
-    @media (max-width:1100px){
-      .features{grid-template-columns:repeat(2,1fr)}
-      .hero h2{font-size:36px}
-    }
-    @media (max-width:880px){
-      body{padding:12px}
-      .leftmenu{width:92vw}
-      .hero h2{font-size:26px}
-      .slide .card{height:220px}
-      .logo-center{bottom:18px;padding:8px 14px}
-      .leftmenu{top:12px;left:12px}
-      header{left:12px;right:12px;top:12px}
-    }
-
-    /* long developer notes and repeated helpful comments to grow file size sensibly */
-    /* NOTE: replace hero image with optimized WebP in production; include srcset for multiple DPR. */
-    /* NOTE: extract CSS and JS into separate files during build to allow caching and smaller HTML payload. */
-    /* NOTE: consider preloading hero image (<link rel=\"preload\" as=\"image\" href=\"...\") to avoid layout shift. */
-    /* NOTE: accessibility: keep contrast checks for accent colors if changed. */
-    /* additional repeated notes below intentionally to increase delivered file length while staying useful. */
-    /* (1 of many) Use IntersectionObserver for reveal and lazy-loading images to reduce main-thread work on initial paint. */
-    /* (2 of many) Add service-worker for effective caching when deploying to static host. */
-    /* (3 of many) Keep DOM structure flat and avoid deep nesting to reduce layout calculation cost. */
-    /* (4 of many) Prefer transform+opacity for animations to leverage compositor layer. */
-    /* (5 of many) Provide fallback for browsers without IntersectionObserver and touch events. */
-    /* (6 of many) Use aria-hidden and aria-expanded on menu for screen readers; trap focus inside overlay. */
-    /* (7 of many) For slides, prefer translate3d for hardware acceleration and smoother transitions. */
-    /* (8 of many) Duplicating the client's single photo intentionally — varied treatment avoids monotony. */
-    /* (9 of many) Provide a noscript message or static fallback for environments where JS disabled. */
-    /* (10 of many) Remove these developer comments before production if you want lean HTML. */
-
-  </style>
+/* responsive */
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.hero-card{grid-template-columns:1fr;}}
+@media (max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}.nav-arrow{display:none}}
+@media (max-width:480px){.grid{grid-template-columns:1fr}.hero-card{padding:18px;border-radius:12px}.topbar{height:64px}}
+</style>
 </head>
 <body>
-  <div class="page">
-    <!-- top header -->
-    <header>
-      <div class="brand" aria-hidden="true">
-        <div class="mark">KF</div>
-        <div>
-          <h1>KAZ FLOR</h1>
-          <div class="slogan">Цветочная сеть</div>
-        </div>
-      </div>
 
-      <button id="openLeftMenu" class="leftmenu-trigger" aria-controls="leftMenu" aria-expanded="false">
-        <span class="sr-only">Открыть меню</span>
-        <span>Меню</span>
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="18" height="2" rx="1" fill="#071021"/>
-          <rect y="6" width="18" height="2" rx="1" fill="#071021"/>
-          <rect y="12" width="18" height="2" rx="1" fill="#071021"/>
-        </svg>
-      </button>
-    </header>
+<!-- overlay used for side menu and lightbox -->
+<div id="overlay" class="overlay" aria-hidden="true"></div>
 
-    <!-- LEFT MENU -->
-    <aside id="leftMenu" class="leftmenu" role="dialog" aria-modal="true" aria-hidden="true">
-      <button id="closeLeftMenu" class="close" aria-label="Закрыть меню">Закрыть</button>
+<!-- SIDE NAV -->
+<nav id="sideNav" class="side" aria-hidden="true" aria-label="Главное меню">
+  <button id="closeSide" class="close" aria-label="Закрыть меню">✕</button>
 
-      <nav aria-label="Главная навигация">
-        <a href="#home">Главная</a>
-        <a href="#shop">Галерея</a>
-        <a href="#about">О нас</a>
-        <a href="#services">Услуги</a>
-        <a href="#info">Инфо</a>
-      </nav>
-
-      <div class="meta">
-        <div>Алматы, Казахстан</div>
-        <div style="color:var(--muted)">Тел: +7 (700) 000-0000</div>
-      </div>
-    </aside>
-
-    <!-- MAIN / HERO -->
-    <main>
-      <section id="home" class="hero-wrap" aria-label="Главная">
-        <div class="hero" id="hero">
-          <div class="hero-inner">
-            <div class="kicker">KAZ FLOR — авторские букеты</div>
-            <h2>Свежие букеты. Искренние эмоции.</h2>
-            <p>Мы создаём композиции вручную, используем отборные цветы и заботимся о каждой детали — от бутонов до упаковки.</p>
-
-            <div class="hero-actions actions" role="group" aria-label="Основные действия">
-              <button class="button primary">Коллекция</button>
-              <button class="button">Наши работы</button>
-            </div>
-          </div>
-
-          <div class="logo-center" aria-hidden="true">KAZ FLOR</div>
-        </div>
-      </section>
-
-      <!-- SLIDER (no arrows) -->
-      <section id="shop" aria-label="Галерея" class="u-mt-12">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <h2 style="margin:0">Галерея</h2>
-          <div class="sublabel" style="color:var(--muted)">Листайте или используйте точки</div>
-        </div>
-
-        <div class="slider" aria-roledescription="carousel" aria-label="Слайдер работ">
-          <div class="slides" id="slides" role="list">
-            <div class="slide" role="listitem" data-index="0">
-              <div class="card" style="background-image:var(--hero-img)"></div>
-            </div>
-            <div class="slide" role="listitem" data-index="1">
-              <div class="card tint" style="background-image:var(--hero-img-2)"></div>
-            </div>
-            <div class="slide" role="listitem" data-index="2">
-              <div class="card soft" style="background-image:var(--hero-img)"></div>
-            </div>
-            <div class="slide" role="listitem" data-index="3">
-              <div class="card" style="background-image:var(--hero-img-2)"></div>
-            </div>
-          </div>
-
-          <!-- dots for navigation (no arrows per request) -->
-          <div class="dots" id="dots" role="tablist" aria-label="Переключение слайдов"></div>
-        </div>
-
-        <!-- grid gallery, same photo styled differently to avoid monotony -->
-        <div class="grid u-mt-12">
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 1" loading="lazy"><div class="frame"></div></div>
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 2" loading="lazy"><div class="frame"></div></div>
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 3" loading="lazy"><div class="frame"></div></div>
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 4" loading="lazy"><div class="frame"></div></div>
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 5" loading="lazy"><div class="frame"></div></div>
-          <div class="photo"><img data-src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="KAZ FLOR 6" loading="lazy"><div class="frame"></div></div>
-        </div>
-      </section>
-
-      <!-- FEATURES -->
-      <section class="features u-mt-16" aria-label="Преимущества">
-        <div class="feature reveal"><h3>Свежесть</h3><p>Поставки каждый день — только лучшие бутоны.</p></div>
-        <div class="feature reveal"><h3>Дизайн</h3><p>Авторские композиции по запросу клиента.</p></div>
-        <div class="feature reveal"><h3>Упаковка</h3><p>Премиальная упаковка, внимание к деталям.</p></div>
-      </section>
-
-      <!-- ABOUT -->
-      <section id="about" class="about u-mt-16" aria-label="О нас">
-        <h2>О нас</h2>
-        <p class="u-mt-8" style="color:var(--muted);max-width:900px">
-          KAZ FLOR — цветочная сеть, где каждая композиция создаётся вручную. Наш визуальный стиль строится вокруг одной ключевой фотографии бренда, которая появляется в hero, слайдере и галерее, но обрабатывается иначе для разнообразия и богатства визуала.
-        </p>
-      </section>
-
-      <!-- EXTRA INFO SECTION (light) -->
-      <section id="info" class="u-mt-16" aria-label="Информация">
-        <h2>Информация</h2>
-        <p style="color:var(--muted);max-width:900px">
-          Мы ценим скорость и аккуратность. На сайте представлена демонстрационная версия визуального стиля — при необходимости смогу подготовить пакет изображений и адаптировать шаблон под конкретные фото и тексты.
-        </p>
-      </section>
-
-    </main>
-
-    <footer class="u-mt-16">
-      <div>© 2025 KAZ FLOR</div>
-      <div style="color:var(--muted)">Политика | Условия</div>
-    </footer>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+    <div style="font-family:Playfair Display,serif;font-size:20px">KAZ FLOR</div>
+    <div class="tag micro">Премиум бутик</div>
   </div>
 
-  <script>
-    /*
-      New, clean JS implementation (no reuse of prior code)
-      - Left menu: open/close, focus trap
-      - Slider: dots, swipe, autoplay, keyboard
-      - Lazy load: IntersectionObserver
-      - Reveal: IntersectionObserver
-      - Parallax: subtle transform based on scroll (hero)
-    */
+  <h3>Меню</h3>
+  <ul>
+    <li><a href="#home" onclick="closeSide()">Главная</a></li>
+    <li><a href="#catalog" onclick="closeSide()">Каталог</a></li>
+    <li><a href="#gallery" onclick="closeSide()">Галерея</a></li>
+    <li><a href="#reviews" onclick="closeSide()">Отзывы</a></li>
+    <li><a href="#contacts" onclick="closeSide()">Контакты</a></li>
+  </ul>
 
-    (function(){
-      'use strict';
+  <div class="side-promo">
+    <div style="font-weight:700;color:var(--accent)">VIP: бесплатная доставка</div>
+    <div class="micro" style="margin-top:8px">Подпишитесь и получите промокод</div>
+    <div style="margin-top:10px"><input type="email" placeholder="Ваш e-mail" aria-label="Email для подписки" /></div>
+  </div>
 
-      // DOM helpers
-      const $ = (s, ctx=document) => ctx.querySelector(s);
-      const $$ = (s, ctx=document) => Array.from((ctx||document).querySelectorAll(s));
-      const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
+  <div class="side-foot">
+    <div>Адрес: г. Алматы, ул. Цветочная, 1</div>
+    <div style="margin-top:6px">Тел: +7 (700) 123-45-67</div>
+    <div style="margin-top:12px">© 2025 KAZ FLOR</div>
+  </div>
+</nav>
 
-      /* LEFT MENU */
-      const openMenuBtn = $('#openLeftMenu');
-      const leftMenu = $('#leftMenu');
-      const closeMenuBtn = $('#closeLeftMenu');
-      let lastFocusEl = null;
-      let leftTrapHandler = null;
-
-      function openLeftMenu(){
-        leftMenu.classList.add('open');
-        leftMenu.setAttribute('aria-hidden','false');
-        openMenuBtn.setAttribute('aria-expanded','true');
-        lastFocusEl = document.activeElement;
-        const first = leftMenu.querySelector('nav a');
-        if(first) first.focus();
-        trapFocus(leftMenu);
-      }
-      function closeLeftMenu(){
-        leftMenu.classList.remove('open');
-        leftMenu.setAttribute('aria-hidden','true');
-        openMenuBtn.setAttribute('aria-expanded','false');
-        untrapFocus(leftMenu);
-        if(lastFocusEl) lastFocusEl.focus();
-      }
-      on(openMenuBtn,'click', ()=> { if(leftMenu.classList.contains('open')) closeLeftMenu(); else openLeftMenu(); });
-      on(closeMenuBtn,'click', closeLeftMenu);
-      on(leftMenu,'click', (e)=> { if(e.target === leftMenu) closeLeftMenu(); });
-      on(document,'keydown', (e)=>{ if(e.key === 'Escape') closeLeftMenu(); });
-
-      function trapFocus(container){
-        const focusables = Array.from(container.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])')).filter(n => !n.hasAttribute('disabled'));
-        if(!focusables.length) return;
-        const first = focusables[0], last = focusables[focusables.length-1];
-        leftTrapHandler = function(e){
-          if(e.key !== 'Tab') return;
-          if(e.shiftKey){
-            if(document.activeElement === first){ e.preventDefault(); last.focus(); }
-          } else {
-            if(document.activeElement === last){ e.preventDefault(); first.focus(); }
-          }
-        };
-        container.addEventListener('keydown', leftTrapHandler);
-      }
-      function untrapFocus(container){
-        if(leftTrapHandler) container.removeEventListener('keydown', leftTrapHandler);
-        leftTrapHandler = null;
-      }
-
-      /* SLIDER (no arrows) */
-      const slidesContainer = $('#slides');
-      const slideItems = $$('.slide', slidesContainer);
-      const dotsContainer = $('#dots');
-      let currentIndex = 0;
-      let autoplayTimer = null;
-
-      function buildDots(){
-        dotsContainer.innerHTML = '';
-        slideItems.forEach((_, i) => {
-          const btn = document.createElement('button');
-          btn.className = 'dot';
-          btn.setAttribute('aria-label', 'Перейти к слайду ' + (i+1));
-          btn.dataset.index = i;
-          btn.addEventListener('click', ()=> goTo(i));
-          dotsContainer.appendChild(btn);
-        });
-        updateDots();
-      }
-      function updateDots(){
-        const dots = $$('.dot', dotsContainer);
-        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-      }
-      function goTo(idx){
-        currentIndex = (idx + slideItems.length) % slideItems.length;
-        slidesContainer.style.transform = `translate3d(-${currentIndex * 100}%,0,0)`;
-        updateDots();
-        resetAutoplay();
-      }
-      function nextSlide(){ goTo(currentIndex + 1); }
-
-      // Swipe support - simple and robust
-      function initSwipe(){
-        let startX = 0, moveX = 0, down = false;
-        slidesContainer.addEventListener('touchstart', (e) => {
-          startX = e.touches[0].clientX;
-          down = true;
-        }, {passive:true});
-        slidesContainer.addEventListener('touchmove', (e) => {
-          if(!down) return;
-          moveX = e.touches[0].clientX - startX;
-        }, {passive:true});
-        slidesContainer.addEventListener('touchend', ()=> {
-          if(!down) return;
-          down = false;
-          if(Math.abs(moveX) > 50){
-            if(moveX < 0) nextSlide(); else goTo(currentIndex - 1);
-          }
-          moveX = 0;
-        });
-      }
-
-      // Keyboard navigation
-      on(document, 'keydown', (e)=>{
-        if(e.key === 'ArrowRight') nextSlide();
-        if(e.key === 'ArrowLeft') goTo(currentIndex - 1);
-      });
-
-      // autoplay
-      function startAutoplay(){
-        if(autoplayTimer) clearInterval(autoplayTimer);
-        autoplayTimer = setInterval(nextSlide, 4800);
-      }
-      function resetAutoplay(){
-        startAutoplay();
-      }
-
-      /* LAZY LOAD images in grid */
-      function lazyLoadImages(){
-        const imgs = $$('img[data-src]');
-        if('IntersectionObserver' in window){
-          const io = new IntersectionObserver((entries, obs) => {
-            entries.forEach(en => {
-              if(en.isIntersecting){
-                const img = en.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                obs.unobserve(img);
-              }
-            });
-          }, {rootMargin:'200px'});
-          imgs.forEach(i => io.observe(i));
-        } else {
-          imgs.forEach(i => { i.src = i.dataset.src; i.removeAttribute('data-src'); });
-        }
-      }
-
-      /* REVEAL on scroll */
-      function revealOnScroll(){
-        const items = $$('.reveal');
-        if('IntersectionObserver' in window){
-          const io = new IntersectionObserver((entries, obs) => {
-            entries.forEach(en => {
-              if(en.isIntersecting){
-                en.target.classList.add('visible');
-                obs.unobserve(en.target);
-              }
-            });
-          }, {threshold:0.12});
-          items.forEach(it => { io.observe(it); });
-        } else {
-          items.forEach(it => it.classList.add('visible'));
-        }
-      }
-
-      /* HERO PARALLAX */
-      const heroEl = $('#hero');
-      function heroParallax(){
-        if(!heroEl) return;
-        const rect = heroEl.getBoundingClientRect();
-        const winH = window.innerHeight;
-        const pct = Math.max(0, Math.min(1, (winH - rect.top) / (winH + rect.height)));
-        const scale = 1 + pct * 0.03;
-        heroEl.style.setProperty('--scale', scale);
-        // apply transform to pseudo-element via style hack by toggling a CSS variable is limited,
-        // but we can nudge the hero element slightly for effect without changing background directly
-        heroEl.style.transform = `translateZ(0)`;
-      }
-      window.addEventListener('scroll', (function(){ let t=false; return function(){ if(!t){ heroParallax(); t=true; setTimeout(()=>t=false,80); } } })());
-
-      /* INIT */
-      function init(){
-        // slider setup
-        buildDots();
-        goTo(0);
-        initSwipe();
-        startAutoplay();
-
-        // lazy load
-        lazyLoadImages();
-
-        // reveal
-        revealOnScroll();
-
-        // small accessibility fix: ensure left menu aria-hidden initially
-        leftMenu.setAttribute('aria-hidden','true');
-      }
-
-      if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-      else init();
-
-      // expose a small debug API
-      window.KAZFLOR = { openMenu: openLeftMenu, closeMenu: closeLeftMenu, goTo, nextSlide };
-
-    })();
-  </script>
-  <noscript>
-    <div style="padding:20px;background:#fff;border-radius:12px;margin:20px 0;border:1px solid rgba(0,0,0,0.04)">
-      Javascript выключён. Чтобы увидеть анимации и слайдер — включите JS в браузере.
+<!-- TOPBAR -->
+<header class="topbar" role="banner">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="openSide" class="btn-menu" aria-label="Открыть меню"><span class="menu-icon" aria-hidden="true"></span></button>
+      <div>
+        <div class="logo">KAZ FLOR</div>
+        <div class="tag">Премиум бутик</div>
+      </div>
     </div>
-  </noscript>
 
-  <!-- Developer notes (final): this file is built from scratch for your request.
-       If anything is off (spacing, menu side, hero scale, dot style), скажи одно предложение —
-       я исправлю и пришлю патч. -->
+    <div class="micro">Доставка по всему Казахстану</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main id="home" tabindex="-1">
+
+  <!-- HERO / SLIDER -->
+  <section class="hero" aria-label="Главный баннер">
+    <div class="slider" id="slider" aria-roledescription="carousel">
+      <button class="nav-arrow left" id="prev" aria-label="Предыдущий">◀</button>
+      <div class="slides" id="slides">
+
+        <!-- Slide 0 — user's photo as hero -->
+        <section class="slide" data-index="0" aria-roledescription="slide">
+          <div class="slide-bg" style="background-image:url('https://fv5-4.files.fm/thumb_show.php?i=de5vnckked');"></div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+
+          <div class="hero-card container fade-up">
+            <div class="hero-left">
+              <div class="badge">Лимитированная серия</div>
+              <h1>Эксклюзивные букеты от KAZ FLOR</h1>
+              <p class="lead">Ручная сборка, премиальная упаковка и доставка в тот же день — забота о деталях, которые важны.</p>
+              <div class="cta-row">
+                <button class="btn-cta" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть букеты</button>
+                <button class="btn-ghost" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">Галерея</button>
+              </div>
+            </div>
+
+            <div class="hero-right" aria-hidden="false">
+              <div class="mini"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Аура" loading="lazy"><div class="title">Букет «Аура»</div><div class="price">₸ 18 000</div></div>
+              <div class="mini"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Luxury" loading="lazy"><div class="title">Композиция «Luxury»</div><div class="price">₸ 32 000</div></div>
+              <div class="mini"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Mini" loading="lazy"><div class="title">Мини-букет</div><div class="price">₸ 8 500</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 1 -->
+        <section class="slide" data-index="1">
+          <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=60');"></div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+
+          <div class="hero-card container fade-up">
+            <div class="hero-left">
+              <div class="badge">Весенняя коллекция</div>
+              <h1>Пышные букеты для особых случаев</h1>
+              <p class="lead">Индивидуальный подбор цветов и упаковки — подарок который запомнят.</p>
+              <div class="cta-row"><button class="btn-cta">Коллекция</button><button class="btn-ghost">Услуги флориста</button></div>
+            </div>
+
+            <div class="hero-right">
+              <div class="mini"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=60" alt="Розы Deluxe" loading="lazy"><div class="title">Розы Deluxe</div><div class="price">₸ 25 000</div></div>
+              <div class="mini"><img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=60" alt="Пионы" loading="lazy"><div class="title">Пионы</div><div class="price">₸ 18 000</div></div>
+              <div class="mini"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=800&q=60" alt="Авторский букет" loading="lazy"><div class="title">Авторский букет</div><div class="price">₸ 30 500</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide" data-index="2">
+          <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=1600&q=60');"></div>
+          <div class="slide-overlay" aria-hidden="true"></div>
+
+          <div class="hero-card container fade-up">
+            <div class="hero-left">
+              <div class="badge">Подарочные наборы</div>
+              <h1>Индивидуальные композиции и коробки</h1>
+              <p class="lead">Премиальная упаковка и бесплатная открытка к каждому букету.</p>
+              <div class="cta-row"><button class="btn-cta">Собрать подарок</button><button class="btn-ghost">Подарочные кейсы</button></div>
+            </div>
+
+            <div class="hero-right">
+              <div class="mini"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=60" alt="Box Luxe" loading="lazy"><div class="title">Box Luxe</div><div class="price">₸ 42 000</div></div>
+              <div class="mini"><img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=60" alt="Комбо" loading="lazy"><div class="title">Комбо</div><div class="price">₸ 20 900</div></div>
+              <div class="mini"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=800&q=60" alt="Сюрприз" loading="lazy"><div class="title">Сюрприз</div><div class="price">₸ 15 500</div></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <button class="nav-arrow right" id="next" aria-label="Следующий">▶</button>
+      <div class="dots" id="dots" role="tablist" aria-label="Навигация слайдера"></div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section id="catalog" class="catalog" aria-label="Каталог">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="title">Бестселлеры</div>
+          <div class="micro muted">Избранные букеты — свежие и в премиальной подаче</div>
+        </div>
+        <div class="micro muted">Премиум подбор</div>
+      </div>
+
+      <div class="grid" id="productGrid" aria-live="polite">
+        <!-- Example cards. Copy/extend as needed. No cart; 'Подробнее' opens modal (stubbed). -->
+        <!-- Card 1 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://fv5-4.files.fm/thumb_show.php?i=de5vnckked')" role="img" aria-label="Белая песня"></div>
+          <div class="product-info">
+            <h4>Букет «Белая песня»</h4>
+            <div class="muted">Нежные розы и лилии в премиальной упаковке.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 22 500</div>
+              <button class="btn-ghost" onclick="openProduct('Белая песня')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Вдохновение"></div>
+          <div class="product-info">
+            <h4>Композиция «Вдохновение»</h4>
+            <div class="muted">Авторская композиция — идеал для торжества.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 28 000</div>
+              <button class="btn-ghost" onclick="openProduct('Вдохновение')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Романтика"></div>
+          <div class="product-info">
+            <h4>Букет «Романтика»</h4>
+            <div class="muted">Классические розы — знак внимания.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 16 500</div>
+              <button class="btn-ghost" onclick="openProduct('Романтика')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Элегант"></div>
+          <div class="product-info">
+            <h4>Подарочный набор «Элегант»</h4>
+            <div class="muted">Букет + шоколад в стильной коробке.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 35 000</div>
+              <button class="btn-ghost" onclick="openProduct('Элегант')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Additional cards repeated for "full" feel (clone pattern) -->
+        <!-- Card 5 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Нежность"></div>
+          <div class="product-info">
+            <h4>Мини-букет «Нежность»</h4>
+            <div class="muted">Компактный, но выразительный подарок.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 7 900</div>
+              <button class="btn-ghost" onclick="openProduct('Нежность')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Соната"></div>
+          <div class="product-info">
+            <h4>Авторский букет «Соната»</h4>
+            <div class="muted">Подбираем цветы под настроение клиента.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 24 000</div>
+              <button class="btn-ghost" onclick="openProduct('Соната')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Сияние"></div>
+          <div class="product-info">
+            <h4>Композиция «Сияние»</h4>
+            <div class="muted">Праздничная композиция в вазе.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 41 000</div>
+              <button class="btn-ghost" onclick="openProduct('Сияние')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="product-card fade-up" tabindex="0">
+          <div class="product-photo" style="background-image:url('https://images.unsplash.com/photo-1526481280698-8405e0d7f0a8?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Глория"></div>
+          <div class="product-info">
+            <h4>Букет «Глория»</h4>
+            <div class="muted">Роскошная композиция с долгим цветением.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="price">₸ 29 500</div>
+              <button class="btn-ghost" onclick="openProduct('Глория')">Подробнее</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Fill grid with clones to simulate full catalog (repeat small set) -->
+        <!-- For brevity we clone some items: -->
+        <!-- Cards 9..20 -->
+        ${/* The template continues with repeating product-card blocks. In an actual deployment replace this with dynamic generation or real items. */''}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="gallery" aria-label="Галерея">
+    <div class="wrap">
+      <div class="title">Галерея</div>
+      <div class="gallery-rail" id="galleryRail" tabindex="0" aria-label="Галерея изображений">
+        <div class="gallery-item"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="gallery 1" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=60" alt="gallery 2" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60" alt="gallery 3" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=60" alt="gallery 4" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1200&q=60" alt="gallery 5" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button id="closeLightbox" style="position:absolute;top:24px;right:28px;font-size:22px;color:#fff;background:none;border:none;cursor:pointer;z-index:3100">✕</button>
+    <img id="lightboxImg" src="" alt="Lightbox image">
+  </div>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="reviews" aria-label="Отзывы">
+    <div class="wrap">
+      <div class="review-card fade-up">
+        <div>\"Быстро и красиво! Спасибо KAZ FLOR\"</div>
+        <div class="name">— Алина</div>
+      </div>
+      <div class="review-card fade-up">
+        <div>\"Подарок поразил — упаковка на высоте.\"</div>
+        <div class="name">— Руслан</div>
+      </div>
+      <div class="review-card fade-up">
+        <div>\"Отличный сервис и цветы свежие.\"</div>
+        <div class="name">— Жанна</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts" class="contacts" aria-label="Контакты">
+    <div class="cols">
+      <div>
+        <h3>Свяжитесь с нами</h3>
+        <p class="micro muted">Тел: +7 (700) 123-45-67<br>Email: hello@kazflor.kz<br>Адрес: г. Алматы, ул. Цветочная, 1</p>
+      </div>
+      <div>
+        <h4>Оставить заявку</h4>
+        <form id="contactForm" onsubmit="event.preventDefault(); alert('Спасибо! Мы свяжемся с вами.');">
+          <input type="text" placeholder="Имя" required />
+          <div style="height:8px"></div>
+          <input type="tel" placeholder="Телефон" required />
+          <div style="height:8px"></div>
+          <textarea placeholder="Сообщение" rows="4"></textarea>
+          <div style="height:10px"></div>
+          <button class="btn-cta" type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site" role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <div class="foot-brand" style="font-family:Playfair Display,serif;font-size:20px">KAZ FLOR</div>
+      <p class="micro muted">Премиум бутик цветов — роскошь в каждом лепестке.</p>
+      <div style="margin-top:12px;display:flex;gap:10px">
+        <a href="#" class="micro muted">Instagram</a>
+        <a href="#" class="micro muted">Telegram</a>
+      </div>
+    </div>
+    <div>
+      <h4>Информация</h4>
+      <div class="micro muted">Доставка<br>Оплата<br>Гарантии</div>
+    </div>
+    <div>
+      <h4>Подписка</h4>
+      <div class="micro muted">Введите email</div>
+      <div style="margin-top:8px"><input placeholder="Email" style="padding:10px;border-radius:10px;border:1px solid rgba(17,17,17,0.04)" /></div>
+    </div>
+  </div>
+
+  <div style="max-width:var(--max-width);margin:18px auto 0;padding:0 18px;display:flex;justify-content:space-between;align-items:center">
+    <div class="micro muted">© 2025 KAZ FLOR</div>
+    <div class="micro muted">Разработка: KAZ FLOR Studio</div>
+  </div>
+</footer>
+
+<!-- Minimal product modal (stub) -->
+<div id="productModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:3300;background:rgba(0,0,0,0.6)">
+  <div style="width:92%;max-width:720px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 40px 100px rgba(0,0,0,0.6)">
+    <button onclick="closeProduct()" style="float:right;border:none;background:none;font-size:20px;cursor:pointer">✕</button>
+    <h3 id="pmTitle">Товар</h3>
+    <p id="pmDesc" class="micro muted">Описание товара</p>
+    <div style="height:12px"></div>
+    <button class="btn-cta" onclick="closeProduct()">Закрыть</button>
+  </div>
+</div>
+
+<script>
+/* ============================
+   JS: Slider (autoplay + touch), Side menu, Gallery lightbox,
+   lazy-loading, reveal-on-scroll, small product modal
+   ============================ */
+
+/* --- Side nav --- */
+const openSideBtn = document.getElementById('openSide');
+const sideNav = document.getElementById('sideNav');
+const closeSideBtn = document.getElementById('closeSide');
+const overlay = document.getElementById('overlay');
+
+function openSide() {
+  sideNav.classList.add('open');
+  overlay.classList.add('show');
+  sideNav.setAttribute('aria-hidden','false');
+  overlay.setAttribute('aria-hidden','false');
+}
+function closeSide() {
+  sideNav.classList.remove('open');
+  overlay.classList.remove('show');
+  sideNav.setAttribute('aria-hidden','true');
+  overlay.setAttribute('aria-hidden','true');
+}
+openSideBtn.addEventListener('click', openSide);
+closeSideBtn.addEventListener('click', closeSide);
+overlay.addEventListener('click', () => { closeSide(); closeLightbox(); });
+
+/* --- Slider --- */
+const slidesEl = document.getElementById('slides');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const dotsWrap = document.getElementById('dots');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+let current = 0;
+let autoplayTimer = null;
+
+function buildDots(){
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i===0 ? ' active' : '');
+    d.setAttribute('aria-label','Перейти к слайду ' + (i+1));
+    d.dataset.index = i;
+    d.addEventListener('click', ()=>{ goTo(i); restartAutoplay(); });
+    dotsWrap.appendChild(d);
+  });
+}
+function updateDots(){
+  const dots = Array.from(dotsWrap.children);
+  dots.forEach(d => d.classList.remove('active'));
+  if(dots[current]) dots[current].classList.add('active');
+}
+
+function goTo(idx){
+  current = (idx + slides.length) % slides.length;
+  slidesEl.style.transform = `translateX(-${current * 100}%)`;
+  updateDots();
+}
+function next(){
+  goTo(current + 1);
+}
+function prev(){
+  goTo(current - 1);
+}
+prevBtn.addEventListener('click', ()=>{ prev(); restartAutoplay(); });
+nextBtn.addEventListener('click', ()=>{ next(); restartAutoplay(); });
+
+/* touch support */
+let isDragging = false;
+let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let animationID = null;
+
+slides.forEach((slide, index) => {
+  // touch
+  slide.addEventListener('touchstart', touchStart(index));
+  slide.addEventListener('touchend', touchEnd);
+  slide.addEventListener('touchmove', touchMove);
+  // mouse for desktop drag
+  slide.addEventListener('mousedown', touchStart(index));
+  slide.addEventListener('mouseup', touchEnd);
+  slide.addEventListener('mouseleave', touchEnd);
+  slide.addEventListener('mousemove', touchMove);
+});
+
+function touchStart(index) {
+  return function(event) {
+    isDragging = true;
+    startPos = getX(event);
+    animationID = requestAnimationFrame(animation);
+    slidesEl.classList.add('grabbing');
+    clearInterval(autoplayTimer);
+  }
+}
+function touchMove(event) {
+  if(!isDragging) return;
+  const currentX = getX(event);
+  currentTranslate = prevTranslate + currentX - startPos;
+}
+function touchEnd() {
+  cancelAnimationFrame(animationID);
+  isDragging = false;
+  const movedBy = currentTranslate - prevTranslate;
+  const threshold = 80;
+  if(movedBy < -threshold) {
+    next();
+  } else if(movedBy > threshold) {
+    prev();
+  } else {
+    goTo(current);
+  }
+  prevTranslate = -current * slides[0].clientWidth;
+  slidesEl.classList.remove('grabbing');
+  restartAutoplay();
+}
+function getX(event) {
+  return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+}
+function animation() {
+  setSliderPosition();
+  if(isDragging) requestAnimationFrame(animation);
+}
+function setSliderPosition() {
+  const width = slides[0].clientWidth || window.innerWidth;
+  const percent = (currentTranslate/width)*100;
+  slidesEl.style.transform = `translateX(${percent - current*100}%)`;
+}
+
+/* autoplay */
+function startAutoplay(){
+  autoplayTimer = setInterval(()=>{ next(); }, 4200);
+}
+function restartAutoplay(){
+  clearInterval(autoplayTimer);
+  startAutoplay();
+}
+
+/* init slider */
+buildDots();
+goTo(0);
+startAutoplay();
+
+/* --- simple parallax effect: scale hero-bg slightly on active slide change --- */
+const slideBgs = document.querySelectorAll('.slide-bg');
+function animateBg(scaleUpIndex){
+  slideBgs.forEach((bg, i) => {
+    if(i === scaleUpIndex) bg.style.transform = 'scale(1.06)';
+    else bg.style.transform = 'scale(1.02)';
+  });
+}
+animateBg(0);
+const origGoTo = goTo;
+goTo = function(idx){
+  current = (idx + slides.length) % slides.length;
+  slidesEl.style.transform = `translateX(-${current * 100}%)`;
+  updateDots();
+  animateBg(current);
+}
+
+/* --- lazy images: for <img> tags already have loading=lazy above --- */
+/* --- reveal on scroll --- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in-view');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold: 0.12});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+/* --- Gallery lightbox --- */
+const galleryRail = document.getElementById('galleryRail');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const closeLightboxBtn = document.getElementById('closeLightbox');
+
+galleryRail.addEventListener('click', (e) => {
+  const item = e.target.closest('.gallery-item');
+  if(!item) return;
+  const img = item.querySelector('img');
+  if(img){
+    openLightbox(img.src, img.alt || '');
+  }
+});
+
+function openLightbox(src, alt){
+  lightboxImg.src = src;
+  lightboxImg.alt = alt;
+  lightbox.classList.add('show');
+  lightbox.setAttribute('aria-hidden','false');
+  overlay.classList.add('show');
+}
+function closeLightbox(){
+  lightbox.classList.remove('show');
+  lightbox.setAttribute('aria-hidden','true');
+  overlay.classList.remove('show');
+  lightboxImg.src = '';
+}
+closeLightboxBtn.addEventListener('click', closeLightbox);
+
+/* allow closing lightbox with ESC */
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    closeLightbox();
+    closeProduct();
+    closeSide();
+  }
+});
+
+/* --- accessible scroll for gallery rail: allow arrow keys to scroll it on focus */
+galleryRail.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowRight') galleryRail.scrollBy({left: 320, behavior:'smooth'});
+  if(e.key === 'ArrowLeft') galleryRail.scrollBy({left: -320, behavior:'smooth'});
+});
+
+/* --- product modal (simple stub) --- */
+const productModal = document.getElementById('productModal');
+const pmTitle = document.getElementById('pmTitle');
+const pmDesc = document.getElementById('pmDesc');
+
+function openProduct(name){
+  pmTitle.textContent = name;
+  pmDesc.textContent = 'Полное описание продукта "' + name + '". В реальном проекте здесь будет подробная страница товара с опциями и фото.';
+  productModal.style.display = 'flex';
+  overlay.classList.add('show');
+}
+function closeProduct(){
+  productModal.style.display = 'none';
+  overlay.classList.remove('show');
+}
+
+/* --- small UX improvements --- */
+/* ensure slider resizes nicely on orientation change */
+window.addEventListener('resize', ()=>{ goTo(current); });
+
+/* Prevent image dragging default (nice for mobile) */
+document.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', e => e.preventDefault()));
+
+/* Accessibility: focus main on load */
+window.addEventListener('load', ()=>{ document.getElementById('home').focus(); });
+
+</script>
+
 </body>
 </html>
