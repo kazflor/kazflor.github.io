@@ -44,39 +44,40 @@
   /* Page container */
   .wrap{ max-width:var(--max-width); margin:0 auto; padding:28px 20px 40px }
 
-/* Header */
-header.site-header {
-  width: 100%;
-  padding: 8px 0 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+/* ===== Шапка ===== */
+.site-header {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  border-bottom:3px solid #d4af37;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  z-index:1000;
+  transition:padding 0.3s ease;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-
+.site-header.shrink {
+  padding:6px 20px;
+}
 .brand {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-
 .brand img {
-  height: 56px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-
-  /* Вариант 2 — аккуратная плашка для белого логотипа */
-  background-color: #f9f4ec;
-  padding: 6px;
-  border-radius: 8px;
+  height:50px;
+  width:auto;
+  object-fit:contain;
 }
-
 .brand h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  margin: 0;
-  letter-spacing: .4px;
+  font-size:1.6rem;
+  margin:0;
+  letter-spacing:.5px;
+  color:#111;
 }
 
   /* Hamburger (левый верхний угол) */
@@ -393,7 +394,31 @@ header.site-header {
   modal.addEventListener('click', close);
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
 })();
+(function(){
+  const btn = document.getElementById('menuButton');
+  const menu = document.getElementById('sideMenu');
+  const backdrop = document.getElementById('backdrop');
+  let lastFocus = null;
 
+  function open(){
+    lastFocus = document.activeElement;
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden','false');
+    backdrop.classList.add('show');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden','true');
+    backdrop.classList.remove('show');
+    document.body.style.overflow='';
+    lastFocus && lastFocus.focus();
+  }
+
+  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+  
 /* ====== Lazy load images (basic) ====== */
 (function(){
   const imgs = document.querySelectorAll('img');
@@ -407,6 +432,13 @@ header.site-header {
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   },{ threshold: .15 });
   items.forEach(i=> obs.observe(i));
+})();
+  // Сжатие шапки при скролле
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 50) header.classList.add('shrink');
+    else header.classList.remove('shrink');
+  });
 })();
 </script>
 </body>
