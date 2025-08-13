@@ -2,223 +2,424 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>KAZFLOR — Премиальные букеты</title>
 <meta name="description" content="KAZFLOR — премиальная цветочная мастерская. Букеты, свадьбы, подписки и доставка.">
-
-<!-- Шрифты -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
 <style>
-:root {
-  --pink: #f7e8e3;
-  --pink-dark: #e8cfc7;
-  --bg-light: #ffffff;
-  --bg-alt: #faf7f5;
-  --text-dark: #2a2a2a;
-  --text-muted: #6e6e6e;
-  --shadow-sm: 0 4px 14px rgba(0,0,0,0.06);
-  --shadow-md: 0 12px 28px rgba(0,0,0,0.12);
-  --radius: 18px;
+/* ====== Палитра: пудрово-бутичная, без золота ====== */
+:root{
+  --bg:#faf7f5;
+  --bg-2:#fff;
+  --paper:#f4efec;
+  --ink:#171717;         /* графит */
+  --sub:#4b5563;         /* slate-600 */
+  --accent:#e7cfd1;      /* пудровый розовый (акцент) */
+  --accent-2:#d8c3c6;    /* глубже пудра */
+  --line:rgba(23,23,23,.08);
+  --radius:18px;
+  --shadow-sm:0 8px 24px rgba(0,0,0,.06);
+  --shadow-md:0 18px 48px rgba(0,0,0,.12);
+  --wrap:1200px;
 }
 
-/* Reset */
-*, *::before, *::after { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+/* ====== Сброс/база ====== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  overflow-x:hidden;
 }
-a { color: inherit; text-decoration: none; }
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
 
-/* Header */
-.site-header {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-sm);
-  padding: 14px 20px;
-  display: flex; align-items: center; justify-content: space-between;
-  z-index: 1000;
-  transition: all 0.3s ease;
+/* ====== Контейнер ====== */
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
+
+/* ====== Шапка минимал ====== */
+.site-header{
+  position:fixed; inset:0 0 auto 0;
+  backdrop-filter:saturate(1.1) blur(12px);
+  background:color-mix(in oklab, #fff 88%, #f7f2f0);
+  border-bottom:1px solid var(--line);
+  z-index:1000;
 }
-.site-header.shrink { padding: 8px 20px; box-shadow: var(--shadow-md); }
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand img { height: 44px; }
-.brand h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 0; }
-
-/* Menu button */
-.hamburger { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.hamburger span { position: relative; display: block; width: 22px; height: 2px; background: var(--text-dark); }
-.hamburger span::before, .hamburger span::after { content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: var(--text-dark); }
-.hamburger span::before { top: -7px; }
-.hamburger span::after { top: 7px; }
-
-/* Side menu */
-.side-menu { position: fixed; top: 0; left: 0; width: 300px; height: 100%; background: #fff; box-shadow: var(--shadow-md); transform: translateX(-100%); transition: transform .3s ease; padding: 20px; z-index: 1200; }
-.side-menu.open { transform: translateX(0); }
-.side-nav a { display: block; padding: 12px; border-radius: 8px; transition: background .2s ease; }
-.side-nav a:hover { background: var(--pink); }
-
-/* Backdrop */
-.backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 1100; }
-.backdrop.show { opacity: 1; pointer-events: auto; }
-
-/* Hero */
-.hero {
-  padding: 100px 20px 60px;
-  background: var(--pink);
-  text-align: center;
+.head-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0; gap:16px;
 }
-.hero .kicker { color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; font-size: 0.95rem; }
-.hero h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin: 10px 0; }
-.hero p { max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; }
-.cta { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand h1{
+  font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem;
+}
 
-/* Buttons */
-.btn { padding: 12px 24px; border-radius: 40px; font-weight: 600; border: none; cursor: pointer; transition: all .25s ease; }
-.btn-outline { background: transparent; border: 2px solid var(--text-dark); color: var(--text-dark); }
-.btn-outline:hover { background: var(--text-dark); color: #fff; }
-.btn-pink { background: var(--pink-dark); color: var(--text-dark); border: 2px solid var(--pink-dark); }
-.btn-pink:hover { background: var(--text-dark); color: #fff; }
+/* ====== Бургер + offcanvas ====== */
+.hamburger{
+  display:inline-flex; justify-content:center; align-items:center;
+  width:44px; height:44px; border-radius:12px; border:1px solid var(--line);
+  background:#fff; box-shadow:var(--shadow-sm); cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
+.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger span::before,.hamburger span::after{
+  content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink);
+  transition:transform .25s ease, top .25s ease, opacity .2s ease;
+}
+.hamburger span::before{ top:-7px }
+.hamburger span::after{ top:7px }
+.hamburger.active span{ background:transparent }
+.hamburger.active span::before{ top:0; transform:rotate(45deg) }
+.hamburger.active span::after{ top:0; transform:rotate(-45deg) }
 
-/* Sections */
-section { padding: 64px 20px; }
-section:nth-child(even) { background: var(--bg-alt); }
-.section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
-.section-sub { text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px; }
+/* offcanvas */
+.side-menu{
+  position:fixed; inset:0 auto 0 0; width:min(86vw,360px);
+  transform:translateX(-104%); transition:transform .34s cubic-bezier(.22,.9,.28,1);
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.92));
+  border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12);
+  z-index:1200; display:flex; flex-direction:column;
+}
+.side-menu.open{ transform:translateX(0) }
+.side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
+.side-head img{height:34px}
+.side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
+.side-nav{ padding:10px 12px 18px; overflow:auto }
+.side-nav a{
+  display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px;
+  font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease;
+}
+.side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
+.side-cta{ margin-top:auto; padding:14px 16px; border-top:1px solid var(--line) }
 
-/* Divider */
-section + section { border-top: 1px solid rgba(0,0,0,0.06); box-shadow: 0 -4px 8px rgba(0,0,0,0.02) inset; }
+/* backdrop */
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
+.backdrop.show{ opacity:1; pointer-events:auto }
 
-/* Slider */
-.catalog-swiper { max-width: 1100px; margin: 0 auto; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); }
-.slide img { width: 100%; height: 60vh; object-fit: cover; display: block; }
+/* ====== Герой ====== */
+.hero{
+  padding-top:calc(var(--headH) + 32px);
+  padding-bottom:48px;
+  text-align:center;
+  background:
+    radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%),
+    linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%);
+}
+.kicker{
+  letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub);
+}
+.hero h2{
+  font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem);
+  line-height:1.06; margin:10px auto 0; max-width:900px;
+}
+.hero p{ max-width:760px; margin:14px auto 0; color:#444; font-size:1.05rem }
 
-/* Subscription block */
-.subscription { background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-wrap: wrap; gap: 20px; }
-.sub-left, .sub-right { flex: 1; min-width: 260px; }
+.cta{ margin-top:26px; display:inline-flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
 
-/* Gallery */
-.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 12px; }
-.gallery img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform .2s ease; }
-.gallery img:hover { transform: scale(1.03); }
+/* ====== Кнопки ====== */
+.btn{
+  display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  box-shadow:var(--shadow-sm);
+}
+.btn:hover{ transform:translateY(-2px) }
+.btn-ink{ color:#fff; background:var(--ink) }
+.btn-ink:hover{ box-shadow:0 10px 24px rgba(23,23,23,.18) }
+.btn-powder{
+  background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+  color:#2b2b2b; border-color:rgba(0,0,0,.06);
+}
+.btn-powder:hover{ box-shadow:0 10px 24px rgba(231,207,209,.25) }
 
-/* Footer */
-footer { padding: 30px 0; text-align: center; background: var(--bg-alt); color: var(--text-muted); font-size: 0.95rem; }
+/* ====== Секции ====== */
+section{ padding:64px 0 }
+.section-title{
+  text-align:center; font-family:'Playfair Display',serif; font-size:2.2rem; margin:0 0 8px;
+}
+.section-sub{ text-align:center; color:var(--sub); margin:0 auto 28px; max-width:880px }
+section.alt{ background:var(--paper) }
+section + section{ border-top:1px solid var(--line) }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero h2 { font-size: 2rem; }
-  .slide img { height: auto; }
+/* ====== Слайдер (scroll-snap) ====== */
+.catalog-swiper{
+  width:100%; max-width:1100px; margin:0 auto; border-radius:22px; overflow:hidden;
+  background:#fff; box-shadow:var(--shadow-md); border:1px solid var(--line)
+}
+.swipe-track{ display:flex; gap:0; width:auto; overflow:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none }
+.swipe-track::-webkit-scrollbar{ display:none }
+.slide{ flex:0 0 100%; min-width:100%; height:56vh; position:relative; scroll-snap-align:center; background:#000 }
+.slide img{ width:100%; height:100%; object-fit:cover; filter:contrast(1.03) saturate(1.03) }
+.slide .label{
+  position:absolute; left:18px; bottom:18px; background:rgba(255,255,255,0.9);
+  padding:10px 14px; border-radius:12px; color:var(--ink); font-weight:600; box-shadow:0 10px 24px rgba(0,0,0,.12)
+}
+@media (max-width:900px){ .slide{ height:52vh } }
+@media (max-width:520px){ .slide{ height:48vh } }
+
+/* ====== “Подписка” блок ====== */
+.subscription{
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.84));
+  border-radius:22px; padding:28px; max-width:900px; margin:0 auto;
+  box-shadow:var(--shadow-sm); display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap; border:1px solid var(--line)
+}
+.sub-left{flex:1; min-width:260px}
+.sub-right{flex:1; min-width:260px; text-align:center}
+.sub-list{ text-align:left; color:#333; margin-top:12px; padding-left:10px }
+.sub-list li{ margin:8px 0 }
+
+/* ====== Галерея + модал ====== */
+.gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; max-width:1100px; margin:0 auto }
+.gallery img{
+  width:100%; height:140px; object-fit:cover; border-radius:14px; cursor:pointer;
+  border:1px solid var(--line); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.gallery img:hover{ transform:scale(1.03); box-shadow:var(--shadow-md); border-color:rgba(23,23,23,.14) }
+.modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.85); z-index:9999; padding:20px }
+.modal img{ max-width:92vw; max-height:92vh; border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.7) }
+.modal.show{ display:flex }
+
+/* ====== Контакты ====== */
+.contacts{ max-width:920px; margin:0 auto; display:flex; gap:18px; align-items:flex-start; justify-content:center; flex-wrap:wrap }
+.contact-card{
+  background:#fff; padding:18px; border-radius:16px; min-width:260px; box-shadow:var(--shadow-sm);
+  text-align:center; border:1px solid var(--line)
+}
+.contact-card h3{ font-family:'Playfair Display',serif; margin:.2rem 0 .5rem }
+
+/* ====== Подвал ====== */
+.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
+.site-footer a{ text-decoration:underline; text-underline-offset:3px }
+
+/* ====== Анимация появления ====== */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
+.reveal.visible{ opacity:1; transform:translateY(0) }
+
+/* ====== Доступность: без анимации ====== */
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; animation:none !important }
 }
 </style>
 </head>
 <body>
 
-<div class="backdrop" id="backdrop"></div>
+<!-- Backdrop -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
-<!-- Side menu -->
-<aside class="side-menu" id="sideMenu">
-  <nav class="side-nav">
+<!-- Offcanvas -->
+<aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
+  <div class="side-head">
+    <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
+    <div class="side-title">Меню</div>
+  </div>
+  <nav class="side-nav" aria-label="Боковое меню">
     <a href="#home">Главная</a>
     <a href="#catalog">Каталог</a>
     <a href="#subscription">Свадебная подписка</a>
     <a href="#gallery">Отзывы и фото</a>
     <a href="#contacts">Контакты</a>
+    <a href="https://kazflor.github.io/catalog.html" target="_blank" rel="noopener">Полный каталог</a>
+    <a href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Оставить заявку</a>
+    <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Instagram</a>
   </nav>
+  <div class="side-cta">
+    <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Связаться</a>
+  </div>
 </aside>
 
-<header class="site-header" id="siteHeader">
-  <button class="hamburger" id="menuButton"><span></span></button>
-  <div class="brand">
-    <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR" />
-    <h1>KAZFLOR</h1>
+<!-- Шапка -->
+<header id="siteHeader" class="site-header" role="banner">
+  <div class="wrap head-inner">
+    <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
+      <span></span>
+    </button>
+    <div class="brand">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
+      <h1>KAZFLOR</h1>
+    </div>
+    <nav class="main-nav" aria-label="Главная навигация"></nav>
   </div>
 </header>
 
-<main id="home" class="hero">
-  <div class="kicker">Флористика премиум</div>
-  <h2>Цветы, которые говорят за вас — лаконично, роскошно и с душой.</h2>
-  <p>KazFlor — авторские букеты, свадебное оформление и персональное сопровождение. Доверяйте тем, кто делает моменты красивыми.</p>
-  <div class="cta">
-    <a class="btn btn-outline" href="#catalog">Смотреть каталог</a>
-    <a class="btn btn-pink" href="#contacts">Связаться</a>
+<main id="home" class="hero" role="main">
+  <div class="wrap">
+    <div class="kicker">Флористика премиум</div>
+    <h2>Цветы, которые говорят за вас — лаконично, роскошно и с душой.</h2>
+    <p>KazFlor — авторские букеты, свадебное оформление и персональное сопровождение. Доверяйте тем, кто делает моменты красивыми.</p>
+    <div class="cta">
+      <a class="btn btn-powder" href="https://kazflor.github.io/catalog.html" target="_blank" rel="noopener">Смотреть каталог</a>
+      <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Связаться</a>
+    </div>
   </div>
 </main>
 
-<section id="catalog">
-  <h2 class="section-title">Каталог — избранные работы</h2>
-  <p class="section-sub">Яркие, нежные, минималистичные — коллекции, которые подходят для любви и важных событий.</p>
-  <div class="catalog-swiper">
-    <div class="slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4"></div>
-    <div class="slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v"></div>
-    <div class="slide"><img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked"></div>
-  </div>
-</section>
+<section id="catalog" aria-label="Каталог букетов" class="reveal">
+  <div class="wrap">
+    <h2 class="section-title">Каталог — избранные работы</h2>
+    <p class="section-sub">Яркие, нежные, минималистичные — коллекции, которые подходят для любви и важных событий.</p>
 
-<section id="subscription">
-  <h2 class="section-title">Свадебная подписка</h2>
-  <p class="section-sub">Индивидуальное сопровождение вашего свадебного проекта — несколько пакетов для любого формата и бюджета.</p>
-  <div class="subscription">
-    <div class="sub-left">
-      <h3>Что входит</h3>
-      <ul>
-        <li>Персональный свадебный флорист и консультация</li>
-        <li>Индивидуальная цветочная концепция и план</li>
-        <li>Подбор букетов, бутоньерок и композиций</li>
-        <li>Доставка и монтаж на площадке</li>
-        <li>Экстренная замена цветов в день события (VIP)</li>
-      </ul>
-    </div>
-    <div class="sub-right">
-      <p>Узнать о пакетах и ценах — оставьте заявку или напишите нам в мессенджере.</p>
-      <a class="btn btn-outline" href="#contacts">Оставить заявку</a>
+    <div class="catalog-swiper" aria-hidden="false" tabindex="0">
+      <div class="swipe-track" id="track">
+        <div class="slide">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет — Пудровая романтика">
+          <div class="label">Пудровая романтика</div>
+        </div>
+        <div class="slide">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет — Свадебная классика">
+          <div class="label">Свадебная классика</div>
+        </div>
+        <div class="slide">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет — Цветочная симфония">
+          <div class="label">Цветочная симфония</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="gallery">
-  <h2 class="section-title">Отзывы и фото</h2>
-  <p class="section-sub">Клиенты делятся моментами — нажми на фото, чтобы увеличить.</p>
-  <div class="gallery">
-    <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf">
-    <img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7">
-    <img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm">
+<section id="subscription" class="alt reveal">
+  <div class="wrap">
+    <h2 class="section-title">Свадебная подписка</h2>
+    <p class="section-sub">Индивидуальное сопровождение вашего свадебного проекта — несколько пакетов для любого формата и бюджета.</p>
+
+    <div class="subscription">
+      <div class="sub-left">
+        <h3 style="font-family:'Playfair Display',serif; margin:0 0 8px">Что входит</h3>
+        <ul class="sub-list">
+          <li>Персональный свадебный флорист и консультация</li>
+          <li>Индивидуальная цветочная концепция и план</li>
+          <li>Подбор букетов, бутоньерок и композиций</li>
+          <li>Доставка и монтаж на площадке</li>
+          <li>Экстренная замена цветов в день события (VIP)</li>
+        </ul>
+      </div>
+      <div class="sub-right">
+        <p style="color:#444; margin-bottom:18px">Узнать о пакетах и ценах — оставьте заявку или напишите нам в мессенджере.</p>
+        <a class="btn btn-powder" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Оставить заявку</a>
+        <div style="margin-top:14px; color:var(--sub); font-size:.95rem">Индивидуальные условия для крупных проектов</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="contacts">
-  <h2 class="section-title">Контакты</h2>
-  <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
-  <p style="text-align:center;"><a class="btn btn-pink" href="https://wa.me/77074565744">WhatsApp</a></p>
+<section id="gallery" class="reveal">
+  <div class="wrap">
+    <h2 class="section-title">Отзывы и фото</h2>
+    <p class="section-sub">Клиенты делятся моментами — нажми на фото, чтобы увеличить.</p>
+    <div class="gallery" id="galleryGrid">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" alt="Фото 1" data-full="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" alt="Фото 2" data-full="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" alt="Фото 3" data-full="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" alt="Фото 4" data-full="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Фото 5" data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" alt="Фото 6" data-full="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n">
+    </div>
+  </div>
 </section>
 
-<footer>
-  <p>&copy; KAZFLOR — 2025. Все права защищены.</p>
+<section id="contacts" class="alt reveal">
+  <div class="wrap">
+    <h2 class="section-title">Контакты</h2>
+    <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
+    <div class="contacts">
+      <div class="contact-card">
+        <h3>Павлодар</h3>
+        <p>ул. Маяковского 9<br>пр. Назарбаева 69</p>
+        <p style="margin-top:10px">
+          <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="max-width:900px;">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
+  </div>
 </footer>
 
-<script>
-const menuBtn = document.getElementById('menuButton');
-const sideMenu = document.getElementById('sideMenu');
-const backdrop = document.getElementById('backdrop');
-menuBtn.addEventListener('click', () => {
-  sideMenu.classList.toggle('open');
-  backdrop.classList.toggle('show');
-});
-backdrop.addEventListener('click', () => {
-  sideMenu.classList.remove('open');
-  backdrop.classList.remove('show');
-});
-window.addEventListener('scroll', () => {
-  document.getElementById('siteHeader').classList.toggle('shrink', window.scrollY > 50);
-});
-</script>
+<!-- Модал для галереи -->
+<div id="modal" class="modal" role="dialog" aria-hidden="true">
+  <img id="modalImg" src="" alt="Увеличенное фото">
+</div>
 
+<script>
+/* ====== Инициализация высоты шапки для отступа контента ====== */
+(function(){
+  const header = document.getElementById('siteHeader');
+  const setHead = ()=>{
+    const h = header.offsetHeight || 72;
+    document.documentElement.style.setProperty('--headH', h + 'px');
+  };
+  setHead(); window.addEventListener('resize', setHead, {passive:true});
+})();
+
+/* ====== Меню (одно, без дублей) ====== */
+(function(){
+  const btn = document.getElementById('menuButton');
+  const menu = document.getElementById('sideMenu');
+  const backdrop = document.getElementById('backdrop');
+  let lastFocus = null;
+
+  function open(){
+    lastFocus = document.activeElement;
+    btn.classList.add('active'); btn.setAttribute('aria-expanded','true');
+    menu.classList.add('open'); menu.setAttribute('aria-hidden','false');
+    backdrop.classList.add('show'); document.body.style.overflow='hidden';
+    const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus();
+  }
+  function close(){
+    btn.classList.remove('active'); btn.setAttribute('aria-expanded','false');
+    menu.classList.remove('open'); menu.setAttribute('aria-hidden','true');
+    backdrop.classList.remove('show'); document.body.style.overflow='';
+    if(lastFocus) lastFocus.focus();
+  }
+
+  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ====== Lazy-load изображений ====== */
+(function(){
+  document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy'));
+})();
+
+/* ====== Reveal on scroll ====== */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{ threshold:.15 });
+  items.forEach(i=> obs.observe(i));
+})();
+
+/* ====== Галерея — модал ====== */
+(function(){
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+
+  function open(src, alt){ modalImg.src = src; modalImg.alt = alt || 'image'; modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); }
+  function close(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); setTimeout(()=> modalImg.src = '', 200); }
+
+  document.querySelectorAll('.gallery img').forEach(el=>{
+    el.addEventListener('click', ()=> open(el.dataset.full || el.src, el.alt || ''));
+    el.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') el.click(); });
+  });
+  modal.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+</script>
 </body>
 </html>
