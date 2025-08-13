@@ -44,11 +44,40 @@
   /* Page container */
   .wrap{ max-width:var(--max-width); margin:0 auto; padding:28px 20px 40px }
 
-  /* Header */
-  header.site-header{ width:100%; padding:8px 0 18px; display:flex; align-items:center; justify-content:space-between; gap:14px }
-  .brand{ display:flex; gap:12px; align-items:center }
-  .brand img{ height:56px; width:auto; object-fit:contain; display:block }
-  .brand h1{ font-family:'Playfair Display',serif; font-size:1.6rem; margin:0; letter-spacing:.4px }
+/* Header */
+header.site-header {
+  width: 100%;
+  padding: 8px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.brand img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+
+  /* Вариант 2 — аккуратная плашка для белого логотипа */
+  background-color: #f9f4ec;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  margin: 0;
+  letter-spacing: .4px;
+}
 
   /* Hamburger (левый верхний угол) */
   .hamburger{ display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px; border:1px solid rgba(0,0,0,.08); background:#fff; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .18s ease }
