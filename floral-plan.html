@@ -200,6 +200,153 @@
   .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
   .reveal.visible{ opacity:1; transform:translateY(0) }
 </style>
+
+<!-- ====== ДОБАВЛЕНО: СЛОЙ ГЛУБОКОГО ЛЮКСА (перекрывает базу, ничего не удаляет) ====== -->
+<style>
+  :root{
+    --gold-1:#d4af37;
+    --gold-2:#f9e7a8;
+    --gold-3:#b08d57;
+    --glass-deep:rgba(255,255,255,0.7);
+  }
+
+  /* Перламутровый фон чуть глубже */
+  body{
+    background:
+      radial-gradient(1200px 600px at 5% -10%, rgba(212,175,55,0.06), transparent 60%),
+      radial-gradient(1100px 700px at 95% -20%, rgba(85,107,47,0.06), transparent 55%),
+      linear-gradient(180deg,#fbfbfb 0%,#ffffff 60%,#fbfbfb 100%);
+  }
+
+  /* Золотые акценты и стекло */
+  .site-header{
+    border-bottom:1px solid rgba(212,175,55,0.35);
+    background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.72));
+  }
+  .side-menu{
+    background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.8));
+    border-right:1px solid rgba(212,175,55,0.25);
+  }
+
+  /* Градиентное золото в заголовках */
+  .section-title, .brand h1, .hero .kicker{
+    position:relative;
+    background:linear-gradient(92deg,var(--text) 0%, var(--text) 60%, rgba(0,0,0,0.9) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .section-title::after{
+    content:"";
+    display:block;
+    height:2px;
+    width:72px;
+    margin:10px auto 0;
+    background:linear-gradient(90deg,rgba(0,0,0,0), var(--gold-1), rgba(0,0,0,0));
+    border-radius:2px;
+    opacity:.7;
+  }
+
+  /* Кнопки — контурное золото + сияние при ховере */
+  .btn-premium{
+    border:2px solid transparent;
+    background:
+      linear-gradient(#fff,#fff) padding-box,
+      linear-gradient(135deg,var(--gold-1),var(--gold-2),var(--gold-3)) border-box;
+    color:#1b1b1b;
+  }
+  .btn-premium:hover{
+    background:
+      linear-gradient(180deg,#1a1a1a,#1a1a1a) padding-box,
+      linear-gradient(135deg,var(--gold-1),var(--gold-2),var(--gold-3)) border-box;
+    color:#fff;
+    box-shadow:0 14px 36px rgba(212,175,55,.22), 0 6px 16px rgba(0,0,0,.12);
+  }
+  .btn-filled{
+    background-image:linear-gradient(135deg,var(--khaki),#3f5a2a);
+    border:2px solid transparent;
+    background-origin:border-box;
+    color:#fff;
+  }
+  .btn-filled:hover{
+    filter:saturate(1.05);
+    box-shadow:0 14px 36px rgba(85,107,47,.28), 0 6px 16px rgba(0,0,0,.12);
+  }
+
+  /* Карточки и белые блоки — более глубокий стеклянный объём */
+  .catalog-swiper,
+  .subscription,
+  .contact-card,
+  .modal img{
+    box-shadow:0 18px 60px rgba(0,0,0,.12), 0 6px 18px rgba(0,0,0,.06);
+  }
+  .subscription{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.78));
+    border:1px solid rgba(212,175,55,0.18);
+  }
+  .contact-card{
+    border:1px solid rgba(212,175,55,0.18);
+  }
+
+  /* Hero — мягкий параллакс и свечение */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-20% -10% auto -10%;
+    height:80%;
+    background:
+      radial-gradient(600px 300px at 20% 0%, rgba(212,175,55,.18), transparent 60%),
+      radial-gradient(500px 260px at 80% 10%, rgba(85,107,47,.16), transparent 60%);
+    filter:blur(30px) saturate(1.1);
+    transform:translate3d(var(--parx,0px), var(--pary,0px), 0);
+    transition:transform .2s ease-out;
+    z-index:-1;
+  }
+
+  /* Слайдер — рамка «в витрине» */
+  .catalog-swiper{
+    background:linear-gradient(180deg,#ffffff,#fbfbfb);
+    border:1px solid rgba(212,175,55,0.16);
+  }
+  .slide .label{
+    border:1px solid rgba(212,175,55,0.25);
+  }
+
+  /* Галерея — плавный zoom + золотая кромка на hover */
+  .gallery img{
+    border:1px solid rgba(212,175,55,0.12);
+  }
+  .gallery img:hover{
+    border-color:rgba(212,175,55,0.26);
+  }
+
+  /* Навигация — золотая подсветка ссылок при hover */
+  .side-nav a:hover{
+    box-shadow:0 10px 26px rgba(212,175,55,.12);
+  }
+
+  /* Удобная прокрутка к якорям под фикс-шапку */
+  #home, #catalog, #subscription, #gallery, #contacts{
+    scroll-margin-top:88px;
+  }
+
+  /* Плавность всего интерфейса */
+  *{
+    transition: box-shadow .25s ease, transform .25s ease, background-color .25s ease, border-color .25s ease, opacity .25s ease;
+  }
+
+  /* Доступность: отключаем лишние эффекты, если пользователь не любит анимацию */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important }
+    .swipe-track{ animation:none }
+  }
+</style>
 </head>
 <body>
 
@@ -454,6 +601,41 @@
     else header.classList.remove('shrink');
   });
 })();
+</script>
+
+<!-- ====== ДОБАВЛЕНО: ЭФФЕКТЫ ЛЮКСА (параллакс, мягкое свечение) ====== -->
+<script>
+  // Параллакс для подсветки в hero
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+
+    const setPar = (x = 0, y = 0) => {
+      document.documentElement.style.setProperty('--parx', (x*0.04).toFixed(2)+'px');
+      document.documentElement.style.setProperty('--pary', (y*0.06).toFixed(2)+'px');
+    };
+
+    window.addEventListener('mousemove', (e)=>{
+      const r = hero.getBoundingClientRect();
+      const cx = e.clientX - (r.left + r.width/2);
+      const cy = e.clientY - (r.top + r.height/2);
+      setPar(cx, cy);
+    }, { passive:true });
+
+    window.addEventListener('scroll', ()=>{
+      const t = window.scrollY || window.pageYOffset;
+      document.documentElement.style.setProperty('--pary', (t*-0.08).toFixed(2)+'px');
+    }, { passive:true });
+  })();
+
+  // Лёгкое «дыхание» кнопок
+  (function(){
+    const btns = document.querySelectorAll('.btn-premium, .btn-filled');
+    btns.forEach(b=>{
+      b.addEventListener('mouseenter', ()=> b.style.transform = 'translateY(-2px) scale(1.01)');
+      b.addEventListener('mouseleave', ()=> b.style.transform = '');
+    });
+  })();
 </script>
 </body>
 </html>
