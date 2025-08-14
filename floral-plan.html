@@ -421,5 +421,27 @@ section + section{ border-top:1px solid var(--line) }
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 })();
 </script>
+/* ====== Автослайдер для каталога ====== */
+(function(){
+  const track = document.getElementById('track');
+  if (!track) return;
+  const slides = track.children;
+  let index = 0;
+  const total = slides.length;
+
+  function showSlide(i) {
+    track.style.scrollBehavior = 'smooth';
+    track.scrollTo({
+      left: i * track.clientWidth,
+      behavior: 'smooth'
+    });
+  }
+
+  setInterval(() => {
+    index = (index + 1) % total;
+    showSlide(index);
+  }, 4000);
+})();
+</script>
 </body>
 </html> 
