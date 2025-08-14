@@ -1,128 +1,128 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KAZFLOR — Уход и полив комнатных растений</title>
-  <meta name="description" content="KAZFLOR — советы по уходу и поливу комнатных цветов: лучшие практики и рекомендации." />
-  <!-- Подключение шрифтов и стилей, такие же как на основном сайте -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Скопированы твои стили из шаблона — не меняются */
-    :root{
-      --bg:#faf7f5; --bg-2:#fff; --paper:#f4efec;
-      --ink:#171717; --sub:#4b5563; --accent:#e7cfd1; --accent-2:#d8c3c6;
-      --line:rgba(23,23,23,.08); --radius:18px;
-      --shadow-sm:0 8px 24px rgba(0,0,0,.06);
-      --shadow-md:0 18px 48px rgba(0,0,0,.12);
-      --wrap:1200px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color:var(--ink);background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%),
-        linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.5; overflow-x:hidden;}
-    a{color:inherit; text-decoration:none}
-    img{display:block; max-width:100%}
-    .wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
-    .site-header{position:fixed; inset:0 0 auto 0; backdrop-filter:saturate(1.1) blur(12px);
-      background:color-mix(in oklab, #fff 88%, #f7f2f0); border-bottom:1px solid var(--line);
-      z-index:1000;}
-    .head-inner{display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:16px;}
-    .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:44px; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
-    .brand h1{font-family:'Playfair Display',serif; font-weight:700;
-      letter-spacing:.5px; margin:0; font-size:1.4rem;}
-    .hero{padding-top:calc(var(--headH) + 32px); padding-bottom:48px;
-      text-align:center; background:
-        radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%),
-        linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%);}
-    .hero .kicker{letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub);}
-    .hero h2{font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem);
-      line-height:1.06; margin:10px auto 0; max-width:900px;}
-    .hero p{max-width:760px; margin:14px auto 0; color:#444; font-size:1.05rem;}
-    section{padding:64px 0}
-    .section-title{text-align:center; font-family:'Playfair Display',serif;
-      font-size:2.2rem; margin:0 0 8px;}
-    .section-sub{text-align:center; color:var(--sub); margin:0 auto 28px; max-width:880px;}
-    section.alt{background:var(--paper)}
-    img.inline-illus{margin:20px auto; border-radius:12px; box-shadow:var(--shadow-sm);}
-    .tips-list{max-width:800px;margin:0 auto; list-style:disc inside; color:#333; font-size:1rem; line-height:1.6;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAZ FLOR — Уход и полив комнатных цветов</title>
+<link rel="stylesheet" href="styles.css"> <!-- Подключение твоего стиля -->
+<style>
+/* ====== Стили для таблицы ====== */
+.care-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.care-table th {
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+  text-align: left;
+}
+
+.care-table td {
+  border: 1px solid #ddd;
+  padding: 15px;
+  vertical-align: top;
+}
+
+.care-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.care-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .care-table, .care-table thead, .care-table tbody, .care-table th, .care-table td, .care-table tr {
+    display: block;
+    width: 100%;
+  }
+  .care-table thead {
+    display: none;
+  }
+  .care-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  .care-table td {
+    border: none;
+    padding: 10px;
+    position: relative;
+  }
+  .care-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+</style>
 </head>
 <body>
-  <header class="site-header" role="banner">
-    <div class="wrap head-inner">
-      <div class="brand">
-        <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
-        <h1>KAZFLOR Care</h1>
-      </div>
-    </div>
-  </header>
 
-  <main class="hero" role="main">
-    <div class="wrap">
-      <div class="kicker">Уход и полив</div>
-      <h2>Как правильно заботиться о комнатных растениях — легко и красиво</h2>
-      <p>Минималистичные советы и наглядные иллюстрации помогут даже новичку сохранить растения здоровыми и радующими глаз.</p>
+<!-- ====== ШАПКА И МЕНЮ ТВОЕГО САЙТА ====== -->
+<header>
+  <nav>
+    <div class="logo">
+      <a href="index.html"><img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZ FLOR" height="50"></a>
     </div>
-  </main>
+    <ul class="menu">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="care.html" class="active">Уход</a></li>
+      <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <section class="alt">
-    <div class="wrap">
-      <h2 class="section-title">Общие принципы полива</h2>
-      <p class="section-sub">Главные правила — от частоты до методов: изучаем, как дать растению ровно то, что ему нужно.</p>
-      <img class="inline-illus" src="https://via.placeholder.com/800x400?text=Иллюстрация+1" alt="Иллюстрация полива 1">
-      <ul class="tips-list">
-        <li>Проверяйте верхний слой почвы — лучше полив, когда сухо, чем избыток влаги.</li>
-        <li>Используйте воду комнатной температуры, отстоявшуюся или фильтрованную.</li>
-        <li>Организуйте поддон с галькой для избегания застоя воды.</li>
-        <li>Корректируйте полив зимой: большинство растений нуждаются в нем реже.</li>
-      </ul>
-    </div>
-  </section>
+<!-- ====== ОСНОВНОЙ КОНТЕНТ ====== -->
+<main class="container">
+  <h1>Уход и полив комнатных цветов</h1>
+  <table class="care-table">
+    <thead>
+      <tr>
+        <th>Раздел</th>
+        <th>Описание</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Раздел">💧 Правильный полив</td>
+        <td data-label="Описание">Поливайте только после подсыхания верхнего слоя земли. Используйте тёплую, отстоянную воду.</td>
+      </tr>
+      <tr>
+        <td data-label="Раздел">🌞 Освещение</td>
+        <td data-label="Описание">Большинство комнатных растений любят яркий рассеянный свет. Избегайте прямых солнечных лучей.</td>
+      </tr>
+      <tr>
+        <td data-label="Раздел">🌡 Температура</td>
+        <td data-label="Описание">Оптимальная температура — +18…+24°C. Берегите растения от сквозняков.</td>
+      </tr>
+      <tr>
+        <td data-label="Раздел">🌿 Удобрения</td>
+        <td data-label="Описание">Вносите удобрения в период активного роста весной и летом раз в 2–3 недели.</td>
+      </tr>
+      <tr>
+        <td data-label="Раздел">🪴 Пересадка</td>
+        <td data-label="Описание">Пересаживайте растения раз в 1–2 года, выбирая горшок на 2–3 см больше предыдущего.</td>
+      </tr>
+      <tr>
+        <td data-label="Раздел">⚠ Ошибки</td>
+        <td data-label="Описание">Чрезмерный полив, резкая смена условий и нехватка света могут погубить растение.</td>
+      </tr>
+    </tbody>
+  </table>
+</main>
 
-  <section>
-    <div class="wrap">
-      <h2 class="section-title">Визуальные подсказки по уходу</h2>
-      <p class="section-sub">Показываем примеры графических иллюстраций, чтобы инструкции легче воспринимались.</p>
-      <img class="inline-illus" src="https://via.placeholder.com/800x400?text=Иллюстрация+2" alt="Иллюстрация полива 2">
-    </div>
-  </section>
+<!-- ====== ФУТЕР ====== -->
+<footer>
+  <p>© 2025 KAZ FLOR. Все права защищены.</p>
+</footer>
 
-  <section class="alt">
-    <div class="wrap">
-      <h2 class="section-title">Проблемы и решение</h2>
-      <p class="section-sub">Часто встречающиеся ошибки и как их избежать.</p>
-      <ul class="tips-list">
-        <li>Пожелтевшие листья — признак перелива.</li>
-        <li>Сухая, «сбитая» земля — значит, воды недостаточно.</li>
-        <li>Проверяйте дренаж и регулярность полива, особенно при работе с большими горшками.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2 class="section-title">Растения, не требующие частого полива</h2>
-      <p class="section-sub">Примеры неприхотливых — идеальны для темповой жизни или начинающих.</p>
-      <ul class="tips-list">
-        <li>Хлорофитум — предпочитает влажность, но влага «спевает», если чересчур.» :contentReference[oaicite:1]{index=1}</li>
-        <li>Литопсы — суккуленты, полив 1 раз в 3–4 недели в теплый сезон, зимой — вовсе не поливать :contentReference[oaicite:2]{index=2}.</li>
-      </ul>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="wrap" style="max-width:900px;">
-      <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
-      <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
-    </div>
-  </footer>
 </body>
 </html>
