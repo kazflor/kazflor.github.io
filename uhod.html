@@ -8,15 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ====== Палитра: пудрово-бутичная, без золота ====== */
+/* ====== Палитра ====== */
 :root{
   --bg:#faf7f5;
   --bg-2:#fff;
   --paper:#f4efec;
-  --ink:#171717;         /* графит */
-  --sub:#4b5563;         /* slate-600 */
-  --accent:#e7cfd1;      /* пудровый розовый (акцент) */
-  --accent-2:#d8c3c6;    /* глубже пудра */
+  --ink:#171717;
+  --sub:#4b5563;
+  --accent:#e7cfd1;
+  --accent-2:#d8c3c6;
   --line:rgba(23,23,23,.08);
   --radius:18px;
   --shadow-sm:0 8px 24px rgba(0,0,0,.06);
@@ -24,7 +24,7 @@
   --wrap:1200px;
 }
 
-/* ====== Сброс/база ====== */
+/* ====== База ====== */
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
@@ -37,50 +37,54 @@ body{
     linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   line-height:1.5;
-  overflow-x:hidden;
+  overflow-x:hidden; /* чтобы на мобиле не было горизонтального скролла */
 }
 a{color:inherit; text-decoration:none}
-img{display:block; max-width:100%}
+img{display:block; max-width:100%; height:auto}
 
 /* ====== Контейнер ====== */
 .wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
+@media (max-width:480px){ .wrap{ padding:0 16px } }
 
-/* ====== Шапка минимал ====== */
+/* ====== Фиксированная шапка ====== */
 .site-header{
   position:fixed; inset:0 0 auto 0;
-  backdrop-filter:saturate(1.1) blur(12px);
+  backdrop-filter:saturate(1.05) blur(12px);
   background:color-mix(in oklab, #fff 88%, #f7f2f0);
   border-bottom:1px solid var(--line);
   z-index:1000;
 }
 .head-inner{
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 0; gap:16px;
+  padding:12px 0; gap:12px;
 }
-.brand{display:flex; align-items:center; gap:12px}
-.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand{display:flex; align-items:center; gap:10px; min-width:0}
+.brand img{height:40px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
 .brand h1{
-  font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem;
+  font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.4px; margin:0; font-size:1.25rem; white-space:nowrap;
 }
 
-/* ====== Бургер + offcanvas ====== */
+/* ====== Бургер + offcanvas (CSS-only) ====== */
+#navToggle{ position:absolute; opacity:0; pointer-events:none }
 .hamburger{
   display:inline-flex; justify-content:center; align-items:center;
   width:44px; height:44px; border-radius:12px; border:1px solid var(--line);
-  background:#fff; box-shadow:var(--shadow-sm); cursor:pointer;
+  background:#fff; box-shadow:var(--shadow-sm); cursor:pointer; flex:0 0 auto;
   transition:transform .18s ease, box-shadow .18s ease;
 }
-.hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
-.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
-.hamburger span::before,.hamburger span::after{
+.hamburger:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md) }
+.hamburger .bar{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger .bar::before,.hamburger .bar::after{
   content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink);
   transition:transform .25s ease, top .25s ease, opacity .2s ease;
 }
-.hamburger span::before{ top:-7px }
-.hamburger span::after{ top:7px }
-.hamburger.active span{ background:transparent }
-.hamburger.active span::before{ top:0; transform:rotate(45deg) }
-.hamburger.active span::after{ top:0; transform:rotate(-45deg) }
+.hamburger .bar::before{ top:-7px }
+.hamburger .bar::after{ top:7px }
+
+/* состояние "крестик" */
+#navToggle:checked + label.hamburger .bar{ background:transparent }
+#navToggle:checked + label.hamburger .bar::before{ top:0; transform:rotate(45deg) }
+#navToggle:checked + label.hamburger .bar::after{ top:0; transform:rotate(-45deg) }
 
 /* offcanvas */
 .side-menu{
@@ -90,7 +94,8 @@ img{display:block; max-width:100%}
   border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12);
   z-index:1200; display:flex; flex-direction:column;
 }
-.side-menu.open{ transform:translateX(0) }
+#navToggle:checked ~ .side-menu{ transform:translateX(0) }
+
 .side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
 .side-head img{height:34px}
 .side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
@@ -102,13 +107,19 @@ img{display:block; max-width:100%}
 .side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
 .side-cta{ margin-top:auto; padding:14px 16px; border-top:1px solid var(--line) }
 
-/* backdrop */
-.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
-.backdrop.show{ opacity:1; pointer-events:auto }
+/* backdrop — кликабелен, закрывает меню */
+.backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.32);
+  opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100;
+}
+#navToggle:checked ~ .backdrop{ opacity:1; pointer-events:auto }
+/* делаем backdrop кликабельным элементом-лейблом, чтобы закрывать меню */
+.backdrop-label{ display:block; width:100%; height:100% }
 
 /* ====== Герой ====== */
+:root{ --headH:72px } /* дефолт, дальше подстроим через min-height */
 .hero{
-  padding-top:calc(var(--headH) + 32px);
+  padding-top:calc(var(--headH) + 28px);
   padding-bottom:48px;
   text-align:center;
   background:
@@ -116,23 +127,25 @@ img{display:block; max-width:100%}
     linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%);
 }
 .kicker{
-  letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub);
+  letter-spacing:.14em; text-transform:uppercase; font-size:.86rem; color:var(--sub);
 }
 .hero h2{
-  font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem);
+  font-family:'Playfair Display',serif; font-size:clamp(1.9rem, 4.2vw, 3.1rem);
   line-height:1.06; margin:10px auto 0; max-width:900px;
+  padding:0 2px;
 }
-.hero p{ max-width:760px; margin:14px auto 0; color:#444; font-size:1.05rem }
+.hero p{ max-width:760px; margin:14px auto 0; color:#444; font-size:1.03rem; padding:0 4px }
 
-.cta{ margin-top:26px; display:inline-flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
+.cta{ margin-top:22px; display:inline-flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap }
 
 /* ====== Кнопки ====== */
 .btn{
   display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent;
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-  box-shadow:var(--shadow-sm);
+  box-shadow:var(--shadow-sm); touch-action:manipulation;
 }
 .btn:hover{ transform:translateY(-2px) }
+.btn:active{ transform:translateY(0) }
 .btn-ink{ color:#fff; background:var(--ink) }
 .btn-ink:hover{ box-shadow:0 10px 24px rgba(23,23,23,.18) }
 .btn-powder{
@@ -140,20 +153,21 @@ img{display:block; max-width:100%}
   color:#2b2b2b; border-color:rgba(0,0,0,.06);
 }
 .btn-powder:hover{ box-shadow:0 10px 24px rgba(231,207,209,.25) }
+@media (max-width:400px){
+  .btn{ width:100%; text-align:center }
+}
 
 /* ====== Секции ====== */
-section{ padding:64px 0 }
+section{ padding:56px 0 }
 .section-title{
-  text-align:center; font-family:'Playfair Display',serif; font-size:2.2rem; margin:0 0 8px;
+  text-align:center; font-family:'Playfair Display',serif; font-size:clamp(1.4rem, 3.6vw, 2.2rem); margin:0 0 8px;
 }
-.section-sub{ text-align:center; color:var(--sub); margin:0 auto 28px; max-width:880px }
+.section-sub{ text-align:center; color:var(--sub); margin:0 auto 24px; max-width:880px; padding:0 6px }
 section.alt{ background:var(--paper) }
 section + section{ border-top:1px solid var(--line) }
 
-/* ====== Блок "Уход и полив" — карточки ====== */
-.care{
-  max-width:1100px; margin:0 auto;
-}
+/* ====== Карточки ухода ====== */
+.care{ max-width:1100px; margin:0 auto }
 .care-controls{
   display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; margin:0 0 16px;
 }
@@ -186,7 +200,7 @@ section + section{ border-top:1px solid var(--line) }
 }
 .care-name{
   font-family:'Playfair Display',serif;
-  font-size:1.25rem; margin:0 0 8px;
+  font-size:1.18rem; margin:0 0 8px;
 }
 .care-bot{ color:#555; margin:0 0 14px }
 .care-dl{ display:grid; grid-template-columns:120px 1fr; gap:6px 10px; font-size:.98rem }
@@ -196,14 +210,16 @@ section + section{ border-top:1px solid var(--line) }
   margin-top:10px; padding-top:10px; border-top:1px dashed rgba(23,23,23,.12); color:#333; font-size:.95rem
 }
 
-/* ====== Анимация появления ====== */
-.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
-.reveal.visible{ opacity:1; transform:translateY(0) }
+/* ====== Анимация появления (без JS) ====== */
+.reveal{ opacity:1; transform:none } /* упрощаем для мобильной производительности */
 
-/* ====== Галерея/каталог/подписки — скрыты (если не нужны) ====== */
-/* Удалять не стал — чтобы меню оставалось как у тебя. */
+/* ====== Скрытые секции для структуры меню ====== */
 .catalog-swiper,.subscription,.gallery{ display:none !important }
 
+/* ====== Футер ====== */
+.site-footer{ padding:24px 0 40px; text-align:center }
+
+/* ====== Пониженная анимация ====== */
 @media (prefers-reduced-motion:reduce){
   *{ transition:none !important; animation:none !important }
 }
@@ -211,11 +227,16 @@ section + section{ border-top:1px solid var(--line) }
 </head>
 <body>
 
-<!-- Backdrop -->
-<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<!-- Чекбокс для CSS-бургера -->
+<input type="checkbox" id="navToggle" aria-hidden="true" />
 
-<!-- Offcanvas -->
-<aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
+<!-- Кнопка бургера -->
+<label for="navToggle" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
+  <span class="bar"></span>
+</label>
+
+<!-- Выезжающее меню -->
+<aside class="side-menu" id="sideMenu" aria-hidden="true" role="dialog">
   <div class="side-head">
     <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
     <div class="side-title">Меню</div>
@@ -235,12 +256,18 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </aside>
 
+<!-- Backdrop как label, чтобы закрывать меню тапом -->
+<div class="backdrop">
+  <label for="navToggle" class="backdrop-label" aria-hidden="true"></label>
+</div>
+
 <!-- Шапка -->
 <header id="siteHeader" class="site-header" role="banner">
   <div class="wrap head-inner">
-    <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
-      <span></span>
-    </button>
+    <!-- та же кнопка бургера видна и внутри шапки на мобиле -->
+    <label for="navToggle" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
+      <span class="bar"></span>
+    </label>
     <div class="brand">
       <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
       <h1>KAZFLOR</h1>
@@ -261,14 +288,20 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </main>
 
-<!-- ====== Каталог (заменён на Уход и полив) ====== -->
-<section id="catalog" aria-label="Уход и полив комнатных цветов" class="reveal">
+<!-- ====== Каталог (Уход и полив) ====== -->
+<section id="catalog" aria-label="Уход и полив комнатных цветов">
   <div class="wrap care">
     <h2 class="section-title">Уход и полив по видам комнатных растений</h2>
-    <p class="section-sub">Строгие рекомендации по режиму полива, свету, влажности и температуре — без лишних слов. Нажмите на поле поиска, чтобы быстро найти растение.</p>
+    <p class="section-sub">Строгие рекомендации по режиму полива, свету, влажности и температуре. На телефоне карточки идут одной колонкой — читать удобно.</p>
 
     <div class="care-controls">
-      <input id="careSearch" class="search" type="search" placeholder="Найти растение (например, «Азалия», «Фикус»)…" aria-label="Поиск по растениям">
+      <input id="careSearch" class="search" type="search" placeholder="Найти растение (например, «Азалия», «Фикус»)…" aria-label="Поиск по растениям" oninput="
+        const q=this.value.toLowerCase().trim();
+        document.querySelectorAll('.care-card').forEach(c=>{
+          const name=(c.getAttribute('data-name')||c.querySelector('.care-name').textContent).toLowerCase();
+          c.style.display=name.includes(q)?'':'none';
+        });
+      ">
     </div>
 
     <div id="careGrid" class="care-grid">
@@ -460,7 +493,7 @@ section + section{ border-top:1px solid var(--line) }
         <p class="care-bot">Предпочитает воздухопроницаемый, кислый субстрат.</p>
         <dl class="care-dl">
           <dt>Полив</dt><dd>Слегка влажно всегда; мягкая вода.</dd>
-          <dt>Свет</dt><dd>Яркий рассеянный, без прямого солнца.</dd>
+        <dt>Свет</dt><dd>Яркий рассеянный, без прямого солнца.</dd>
           <dt>Влажность</dt><dd>60–70%, регулярные опрыскивания вокруг.</dd>
           <dt>Температура</dt><dd>+20…+26 °C.</dd>
         </dl>
@@ -666,8 +699,7 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </section>
 
-<!-- Секции «Подписка», «Галерея» — сохранены по якорям, но скрыты стилями выше -->
-<section id="subscription" class="alt reveal">
+<section id="subscription" class="alt">
   <div class="wrap">
     <h2 class="section-title">Свадебная подписка</h2>
     <p class="section-sub">Секция скрыта стилями — оставлена для сохранения структуры меню.</p>
@@ -675,7 +707,7 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </section>
 
-<section id="gallery" class="reveal">
+<section id="gallery">
   <div class="wrap">
     <h2 class="section-title">Отзывы и фото</h2>
     <p class="section-sub">Секция скрыта стилями — оставлена для сохранения структуры меню.</p>
@@ -683,7 +715,7 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </section>
 
-<section id="contacts" class="alt reveal">
+<section id="contacts" class="alt">
   <div class="wrap">
     <h2 class="section-title">Контакты</h2>
     <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
@@ -706,69 +738,5 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </footer>
 
-<script>
-/* ====== Инициализация высоты шапки для отступа контента ====== */
-(function(){
-  const header = document.getElementById('siteHeader');
-  const setHead = ()=>{ const h = header.offsetHeight || 72; document.documentElement.style.setProperty('--headH', h + 'px'); };
-  setHead(); window.addEventListener('resize', setHead, {passive:true});
-})();
-
-/* ====== Меню (одно, без дублей) ====== */
-(function(){
-  const btn = document.getElementById('menuButton');
-  const menu = document.getElementById('sideMenu');
-  const backdrop = document.getElementById('backdrop');
-  let lastFocus = null;
-
-  function open(){
-    lastFocus = document.activeElement;
-    btn.classList.add('active'); btn.setAttribute('aria-expanded','true');
-    menu.classList.add('open'); menu.setAttribute('aria-hidden','false');
-    backdrop.classList.add('show'); document.body.style.overflow='hidden';
-    const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus();
-  }
-  function close(){
-    btn.classList.remove('active'); btn.setAttribute('aria-expanded','false');
-    menu.classList.remove('open'); menu.setAttribute('aria-hidden','true');
-    backdrop.classList.remove('show'); document.body.style.overflow='';
-    if(lastFocus) lastFocus.focus();
-  }
-
-  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
-  backdrop.addEventListener('click', close);
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-})();
-
-/* ====== Lazy-load изображений ====== */
-(function(){
-  document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy'));
-})();
-
-/* ====== Reveal on scroll ====== */
-(function(){
-  const items = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  },{ threshold:.15 });
-  items.forEach(i=> obs.observe(i));
-})();
-
-/* ====== Поиск по карточкам ====== */
-(function(){
-  const input = document.getElementById('careSearch');
-  const grid = document.getElementById('careGrid');
-  const cards = Array.from(grid.querySelectorAll('.care-card'));
-  const normalize = s => s.toLowerCase().trim();
-
-  input.addEventListener('input', ()=>{
-    const q = normalize(input.value);
-    cards.forEach(card=>{
-      const name = normalize(card.dataset.name || card.querySelector('.care-name').textContent);
-      card.style.display = name.includes(q) ? '' : 'none';
-    });
-  });
-})();
-</script>
 </body>
 </html>
