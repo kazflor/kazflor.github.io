@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KAZFLOR — Уход и полив</title>
-<meta name="description" content="KAZFLOR — уход и полив комнатных цветов по видам: подробная таблица рекомендаций." />
+<title>KAZFLOR — Премиальные букеты</title>
+<meta name="description" content="KAZFLOR — премиальная цветочная мастерская. Букеты, свадьбы, подписки и доставка.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ====== Палитра: как у вас ====== */
+/* ====== Палитра: пудрово-бутичная, без золота ====== */
 :root{
   --bg:#faf7f5;
   --bg-2:#fff;
@@ -22,31 +22,9 @@
   --shadow-sm:0 8px 24px rgba(0,0,0,.06);
   --shadow-md:0 18px 48px rgba(0,0,0,.12);
   --wrap:1200px;
-
-  /* Пастельные тона строк таблицы */
-  --rose:#f6e7ed;
-  --mint:#e7f5ef;
-  --lilac:#eee8f8;
-  --sun:#fff2cc;
-  --sky:#eaf3ff;
-  --peach:#ffe9df;
-  --olive:#eef3e3;
-  --lime:#f0f8dd;
-  --plum:#f5e9f5;
-  --coral:#ffe7e3;
-  --sage:#edf3ef;
-  --amber:#ffeccc;
-  --ice:#edf7f9;
-  --apricot:#ffeade;
-  --sea:#e8f4f6;
-  --blush:#f7e9ef;
-  --lav:#efe9ff;
-  --pista:#eef7e8;
-  --sand:#f9f2e7;
-  --tea:#edf4ea;
 }
 
-/* ====== База: как у вас ====== */
+/* ====== Сброс/база ====== */
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
@@ -63,9 +41,11 @@ body{
 }
 a{color:inherit; text-decoration:none}
 img{display:block; max-width:100%}
+
+/* ====== Контейнер ====== */
 .wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
 
-/* ====== Шапка и меню: 1в1 ====== */
+/* ====== Шапка минимал ====== */
 .site-header{
   position:fixed; inset:0 0 auto 0;
   backdrop-filter:saturate(1.1) blur(12px);
@@ -73,17 +53,31 @@ img{display:block; max-width:100%}
   border-bottom:1px solid var(--line);
   z-index:1000;
 }
-.head-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px }
-.brand{ display:flex; align-items:center; gap:12px }
-.brand img{ height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06)) }
-.brand h1{ font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem }
+.head-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0; gap:16px;
+}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand h1{
+  font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem;
+}
 
-/* Бургер + offcanvas */
-.hamburger{ display:inline-flex; justify-content:center; align-items:center; width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease }
+/* ====== Бургер + offcanvas ====== */
+.hamburger{
+  display:inline-flex; justify-content:center; align-items:center;
+  width:44px; height:44px; border-radius:12px; border:1px solid var(--line);
+  background:#fff; box-shadow:var(--shadow-sm); cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
 .hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
 .hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
-.hamburger span::before,.hamburger span::after{ content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink); transition:transform .25s ease, top .25s ease, opacity .2s ease }
-.hamburger span::before{ top:-7px } .hamburger span::after{ top:7px }
+.hamburger span::before,.hamburger span::after{
+  content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink);
+  transition:transform .25s ease, top .25s ease, opacity .2s ease;
+}
+.hamburger span::before{ top:-7px }
+.hamburger span::after{ top:7px }
 .hamburger.active span{ background:transparent }
 .hamburger.active span::before{ top:0; transform:rotate(45deg) }
 .hamburger.active span::after{ top:0; transform:rotate(-45deg) }
@@ -101,7 +95,10 @@ img{display:block; max-width:100%}
 .side-head img{height:34px}
 .side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
 .side-nav{ padding:10px 12px 18px; overflow:auto }
-.side-nav a{ display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px; font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease }
+.side-nav a{
+  display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px;
+  font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease;
+}
 .side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
 .side-cta{ margin-top:auto; padding:14px 16px; border-top:1px solid var(--line) }
 
@@ -109,103 +106,107 @@ img{display:block; max-width:100%}
 .backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
 .backdrop.show{ opacity:1; pointer-events:auto }
 
-/* ====== Герой: под уход ====== */
+/* ====== Герой ====== */
 .hero{
   padding-top:calc(var(--headH) + 32px);
-  padding-bottom:48px; text-align:center;
+  padding-bottom:48px;
+  text-align:center;
   background:
     radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%),
     linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%);
 }
-.kicker{ letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub) }
-.hero h2{ font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem); line-height:1.06; margin:10px auto 0; max-width:900px }
+.kicker{
+  letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub);
+}
+.hero h2{
+  font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem);
+  line-height:1.06; margin:10px auto 0; max-width:900px;
+}
 .hero p{ max-width:760px; margin:14px auto 0; color:#444; font-size:1.05rem }
+
 .cta{ margin-top:26px; display:inline-flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
 
-/* ====== Кнопки (как у вас) ====== */
-.btn{ display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease; box-shadow:var(--shadow-sm) }
+/* ====== Кнопки ====== */
+.btn{
+  display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  box-shadow:var(--shadow-sm);
+}
 .btn:hover{ transform:translateY(-2px) }
 .btn-ink{ color:#fff; background:var(--ink) }
 .btn-ink:hover{ box-shadow:0 10px 24px rgba(23,23,23,.18) }
-.btn-powder{ background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%); color:#2b2b2b; border-color:rgba(0,0,0,.06) }
+.btn-powder{
+  background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+  color:#2b2b2b; border-color:rgba(0,0,0,.06);
+}
 .btn-powder:hover{ box-shadow:0 10px 24px rgba(231,207,209,.25) }
 
-/* ====== Разделы ====== */
+/* ====== Секции ====== */
 section{ padding:64px 0 }
-.section-title{ text-align:center; font-family:'Playfair Display',serif; font-size:2.2rem; margin:0 0 8px }
+.section-title{
+  text-align:center; font-family:'Playfair Display',serif; font-size:2.2rem; margin:0 0 8px;
+}
 .section-sub{ text-align:center; color:var(--sub); margin:0 auto 28px; max-width:880px }
 section.alt{ background:var(--paper) }
 section + section{ border-top:1px solid var(--line) }
 
-/* ====== Таблица ухода: премиум ====== */
-.care-wrap{ max-width:1100px; margin:0 auto }
+/* ====== Блок "Уход и полив" — карточки ====== */
+.care{
+  max-width:1100px; margin:0 auto;
+}
+.care-controls{
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; margin:0 0 16px;
+}
+.search{
+  flex:1 1 320px; min-width:220px;
+  border:1px solid var(--line); border-radius:12px; padding:12px 14px;
+  background:#fff; outline:none; font-size:1rem;
+  box-shadow:var(--shadow-sm);
+}
+.care-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+@media (max-width:1024px){ .care-grid{ grid-template-columns:repeat(2,1fr) } }
+@media (max-width:640px){ .care-grid{ grid-template-columns:1fr } }
+
 .care-card{
-  background:#fff; border:1px solid var(--line); border-radius:22px; box-shadow:var(--shadow-md);
-  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(23,23,23,.10);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.care-head{
-  padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px;
-  background:linear-gradient(180deg,#fff, #fdfbfa);
-  border-bottom:1px solid var(--line);
+.care-card:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+  border-color:rgba(23,23,23,.18);
 }
-.care-head .title{ font-family:'Playfair Display',serif; font-size:1.4rem; margin:0 }
-.care-table{ width:100%; border-collapse:separate; border-spacing:0; }
-.care-table thead th{
-  text-align:left; font-weight:700; color:#2b2b2b; font-size:.95rem; padding:14px 16px; background:#fafafa; border-bottom:1px solid var(--line);
+.care-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem; margin:0 0 8px;
 }
-.care-table td{ vertical-align:top; padding:14px 16px; border-bottom:1px solid var(--line); color:#242424 }
-.care-table tr:last-child td{ border-bottom:none }
-
-/* Цветные строки */
-.tone-rose{ background:var(--rose) }
-.tone-mint{ background:var(--mint) }
-.tone-lilac{ background:var(--lilac) }
-.tone-sun{ background:var(--sun) }
-.tone-sky{ background:var(--sky) }
-.tone-peach{ background:var(--peach) }
-.tone-olive{ background:var(--olive) }
-.tone-lime{ background:var(--lime) }
-.tone-plum{ background:var(--plum) }
-.tone-coral{ background:var(--coral) }
-.tone-sage{ background:var(--sage) }
-.tone-amber{ background:var(--amber) }
-.tone-ice{ background:var(--ice) }
-.tone-apricot{ background:var(--apricot) }
-.tone-sea{ background:var(--sea) }
-.tone-blush{ background:var(--blush) }
-.tone-lav{ background:var(--lav) }
-.tone-pista{ background:var(--pista) }
-.tone-sand{ background:var(--sand) }
-.tone-tea{ background:var(--tea) }
-
-/* Левая цветная полоса-акцент */
-.care-table tr[class^="tone-"] td:first-child{
-  border-left:6px solid rgba(23,23,23,.06);
-  border-top-left-radius:14px; border-bottom-left-radius:14px;
+.care-bot{ color:#555; margin:0 0 14px }
+.care-dl{ display:grid; grid-template-columns:120px 1fr; gap:6px 10px; font-size:.98rem }
+.care-dl dt{ color:#444; font-weight:600 }
+.care-dl dd{ margin:0; color:#2b2b2b }
+.care-note{
+  margin-top:10px; padding-top:10px; border-top:1px dashed rgba(23,23,23,.12); color:#333; font-size:.95rem
 }
-
-/* Адаптив под телефон: превращаем строки в карточки */
-@media (max-width: 780px){
-  .care-table thead{ display:none }
-  .care-table, .care-table tbody, .care-table tr, .care-table td{ display:block; width:100% }
-  .care-table tr{ margin:12px 12px; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-sm) }
-  .care-table td{ border-bottom:1px solid var(--line) }
-  .care-table td:last-child{ border-bottom:none }
-  .care-table td::before{
-    content:attr(data-label); display:block; font-weight:700; color:#333; margin-bottom:6px; text-transform:none;
-  }
-}
-
-/* ====== Подвал ====== */
-.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
-.site-footer a{ text-decoration:underline; text-underline-offset:3px }
 
 /* ====== Анимация появления ====== */
 .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
 .reveal.visible{ opacity:1; transform:translateY(0) }
 
-/* ====== Без анимации ====== */
-@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important } }
+/* ====== Галерея/каталог/подписки — скрыты (если не нужны) ====== */
+/* Удалять не стал — чтобы меню оставалось как у тебя. */
+.catalog-swiper,.subscription,.gallery{ display:none !important }
+
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; animation:none !important }
+}
 </style>
 </head>
 <body>
@@ -213,7 +214,7 @@ section + section{ border-top:1px solid var(--line) }
 <!-- Backdrop -->
 <div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
-<!-- Offcanvas (как у вас) -->
+<!-- Offcanvas -->
 <aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
   <div class="side-head">
     <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
@@ -221,7 +222,10 @@ section + section{ border-top:1px solid var(--line) }
   </div>
   <nav class="side-nav" aria-label="Боковое меню">
     <a href="#home">Главная</a>
-    <a href="#care">Уход и полив</a>
+    <a href="#catalog">Каталог</a>
+    <a href="#subscription">Свадебная подписка</a>
+    <a href="#gallery">Отзывы и фото</a>
+    <a href="#contacts">Контакты</a>
     <a href="https://kazflor.github.io/catalog.html" target="_blank" rel="noopener">Полный каталог</a>
     <a href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Оставить заявку</a>
     <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Instagram</a>
@@ -231,7 +235,7 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </aside>
 
-<!-- Шапка: 1в1 -->
+<!-- Шапка -->
 <header id="siteHeader" class="site-header" role="banner">
   <div class="wrap head-inner">
     <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
@@ -245,165 +249,451 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </header>
 
-<!-- Герой -->
 <main id="home" class="hero" role="main">
   <div class="wrap">
-    <div class="kicker">Гид KAZFLOR</div>
-    <h2>Уход и полив комнатных растений по видам</h2>
-    <p>Премиально оформленная таблица: как поливать, чем ухаживать и что учесть — для 20 популярных растений.</p>
+    <div class="kicker">Флористика премиум</div>
+    <h2>Цветы, которые говорят за вас — лаконично, роскошно и с душой.</h2>
+    <p>KazFlor — авторские букеты, свадебное оформление и персональное сопровождение. Доверяйте тем, кто делает моменты красивыми.</p>
     <div class="cta">
-      <a class="btn btn-powder" href="#care">Перейти к таблице</a>
-      <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Задать вопрос</a>
+      <a class="btn btn-powder" href="#catalog">Памятка по уходу</a>
+      <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Связаться</a>
     </div>
   </div>
 </main>
 
-<!-- Единственный блок: Уход и полив -->
-<section id="care" class="reveal">
-  <div class="wrap care-wrap">
-    <div class="care-card">
-      <div class="care-head">
-        <h3 class="title">Таблица ухода и полива</h3>
-        <div style="color:var(--sub); font-size:.95rem">Советы кратко и по делу</div>
-      </div>
+<!-- ====== Каталог (заменён на Уход и полив) ====== -->
+<section id="catalog" aria-label="Уход и полив комнатных цветов" class="reveal">
+  <div class="wrap care">
+    <h2 class="section-title">Уход и полив по видам комнатных растений</h2>
+    <p class="section-sub">Строгие рекомендации по режиму полива, свету, влажности и температуре — без лишних слов. Нажмите на поле поиска, чтобы быстро найти растение.</p>
 
-      <div style="overflow:auto">
-        <table class="care-table">
-          <thead>
-            <tr>
-              <th style="min-width:180px">Растение</th>
-              <th style="min-width:260px">Полив</th>
-              <th style="min-width:320px">Уход</th>
-              <th style="min-width:220px">Примечания</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="tone-rose">
-              <td data-label="Растение">Азалия</td>
-              <td data-label="Полив">Почва слегка влажная всегда; не допускать пересыхания. Вода мягкая, прохладная.</td>
-              <td data-label="Уход">Яркий рассеянный свет, прохлада +12…+18°C. Кислый субстрат, высокая влажность воздуха.</td>
-              <td data-label="Примечания">Не ставить у батарей; опрыскивание тёплой водой по воздуху.</td>
-            </tr>
-            <tr class="tone-sky">
-              <td data-label="Растение">Орхидея (Фаленопсис)</td>
-              <td data-label="Полив">Погружение горшка на 10–15 мин 1 раз в 7–10 дней; просушивать корни.</td>
-              <td data-label="Уход">Свет рассеянный, без прямого солнца; прозрачный горшок; хорошая вентиляция.</td>
-              <td data-label="Примечания">Не оставлять воду в розетке; удобрения «для орхидей» слабо, 1–2р/мес.</td>
-            </tr>
-            <tr class="tone-olive">
-              <td data-label="Растение">Фикус эластика</td>
-              <td data-label="Полив">После подсыхания верхних 2–3 см грунта; зимой реже.</td>
-              <td data-label="Уход">Яркий рассеянный свет, без сквозняков; протирать листья.</td>
-              <td data-label="Примечания">Не любит «болото»; дренаж обязателен.</td>
-            </tr>
-            <tr class="tone-peach">
-              <td data-label="Растение">Роза комнатная</td>
-              <td data-label="Полив">Регулярный, умеренный; без пересушек; в жару чаще.</td>
-              <td data-label="Уход">Максимум света, прохладнее ночью; обрезка отцветших бутонов.</td>
-              <td data-label="Примечания">Чувствительна к сухому воздуху и клещу — профилактика обязательна.</td>
-            </tr>
-            <tr class="tone-amber">
-              <td data-label="Растение">Герань (Пеларгония)</td>
-              <td data-label="Полив">После подсыхания половины горшка; любит свет и умеренную сухость.</td>
-              <td data-label="Уход">Прямое солнце допустимо; прищипка для кустистости.</td>
-              <td data-label="Примечания">Зимой прохлада +12…+15°C — залог цветения.</td>
-            </tr>
-            <tr class="tone-sand">
-              <td data-label="Растение">Кактусы</td>
-              <td data-label="Полив">Редкий: лето 1р/10–14дн, зима 1р/3–4нед или сухо.</td>
-              <td data-label="Уход">Максимум света, южное окно; лёгкий минеральный субстрат.</td>
-              <td data-label="Примечания">Зимой прохладная сухая зимовка стимулирует цветение.</td>
-            </tr>
-            <tr class="tone-lilac">
-              <td data-label="Растение">Фиалка (Сенполия)</td>
-              <td data-label="Полив">Через поддон тёплой водой 1–2р/нед; не мочить розетку.</td>
-              <td data-label="Уход">Яркий рассеянный свет; стабильное тепло +20…+24°C.</td>
-              <td data-label="Примечания">Листья не опрыскивать; регулярно удалять старые цветоносы.</td>
-            </tr>
-            <tr class="tone-sea">
-              <td data-label="Растение">Драцена</td>
-              <td data-label="Полив">Умеренный: после подсыхания 3–4 см грунта.</td>
-              <td data-label="Уход">Полутень/рассеянный свет; любит влажный воздух.</td>
-              <td data-label="Примечания">Не переносит переувлажнение — корневая быстро загнивает.</td>
-            </tr>
-            <tr class="tone-pista">
-              <td data-label="Растение">Каланхоэ</td>
-              <td data-label="Полив">Суккулент: реже, дать просохнуть полностью верхнему слою.</td>
-              <td data-label="Уход">Много света, можно немного прямого солнца.</td>
-              <td data-label="Примечания">Скудный полив стимулирует цветение; избыток — вытягивание.</td>
-            </tr>
-            <tr class="tone-blush">
-              <td data-label="Растение">Спатифиллум</td>
-              <td data-label="Полив">Поддерживать равномерную влажность; не пересушивать.</td>
-              <td data-label="Уход">Рассеянный свет, без прямого солнца; любит влажный воздух.</td>
-              <td data-label="Примечания">Жёлтеют края — сухо или солевой налёт в воде.</td>
-            </tr>
-            <tr class="tone-ice">
-              <td data-label="Растение">Алоэ</td>
-              <td data-label="Полив">Редкий, обильный; дать просохнуть 2/3 горшка.</td>
-              <td data-label="Уход">Много света, южные окна; дренаж обязателен.</td>
-              <td data-label="Примечания">Зимой почти сухо; боится холодной сырости.</td>
-            </tr>
-            <tr class="tone-apricot">
-              <td data-label="Растение">Бегония</td>
-              <td data-label="Полив">Умеренно, без застоя; воду из поддона сливать.</td>
-              <td data-label="Уход">Яркий рассеянный свет; не любит холодные сквозняки.</td>
-              <td data-label="Примечания">Листья не мочить — пятна и гниль.</td>
-            </tr>
-            <tr class="tone-lav">
-              <td data-label="Растение">Антуриум</td>
-              <td data-label="Полив">Равномерно влажно; мягкая, тёплая вода.</td>
-              <td data-label="Уход">Свет рассеянный, тепло +20…+26°C, высокая влажность.</td>
-              <td data-label="Примечания">Кислый рыхлый субстрат с корой; опрыскивание воздуха.</td>
-            </tr>
-            <tr class="tone-olive">
-              <td data-label="Растение">Хлорофитум</td>
-              <td data-label="Полив">Регулярный, умеренный; пересыхание переносит, но хуже растёт.</td>
-              <td data-label="Уход">Неприхотлив; свет/полутень; периодическая пересадка.</td>
-              <td data-label="Примечания">Хорош для очистки воздуха; быстро наращивает деток.</td>
-            </tr>
-            <tr class="tone-sun">
-              <td data-label="Растение">Жасмин комнатный</td>
-              <td data-label="Полив">Почва слегка влажная; в период бутонизации стабильный полив.</td>
-              <td data-label="Уход">Много света, прохладная зимовка +8…+12°C.</td>
-              <td data-label="Примечания">Сухой воздух — сброс бутонов; нужна опора.</td>
-            </tr>
-            <tr class="tone-sage">
-              <td data-label="Растение">Лаванда (комнатная)</td>
-              <td data-label="Полив">Умеренно, с просушкой; не переливать.</td>
-              <td data-label="Уход">Максимум солнца, лёгкая почва, дренаж.</td>
-              <td data-label="Примечания">Прохладная зимовка улучшает кустистость.</td>
-            </tr>
-            <tr class="tone-plum">
-              <td data-label="Растение">Цикламен</td>
-              <td data-label="Полив">Через поддон; в период покоя почти сухо.</td>
-              <td data-label="Уход">Прохлада +12…+16°C, рассеянный свет.</td>
-              <td data-label="Примечания">Не мочить клубень; удалять отцветшие цветоносы.</td>
-            </tr>
-            <tr class="tone-tea">
-              <td data-label="Растение">Замиокулькас</td>
-              <td data-label="Полив">Редко: после полной просушки верхнего слоя.</td>
-              <td data-label="Уход">Свет/полутень; плотный дренаж; не любит частые пересадки.</td>
-              <td data-label="Примечания">Лучше недолить, чем перелить.</td>
-            </tr>
-            <tr class="tone-coral">
-              <td data-label="Растение">Монстера</td>
-              <td data-label="Полив">Умеренно, после подсыхания 3–4 см; зимой реже.</td>
-              <td data-label="Уход">Яркий рассеянный свет; опора; протирать листья.</td>
-              <td data-label="Примечания">Воздушные корни не срезать — направлять в мох.</td>
-            </tr>
-            <tr class="tone-amber">
-              <td data-label="Растение">Пахира</td>
-              <td data-label="Полив">Редкий, обильный; просушка 1/2 горшка.</td>
-              <td data-label="Уход">Яркий рассеянный свет; без сквозняков.</td>
-              <td data-label="Примечания">Чрезмерный полив — утолщение ствола страдает.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="care-controls">
+      <input id="careSearch" class="search" type="search" placeholder="Найти растение (например, «Азалия», «Фикус»)…" aria-label="Поиск по растениям">
+    </div>
 
-      <div style="padding:14px 18px; color:var(--sub); border-top:1px solid var(--line); background:#fff">
-        Подсказка: весной–летом удобрения 1–2 раза в месяц (по типу растения). Зимой большинству — реже.
+    <div id="careGrid" class="care-grid">
+      <!-- 1 -->
+      <article class="care-card" data-name="Азалия Rhododendron simsii">
+        <h3 class="care-name">Азалия</h3>
+        <p class="care-bot">Цветущий рододендрон для прохладных комнат.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Постоянно слегка влажно; не пересушивать. Мягкая, подкисленная вода. Погружение горшка 1–2×/нед в цветение.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный, без полуденного солнца.</dd>
+          <dt>Влажность</dt><dd>Высокая (55–70%). Опрыскивание вокруг, не по цветкам.</dd>
+          <dt>Температура</dt><dd>+12…+18 °C, прохладнее на бутонизацию.</dd>
+        </dl>
+        <div class="care-note">Кислый субстрат (pH 4.5–5.5). Регулярно удалять отцветшие бутоны.</div>
+      </article>
+
+      <!-- 2 -->
+      <article class="care-card" data-name="Орхидея Фаленопсис Phalaenopsis">
+        <h3 class="care-name">Орхидея (Фаленопсис)</h3>
+        <p class="care-bot">Нетерпима к застою воды, любит воздух у корней.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Погружение 20–30 мин при просветлении корней; затем полностью слить.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный, 10–12 ч. Без прямого солнца.</dd>
+          <dt>Влажность</dt><dd>40–60%. Без опрыскивания по цветам.</dd>
+          <dt>Температура</dt><dd>Днём +22…+28 °C, ночью +18…+20 °C.</dd>
+        </dl>
+        <div class="care-note">Проветривание без сквозняка. Удобрять специализированными удобрениями в ½ дозы.</div>
+      </article>
+
+      <!-- 3 -->
+      <article class="care-card" data-name="Роза комнатная Rosa">
+        <h3 class="care-name">Роза комнатная</h3>
+        <p class="care-bot">Любит яркий свет и свежий воздух.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Равномерно влажно в цветение; подсушивать верх 1–2 см между поливами вне цветения.</dd>
+          <dt>Свет</dt><dd>Очень светло, 4–6 ч солнца (утро/вечер).</dd>
+          <dt>Влажность</dt><dd>40–60%, душ тёплой водой по листьям.</dd>
+          <dt>Температура</dt><dd>+16…+24 °C; прохладная зимовка +8…+12 °C.</dd>
+        </dl>
+        <div class="care-note">Удалять отцветшие бутоны, формирующая обрезка весной.</div>
+      </article>
+
+      <!-- 4 -->
+      <article class="care-card" data-name="Фикус Бенджамина Ficus benjamina">
+        <h3 class="care-name">Фикус Бенджамина</h3>
+        <p class="care-bot">Чувствителен к перемещениям.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания верхних 2–3 см; зимой реже.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный; пёстрым сортам — светлее.</dd>
+          <dt>Влажность</dt><dd>40–60%. Периодический душ.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C, ниже +15 °C не желателен.</dd>
+        </dl>
+        <div class="care-note">Не разворачивать часто. Чистить листья от пыли.</div>
+      </article>
+
+      <!-- 5 -->
+      <article class="care-card" data-name="Бегония Begonia">
+        <h3 class="care-name">Бегония</h3>
+        <p class="care-bot">Много видов: клубневые и декоративно-лиственные.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренный, без застоя. Клубневые — с периодом покоя.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный; без полуденного солнца.</dd>
+          <dt>Влажность</dt><dd>50–60%, не опрыскивать по листу.</dd>
+          <dt>Температура</dt><dd>+18…+24 °C.</dd>
+        </dl>
+        <div class="care-note">Поливать по краю горшка. Удалять водянистые листья.</div>
+      </article>
+
+      <!-- 6 -->
+      <article class="care-card" data-name="Сенполия Фиалка African violet Saintpaulia">
+        <h3 class="care-name">Сенполия (Фиалка)</h3>
+        <p class="care-bot">Компактна, любит стабильность.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Нижний полив/фитиль; поддерживать субстрат слегка влажным.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный 10–12 ч; без прямых лучей.</dd>
+          <dt>Влажность</dt><dd>45–55%, без опрыскиваний.</dd>
+          <dt>Температура</dt><dd>+20…+24 °C.</dd>
+        </dl>
+        <div class="care-note">Не мочить розетку и листовые черешки.</div>
+      </article>
+
+      <!-- 7 -->
+      <article class="care-card" data-name="Спатифиллум Spathiphyllum">
+        <h3 class="care-name">Спатифиллум</h3>
+        <p class="care-bot">Цветёт при стабильной влажности.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Регулярный, после подсыхания верхних 1–2 см; не пересушивать.</dd>
+          <dt>Свет</dt><dd>Полутень–рассеянный свет.</dd>
+          <dt>Влажность</dt><dd>60%+, любит опрыскивания и поддоны с керамзитом.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Желтеют кончики — сухо; свисают листья — перелив/сухо.</div>
+      </article>
+
+      <!-- 8 -->
+      <article class="care-card" data-name="Драцена Dracaena">
+        <h3 class="care-name">Драцена</h3>
+        <p class="care-bot">Невзыскательная, без сквозняков.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания 1/3 горшка; зимой реже.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный/полутень.</dd>
+          <dt>Влажность</dt><dd>40–60%, периодический душ.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Чувствительна к фтору и солям — мягкая вода.</div>
+      </article>
+
+      <!-- 9 -->
+      <article class="care-card" data-name="Замиокулькас Zamioculcas zamiifolia">
+        <h3 class="care-name">Замиокулькас</h3>
+        <p class="care-bot">Терпит засуху, боится перелива.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Редкий; хорошо просушивать субстрат до дна.</dd>
+          <dt>Свет</dt><dd>От яркого рассеянного до полутени.</dd>
+          <dt>Влажность</dt><dd>Низкая/средняя; без опрыскиваний.</dd>
+          <dt>Температура</dt><dd>+18…+28 °C.</dd>
+        </dl>
+        <div class="care-note">Корневища хрупкие — беречь при пересадке.</div>
+      </article>
+
+      <!-- 10 -->
+      <article class="care-card" data-name="Монстера Monstera deliciosa">
+        <h3 class="care-name">Монстера</h3>
+        <p class="care-bot">Любит стабильно тёплые условия и опоры.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания верхних 2–3 см; зимой умеренно.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный; без жёсткого солнца.</dd>
+          <dt>Влажность</dt><dd>50–70%, протирать листья.</dd>
+          <dt>Температура</dt><dd>+20…+28 °C.</dd>
+        </dl>
+        <div class="care-note">Воздушные корни не обрезать, направлять к мху/опоре.</div>
+      </article>
+
+      <!-- 11 -->
+      <article class="care-card" data-name="Пилея Pilea peperomioides">
+        <h3 class="care-name">Пилея (P. peperomioides)</h3>
+        <p class="care-bot">«Китайское денежное дерево».</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренный; подсушивать верхние 2 см.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный, лёгкое утреннее солнце.</dd>
+          <dt>Влажность</dt><dd>Средняя; без переувлажнения.</dd>
+          <dt>Температура</dt><dd>+18…+24 °C.</dd>
+        </dl>
+        <div class="care-note">Поворачивать к свету для ровной розетки.</div>
+      </article>
+
+      <!-- 12 -->
+      <article class="care-card" data-name="Калатея Calathea">
+        <h3 class="care-name">Калатея</h3>
+        <p class="care-bot">Влаголюбивая, без сквозняков.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Субстрат слегка влажный всегда; мягкая вода.</dd>
+          <dt>Свет</dt><dd>Полутень/яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>60–80%, поддон с керамзитом.</dd>
+          <dt>Температура</dt><dd>+20…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Коричневые края — сухой воздух/жёсткая вода.</div>
+      </article>
+
+      <!-- 13 -->
+      <article class="care-card" data-name="Пеперомия Peperomia">
+        <h3 class="care-name">Пеперомия</h3>
+        <p class="care-bot">Компактная, подходит для стола.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; не заливать, лучше недолив.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>Средняя; без опрыскиваний.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Суккулентные виды поливать реже.</div>
+      </article>
+
+      <!-- 14 -->
+      <article class="care-card" data-name="Шеффлера Schefflera">
+        <h3 class="care-name">Шеффлера</h3>
+        <p class="care-bot">Вынослива, любит свет.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания верхних 2–3 см.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный; пёстрым — больше света.</dd>
+          <dt>Влажность</dt><dd>Средняя; душ раз в месяц.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Опора и прищипка для густоты.</div>
+      </article>
+
+      <!-- 15 -->
+      <article class="care-card" data-name="Антуриум Anthurium">
+        <h3 class="care-name">Антуриум</h3>
+        <p class="care-bot">Предпочитает воздухопроницаемый, кислый субстрат.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Слегка влажно всегда; мягкая вода.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный, без прямого солнца.</dd>
+          <dt>Влажность</dt><dd>60–70%, регулярные опрыскивания вокруг.</dd>
+          <dt>Температура</dt><dd>+20…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Соляные отложения — признак жёсткой воды.</div>
+      </article>
+
+      <!-- 16 -->
+      <article class="care-card" data-name="Алоказия Alocasia">
+        <h3 class="care-name">Алоказия</h3>
+        <p class="care-bot">Тропик, любит тепло и влажность.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Стабильно слегка влажно; не пересушивать.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>60–80%, увлажнитель.</dd>
+          <dt>Температура</dt><dd>+20…+28 °C.</dd>
+        </dl>
+        <div class="care-note">Частая причина проблем — холодная почва/сквозняк.</div>
+      </article>
+
+      <!-- 17 -->
+      <article class="care-card" data-name="Сансевиерия Sansevieria Dracaena trifasciata">
+        <h3 class="care-name">Сансевиерия</h3>
+        <p class="care-bot">Максимально неприхотлива.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Редкий; просушка полностью, зимой 1×/3–4 нед.</dd>
+          <dt>Свет</dt><dd>От тени до солнца.</dd>
+          <dt>Влажность</dt><dd>Низкая/средняя.</dd>
+          <dt>Температура</dt><dd>+18…+30 °C; не ниже +12 °C.</dd>
+        </dl>
+        <div class="care-note">Главный риск — перелив.</div>
+      </article>
+
+      <!-- 18 -->
+      <article class="care-card" data-name="Хойя Hoya">
+        <h3 class="care-name">Хойя</h3>
+        <p class="care-bot">Лиана с восковыми цветками.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; просушивать 1/2 горшка.</dd>
+          <dt>Свет</dt><dd>Яркий; любит утреннее/вечернее солнце.</dd>
+          <dt>Влажность</dt><dd>Средняя; без крайностей.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Не срезать цветоносы — на них повторное цветение.</div>
+      </article>
+
+      <!-- 19 -->
+      <article class="care-card" data-name="Пахира Pachira aquatica">
+        <h3 class="care-name">Пахира</h3>
+        <p class="care-bot">Запасает влагу в стволе.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; просушка верхних 3–4 см.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>Средняя.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Избыток воды вызывает трещины на стволе.</div>
+      </article>
+
+      <!-- 20 -->
+      <article class="care-card" data-name="Плющ Хедера Hedera helix">
+        <h3 class="care-name">Плющ (Хедера)</h3>
+        <p class="care-bot">Любит прохладу и влажный воздух.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Регулярно, без пересушек; зимой умеренно.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный/полутень.</dd>
+          <dt>Влажность</dt><dd>60%+, опрыскивание.</dd>
+          <dt>Температура</dt><dd>+12…+20 °C.</dd>
+        </dl>
+        <div class="care-note">Пёстрые формы требуют больше света.</div>
+      </article>
+
+      <!-- 21 -->
+      <article class="care-card" data-name="Хлорофитум Chlorophytum">
+        <h3 class="care-name">Хлорофитум</h3>
+        <p class="care-bot">Фильтрует воздух, легко растёт.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренный; просушка верхних 2–3 см.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный/полутень.</dd>
+          <dt>Влажность</dt><dd>Средняя; переносит сухой воздух.</dd>
+          <dt>Температура</dt><dd>+16…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Деток можно укоренять без отрезания от материнского растения.</div>
+      </article>
+
+      <!-- 22 -->
+      <article class="care-card" data-name="Герань Пеларгония Pelargonium">
+        <h3 class="care-name">Герань (Пеларгония)</h3>
+        <p class="care-bot">Солнечная, ароматная.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания верхних 2–3 см; без застоя.</dd>
+          <dt>Свет</dt><dd>Много света, 3–5 ч солнца.</dd>
+          <dt>Влажность</dt><dd>Низкая/средняя; не опрыскивать.</dd>
+          <dt>Температура</dt><dd>+16…+24 °C; зимой +10…+12 °C для закладки бутонов.</dd>
+        </dl>
+        <div class="care-note">Прищипка для кустистости, лёгкий горшок.</div>
+      </article>
+
+      <!-- 23 -->
+      <article class="care-card" data-name="Камелия Camellia japonica">
+        <h3 class="care-name">Камелия</h3>
+        <p class="care-bot">Капризна, любит прохладу и кислотность.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Стабильно влажно, мягкая кислая вода.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>60%+, прохлада.</dd>
+          <dt>Температура</dt><dd>+10…+18 °C; жару не любит.</dd>
+        </dl>
+        <div class="care-note">Во время бутонизации не перемещать.</div>
+      </article>
+
+      <!-- 24 -->
+      <article class="care-card" data-name="Кротон Кодиеум Codiaeum variegatum">
+        <h3 class="care-name">Кротон (Кодиеум)</h3>
+        <p class="care-bot">Яркая листва при хорошем свете.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Регулярный, без пересушек и без застоя.</dd>
+          <dt>Свет</dt><dd>Очень светло, рассеянно; немного солнца.</dd>
+          <dt>Влажность</dt><dd>60%+, опрыскивания.</dd>
+          <dt>Температура</dt><dd>+20…+26 °C, без сквозняков.</dd>
+        </dl>
+        <div class="care-note">Сок ядовит — беречь от детей и животных.</div>
+      </article>
+
+      <!-- 25 -->
+      <article class="care-card" data-name="Аглаонема Aglaonema">
+        <h3 class="care-name">Аглаонема</h3>
+        <p class="care-bot">Теневынослива, любит стабильность.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; верх подсыхает на 2–3 см.</dd>
+          <dt>Свет</dt><dd>Полутень/рассеянный; пёстрым — светлее.</dd>
+          <dt>Влажность</dt><dd>Средняя/высокая.</dd>
+          <dt>Температура</dt><dd>+18…+26 °C.</dd>
+        </dl>
+        <div class="care-note">Избегать холодной воды и сквозняков.</div>
+      </article>
+
+      <!-- 26 -->
+      <article class="care-card" data-name="Диффенбахия Dieffenbachia">
+        <h3 class="care-name">Диффенбахия</h3>
+        <p class="care-bot">Декоративная листва, токсичный сок.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>После подсыхания верхних 2–3 см; без застоя.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный/полутень.</dd>
+          <dt>Влажность</dt><dd>Средняя/высокая.</dd>
+          <dt>Температура</dt><dd>+20…+28 °C.</dd>
+        </dl>
+        <div class="care-note">Перчатки при обрезке, держать вдали от питомцев.</div>
+      </article>
+
+      <!-- 27 -->
+      <article class="care-card" data-name="Нолина Бокарнея Beaucarnea recurvata">
+        <h3 class="care-name">Нолина (Бокарнея)</h3>
+        <p class="care-bot">Ксерофит с «бутылочным» стволом.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Редкий; просушка полностью. Зимой минимум.</dd>
+          <dt>Свет</dt><dd>Много света, переносит солнце.</dd>
+          <dt>Влажность</dt><dd>Низкая.</dd>
+          <dt>Температура</dt><dd>+18…+28 °C; зима +10…+15 °C.</dd>
+        </dl>
+        <div class="care-note">Дренаж обязателен, лёгкий субстрат.</div>
+      </article>
+
+      <!-- 28 -->
+      <article class="care-card" data-name="Аспидистра Aspidistra elatior">
+        <h3 class="care-name">Аспидистра</h3>
+        <p class="care-bot">«Железное растение» для тени.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; просушка 1/2 горшка.</dd>
+          <dt>Свет</dt><dd>Тень/полутень; без прямого солнца.</dd>
+          <dt>Влажность</dt><dd>Низкая/средняя.</dd>
+          <dt>Температура</dt><dd>+10…+25 °C.</dd>
+        </dl>
+        <div class="care-note">Редкая пересадка; терпит забывчивость.</div>
+      </article>
+
+      <!-- 29 -->
+      <article class="care-card" data-name="Кливия Clivia">
+        <h3 class="care-name">Кливия</h3>
+        <p class="care-bot">Цветёт после прохладной зимовки.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Умеренно; зимой почти сухо до стрелки.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>Средняя.</dd>
+          <dt>Температура</dt><dd>Лето +18…+24 °C, зима +10…+12 °C.</dd>
+        </dl>
+        <div class="care-note">Не любит тревогу корней; тесный горшок стимулирует цветение.</div>
+      </article>
+
+      <!-- 30 -->
+      <article class="care-card" data-name="Цикламен Cyclamen persicum">
+        <h3 class="care-name">Цикламен</h3>
+        <p class="care-bot">Прохладолюбивый клубневой цветок.</p>
+        <dl class="care-dl">
+          <dt>Полив</dt><dd>Нижний полив/по краю, не на клубень; в покое почти сухо.</dd>
+          <dt>Свет</dt><dd>Яркий рассеянный.</dd>
+          <dt>Влажность</dt><dd>Средняя/высокая, без опрыскивания по листьям.</dd>
+          <dt>Температура</dt><dd>+12…+18 °C.</dd>
+        </dl>
+        <div class="care-note">Отцветшие цветоносы выкручивать целиком.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Секции «Подписка», «Галерея» — сохранены по якорям, но скрыты стилями выше -->
+<section id="subscription" class="alt reveal">
+  <div class="wrap">
+    <h2 class="section-title">Свадебная подписка</h2>
+    <p class="section-sub">Секция скрыта стилями — оставлена для сохранения структуры меню.</p>
+    <div class="subscription"></div>
+  </div>
+</section>
+
+<section id="gallery" class="reveal">
+  <div class="wrap">
+    <h2 class="section-title">Отзывы и фото</h2>
+    <p class="section-sub">Секция скрыта стилями — оставлена для сохранения структуры меню.</p>
+    <div class="gallery" id="galleryGrid"></div>
+  </div>
+</section>
+
+<section id="contacts" class="alt reveal">
+  <div class="wrap">
+    <h2 class="section-title">Контакты</h2>
+    <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
+    <div class="contacts">
+      <div class="contact-card">
+        <h3>Павлодар</h3>
+        <p>ул. Маяковского 9<br>пр. Назарбаева 69</p>
+        <p style="margin-top:10px">
+          <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
       </div>
     </div>
   </div>
@@ -412,39 +702,72 @@ section + section{ border-top:1px solid var(--line) }
 <footer class="site-footer">
   <div class="wrap" style="max-width:900px;">
     <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
-    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">@kaz_flor_pvl</a></p>
+    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
   </div>
 </footer>
 
-<!-- Скрипты: как у вас -->
 <script>
-/* ====== Высота шапки для отступа ====== */
+/* ====== Инициализация высоты шапки для отступа контента ====== */
 (function(){
   const header = document.getElementById('siteHeader');
   const setHead = ()=>{ const h = header.offsetHeight || 72; document.documentElement.style.setProperty('--headH', h + 'px'); };
   setHead(); window.addEventListener('resize', setHead, {passive:true});
 })();
-/* ====== Меню ====== */
+
+/* ====== Меню (одно, без дублей) ====== */
 (function(){
   const btn = document.getElementById('menuButton');
   const menu = document.getElementById('sideMenu');
   const backdrop = document.getElementById('backdrop');
   let lastFocus = null;
-  function open(){ lastFocus = document.activeElement; btn.classList.add('active'); btn.setAttribute('aria-expanded','true');
-    menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); backdrop.classList.add('show'); document.body.style.overflow='hidden';
-    const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus(); }
-  function close(){ btn.classList.remove('active'); btn.setAttribute('aria-expanded','false');
-    menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); backdrop.classList.remove('show'); document.body.style.overflow='';
-    if(lastFocus) lastFocus.focus(); }
+
+  function open(){
+    lastFocus = document.activeElement;
+    btn.classList.add('active'); btn.setAttribute('aria-expanded','true');
+    menu.classList.add('open'); menu.setAttribute('aria-hidden','false');
+    backdrop.classList.add('show'); document.body.style.overflow='hidden';
+    const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus();
+  }
+  function close(){
+    btn.classList.remove('active'); btn.setAttribute('aria-expanded','false');
+    menu.classList.remove('open'); menu.setAttribute('aria-hidden','true');
+    backdrop.classList.remove('show'); document.body.style.overflow='';
+    if(lastFocus) lastFocus.focus();
+  }
+
   btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
   backdrop.addEventListener('click', close);
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 })();
+
+/* ====== Lazy-load изображений ====== */
+(function(){
+  document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy'));
+})();
+
 /* ====== Reveal on scroll ====== */
 (function(){
   const items = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{ threshold:.15 });
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{ threshold:.15 });
   items.forEach(i=> obs.observe(i));
+})();
+
+/* ====== Поиск по карточкам ====== */
+(function(){
+  const input = document.getElementById('careSearch');
+  const grid = document.getElementById('careGrid');
+  const cards = Array.from(grid.querySelectorAll('.care-card'));
+  const normalize = s => s.toLowerCase().trim();
+
+  input.addEventListener('input', ()=>{
+    const q = normalize(input.value);
+    cards.forEach(card=>{
+      const name = normalize(card.dataset.name || card.querySelector('.care-name').textContent);
+      card.style.display = name.includes(q) ? '' : 'none';
+    });
+  });
 })();
 </script>
 </body>
