@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -326,17 +327,19 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </section>
 
-<section id="contacts" class="alt reveal">
+<section id="visit" class="alt reveal">
   <div class="wrap">
-    <h2 class="section-title">Контакты</h2>
-    <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
-    <div class="contacts">
-      <div class="contact-card">
-        <h3>Павлодар</h3>
+    <h2 class="section-title">Заходите к нам в гости</h2>
+    <p class="section-sub">Приходите в наш магазин — почувствуйте атмосферу цветов лично.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center">
+      <div style="flex:1;min-width:280px;max-width:460px">
+        <img src="https://fv5-4.files.fm/thumb_show.php?i=a48fp349ue&view&v=1&PHPSESSID=33ed7d7e07442b6c58fdd07bd71e44dccb3f153d" alt="Наш магазин"
+             style="width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+      </div>
+      <div style="flex:1;min-width:260px;text-align:center">
+        <h3 style="font-family:'Playfair Display',serif;margin:0 0 8px">Павлодар</h3>
         <p>ул. Маяковского 9<br>пр. Назарбаева 69</p>
-        <p style="margin-top:10px">
-          <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">WhatsApp</a>
-        </p>
+        <a class="btn btn-ink" href="https://2gis.kz/pavlodar/firm/70000001018651106" target="_blank" rel="noopener">Построить маршрут</a>
       </div>
     </div>
   </div>
@@ -421,6 +424,8 @@ section + section{ border-top:1px solid var(--line) }
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 })();
 </script>
+
+<script>
 /* ====== Автослайдер для каталога ====== */
 (function(){
   const track = document.getElementById('track');
@@ -443,5 +448,6 @@ section + section{ border-top:1px solid var(--line) }
   }, 4000);
 })();
 </script>
+
 </body>
 </html> 
