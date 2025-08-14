@@ -326,22 +326,20 @@ section + section{ border-top:1px solid var(--line) }
   </div>
 </section>
 
-<section id="visit" class="alt reveal">
+<section id="contacts" class="alt reveal">
   <div class="wrap">
-    <h2 class="section-title">Заходите к нам в гости</h2>
-    <p class="section-sub">Мы будем рады видеть вас в нашем магазине. Атмосфера цветов и вдохновения — ждём лично!</p>
-    <div class="visit-block" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center">
-      <div style="flex:1;min-width:280px;max-width:460px">
-        <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Наш магазин" style="width:100%;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.12)">
-      </div>
-      <div style="flex:1;min-width:260px;text-align:center">
-        <h3 style="font-family:'Playfair Display',serif;margin:0 0 8px">Павлодар</h3>
+    <h2 class="section-title">Контакты</h2>
+    <p class="section-sub">Свяжитесь с нами любым удобным способом — ответим оперативно.</p>
+    <div class="contacts">
+      <div class="contact-card">
+        <h3>Павлодар</h3>
         <p>ул. Маяковского 9<br>пр. Назарбаева 69</p>
-        <a class="btn btn-ink" href="https://maps.google.com/?q=Павлодар,Маяковского+9" target="_blank" rel="noopener">Построить маршрут</a>
+        <p style="margin-top:10px">
+          <a class="btn btn-ink" href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
       </div>
     </div>
   </div>
-
 </section>
 
 <footer class="site-footer">
@@ -406,25 +404,7 @@ section + section{ border-top:1px solid var(--line) }
   },{ threshold:.15 });
   items.forEach(i=> obs.observe(i));
 })();
-<script>
-/* ====== Автослайдер для каталога ====== */
-(function(){
-  const track = document.getElementById('track');
-  let index = 0;
-  const slides = track.querySelectorAll('.slide');
-  const total = slides.length;
 
-  function goNext(){
-    index = (index + 1) % total;
-    track.scrollTo({
-      left: slides[index].offsetLeft,
-      behavior: 'smooth'
-    });
-  }
-
-  setInterval(goNext, 4000);
-})();
-</script>
 /* ====== Галерея — модал ====== */
 (function(){
   const modal = document.getElementById('modal');
@@ -442,4 +422,4 @@ section + section{ border-top:1px solid var(--line) }
 })();
 </script>
 </body>
-</html>
+</html> 
