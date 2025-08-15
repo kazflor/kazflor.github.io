@@ -1,174 +1,251 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>KAZFLOR — Каталог</title>
+<meta name="description" content="KAZFLOR — Каталог: букеты, композиции и свадебные букеты.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
 <style>
+/* ====== Палитра и токены — как на главной ====== */
 :root{
-  --khaki:#556B2F;
-  --cream:#f9f6f2;
-  --bronze:#b08d57;
-  --muted:#cfcfcf;
-  --glass: rgba(255,255,255,0.06);
-  --radius:18px;
+  --bg:#faf7f5; --bg-2:#fff; --paper:#f4efec; --ink:#171717; --sub:#4b5563;
+  --accent:#e7cfd1; --accent-2:#d8c3c6; --line:rgba(23,23,23,.08);
+  --radius:18px; --shadow-sm:0 8px 24px rgba(0,0,0,.06); --shadow-md:0 18px 48px rgba(0,0,0,.12); --wrap:1200px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
 body{
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-  background:#0f0f0f;
-  color:var(--cream);
-  line-height:1.45;
+  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; color:var(--ink);
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%), linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.5; overflow-x:hidden;
 }
-.bg {
-  position:fixed;
-  inset:0;
-  z-index:-20;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-    url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
-  background-size:cover;
-  background-position:center;
-}
-.wrap{
-  max-width:1200px;
-  margin:0 auto;
-  padding:36px 20px;
-}
-header.site-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 0;
-}
-.brand{display:flex;gap:14px;align-items:center}
-.brand img{height:56px;filter:brightness(0) invert(1)}
-.brand h1{
-  font-family:'Playfair Display',serif;
-  font-size:1.6rem;
-}
-nav.main-nav{display:flex;gap:16px}
-nav.main-nav a{
-  color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;
-  transition:all .22s ease;font-size:0.95rem;
-}
-nav.main-nav a:hover{color:var(--cream);background:rgba(255,255,255,0.03)}
+a{color:inherit; text-decoration:none} img{display:block; max-width:100%}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
 
-.section-title{
-  text-align:center;
-  font-family:'Playfair Display',serif;
-  font-size:2.1rem;
-  margin-bottom:30px;
-}
+/* ====== Шапка (идентична твоей) ====== */
+.site-header{ position:fixed; inset:0 0 auto 0; backdrop-filter:saturate(1.1) blur(12px); background:color-mix(in oklab, #fff 88%, #f7f2f0); border-bottom:1px solid var(--line); z-index:1000 }
+.head-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px }
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand h1{ font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem }
 
-.catalog-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:16px;
-}
-.card{
-  position:relative;
-  overflow:hidden;
-  border-radius:var(--radius);
-  background:var(--glass);
-  box-shadow:0 10px 30px rgba(0,0,0,0.45);
-  cursor:pointer;
-  transform:scale(1);
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-.card img{
-  width:100%;height:200px;object-fit:cover;display:block;
-  transition:transform .4s ease;
-}
-.card:hover{transform:scale(1.03);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
-.card:hover img{transform:scale(1.05)}
+/* ====== Бургер + offcanvas — как на главной ====== */
+.hamburger{ display:inline-flex; justify-content:center; align-items:center; width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease }
+.hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
+.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger span::before,.hamburger span::after{ content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink); transition:transform .25s ease, top .25s ease, opacity .2s ease }
+.hamburger span::before{ top:-7px } .hamburger span::after{ top:7px }
+.hamburger.active span{ background:transparent } .hamburger.active span::before{ top:0; transform:rotate(45deg) } .hamburger.active span::after{ top:0; transform:rotate(-45deg) }
+.side-menu{ position:fixed; inset:0 auto 0 0; width:min(86vw,360px); transform:translateX(-104%); transition:transform .34s cubic-bezier(.22,.9,.28,1); background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.92)); border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12); z-index:1200; display:flex; flex-direction:column }
+.side-menu.open{ transform:translateX(0) }
+.side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
+.side-head img{height:34px} .side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
+.side-nav{ padding:10px 12px 18px; overflow:auto }
+.side-nav a{ display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px; font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease }
+.side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
+.backdrop.show{ opacity:1; pointer-events:auto }
 
-/* modal */
-.modal {
-  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
-  background:rgba(0,0,0,0.85); z-index:99999; padding:20px;
-}
-.modal img{ max-width:92vw; max-height:92vh; border-radius:10px; box-shadow:0 24px 60px rgba(0,0,0,0.7) }
+/* ====== Титул каталога ====== */
+.hero{ padding-top:calc(var(--headH) + 24px); padding-bottom:20px; text-align:center; background: radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%), linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%) }
+.kicker{ letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub) }
+.hero h2{ font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.6vw,3rem); line-height:1.06; margin:10px auto 0; max-width:900px }
+.hero p{ max-width:760px; margin:10px auto 0; color:#444 }
+
+/* ====== Чипы-фильтры (табы) ====== */
+.filters{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:18px 0 8px }
+.chip{ appearance:none; border:none; cursor:pointer; padding:10px 16px; border-radius:999px; font-weight:700; background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%); color:#2b2b2b; box-shadow:var(--shadow-sm); border:1px solid rgba(0,0,0,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease }
+.chip:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
+.chip[aria-selected="true"]{ background:var(--ink); color:#fff }
+
+/* ====== Галерея и панели ====== */
+.tab-panels{ max-width:1100px; margin:0 auto }
+.gallery{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px }
+.gallery img{ width:100%; height:140px; object-fit:cover; border-radius:14px; cursor:pointer; border:1px solid var(--line); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease }
+.gallery img:hover{ transform:scale(1.03); box-shadow:var(--shadow-md); border-color:rgba(23,23,23,.14) }
+.tab-panels [hidden]{ display:none !important }
+
+/* ====== Подвал ====== */
+.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
+.site-footer a{ text-decoration:underline; text-underline-offset:3px }
+
+/* ====== Модал ====== */
+.modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.85); z-index:9999; padding:20px }
+.modal img{ max-width:92vw; max-height:92vh; border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.7) }
 .modal.show{ display:flex }
 
-footer.site-footer{
-  padding:36px 0;
-  text-align:center;
-  color:var(--muted);
-}
+/* ====== Анимация появления ====== */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
+.reveal.visible{ opacity:1; transform:translateY(0) }
 
-@media(max-width:520px){
-  .brand img{height:48px}
-  .brand h1{font-size:1.3rem}
-  nav.main-nav{display:none}
-  .card img{height:160px}
-}
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important } }
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="wrap">
-  <header class="site-header">
+
+<!-- Backdrop -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+<!-- Offcanvas -->
+<aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
+  <div class="side-head">
+    <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
+    <div class="side-title">Меню</div>
+  </div>
+  <nav class="side-nav" aria-label="Боковое меню">
+    <a href="index">Главная</a>
+    <a href="#catalog">Каталог</a>
+    <a href="#uhod">Уход за комнатными</a>
+    <a href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Оставить заявку</a>
+    <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</aside>
+
+<!-- Шапка -->
+<header id="siteHeader" class="site-header" role="banner">
+  <div class="wrap head-inner">
+    <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false"><span></span></button>
     <div class="brand">
-      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
       <h1>KAZFLOR</h1>
     </div>
-    <nav class="main-nav">
-     
-    </nav>
-  </header>
+    <nav class="main-nav" aria-label="Главная навигация"></nav>
+  </div>
+</header>
 
-  <h2 class="section-title animate__animated animate__fadeInUp">Каталог наших работ</h2>
+<!-- Титул и табы -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Каталог</div>
+    <h2>Букеты · Композиции · Свадебные букеты</h2>
+    <p>Выберите категорию — кликните на фото, чтобы увеличить.</p>
+    <div class="filters" role="tablist" aria-label="Категории каталога">
+      <a href="#bouquets" class="chip" id="tabBtn-bouquets" role="tab" aria-selected="true" aria-controls="tab-bouquets">Букеты</a>
+      <a href="#compositions" class="chip" id="tabBtn-compositions" role="tab" aria-selected="false" aria-controls="tab-compositions">Композиции</a>
+      <a href="#wedding" class="chip" id="tabBtn-wedding" role="tab" aria-selected="false" aria-controls="tab-wedding">Свадебные букеты</a>
+    </div>
+  </div>
+</section>
 
-  <div class="catalog-grid">
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Фото 1">
-    </div>
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Фото 2">
-    </div>
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Фото 3">
-    </div>
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=9kshb8a4qq" alt="Фото 4">
-    </div>
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=9vscpbq74b" alt="Фото 5">
-    </div>
-    <div class="card animate__animated animate__fadeInUp" data-full="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg">
-      <img src="https://fv5-4.files.fm/thumb_show.php?i=j82m8mrxkg" alt="Фото 6">
+<!-- Галереи (как у тебя) -->
+<section class="reveal" id="catalog">
+  <div class="wrap tab-panels">
+
+    <!-- БУКЕТЫ -->
+    <div class="gallery" id="tab-bouquets" role="tabpanel" aria-labelledby="tabBtn-bouquets">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Букет — Пудровая романтика" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Букет — Свадебная классика" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Букет — Цветочная симфония" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n" alt="Букет 4" data-full="https://fv5-2.files.fm/thumb_show.php?i=vfevw9eu7n">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Букет 5" data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" alt="Букет 6" data-full="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4">
     </div>
 
+    <!-- КОМПОЗИЦИИ -->
+    <div class="gallery" id="tab-compositions" role="tabpanel" aria-labelledby="tabBtn-compositions" hidden>
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf" alt="Композиция 1" data-full="https://fv5-2.files.fm/thumb_show.php?i=3m8jvs5bgf">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7" alt="Композиция 2" data-full="https://fv5-2.files.fm/thumb_show.php?i=5sdzdbjru7">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm" alt="Композиция 3" data-full="https://fv5-2.files.fm/thumb_show.php?i=uj9txnj8pm">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4" alt="Композиция 4" data-full="https://fv5-2.files.fm/thumb_show.php?i=zruvnzuxv4">
+    </div>
 
+    <!-- СВАДЕБНЫЕ БУКЕТЫ -->
+    <div class="gallery" id="tab-wedding" role="tabpanel" aria-labelledby="tabBtn-wedding" hidden>
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебный букет 1" data-full="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4" alt="Свадебный букет 2" data-full="https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4">
+      <img src="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked" alt="Свадебный букет 3" data-full="https://fv5-4.files.fm/thumb_show.php?i=de5vnckked">
+      <img src="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm" alt="Свадебный букет 4" data-full="https://fv5-2.files.fm/thumb_show.php?i=wpsmfdqygm">
+    </div>
 
-</div>
+  </div>
+</section>
 
-<div id="modal" class="modal">
-  <img id="modalImg" src="" alt="">
+<footer class="site-footer">
+  <div class="wrap" style="max-width:900px;">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
+  </div>
+</footer>
+
+<!-- Модал для галереи -->
+<div id="modal" class="modal" role="dialog" aria-hidden="true">
+  <img id="modalImg" src="" alt="Увеличенное фото">
 </div>
 
 <script>
+/* ====== Инициализация высоты шапки ====== */
+(function(){
+  const header = document.getElementById('siteHeader');
+  const setHead = ()=>{ const h = header.offsetHeight || 72; document.documentElement.style.setProperty('--headH', h + 'px'); };
+  setHead(); window.addEventListener('resize', setHead, {passive:true});
+})();
+
+/* ====== Меню ====== */
+(function(){
+  const btn = document.getElementById('menuButton');
+  const menu = document.getElementById('sideMenu');
+  const backdrop = document.getElementById('backdrop');
+  let lastFocus = null;
+  function open(){ lastFocus = document.activeElement; btn.classList.add('active'); btn.setAttribute('aria-expanded','true'); menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); backdrop.classList.add('show'); document.body.style.overflow='hidden'; const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus(); }
+  function close(){ btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); backdrop.classList.remove('show'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ====== Lazy-load изображений ====== */
+(function(){ document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy')); })();
+
+/* ====== Reveal on scroll ====== */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{ threshold:.15 });
+  items.forEach(i=> obs.observe(i));
+})();
+
+/* ====== Галерея — модал ====== */
 (function(){
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modalImg');
-  document.querySelectorAll('.card').forEach(el=>{
-    el.addEventListener('click',()=>{
-      modalImg.src = el.dataset.full;
-      modal.classList.add('show');
+  function open(src, alt){ modalImg.src = src; modalImg.alt = alt || 'image'; modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); }
+  function close(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); setTimeout(()=> modalImg.src = '', 200); }
+  document.querySelectorAll('.gallery img').forEach(el=>{
+    el.addEventListener('click', ()=> open(el.dataset.full || el.src, el.alt || ''));
+    el.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') el.click(); });
+  });
+  modal.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ====== Табы категорий — ровно как просил ====== */
+(function(){
+  const tabs = [
+    {btn: document.getElementById('tabBtn-bouquets'), panel: document.getElementById('tab-bouquets'), hash:'bouquets'},
+    {btn: document.getElementById('tabBtn-compositions'), panel: document.getElementById('tab-compositions'), hash:'compositions'},
+    {btn: document.getElementById('tabBtn-wedding'), panel: document.getElementById('tab-wedding'), hash:'wedding'}
+  ];
+  function activate(target){
+    tabs.forEach(({btn,panel})=>{
+      const on = (btn === target);
+      btn.setAttribute('aria-selected', on);
+      panel.toggleAttribute('hidden', !on);
+    });
+  }
+  tabs.forEach(({btn,hash})=>{
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      history.replaceState(null, '', '#'+hash);
+      activate(btn);
+      document.getElementById('catalog').scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
-  modal.addEventListener('click',()=> modal.classList.remove('show'));
+  // Активируем вкладку по хэшу (#bouquets / #compositions / #wedding)
+  const hash = (location.hash || '').replace('#','');
+  const found = tabs.find(t=> t.hash===hash);
+  activate(found? found.btn : tabs[0].btn);
 })();
 </script>
 
-<div style="text-align:center; margin: 40px 0;">
-  <a class="btn-premium animate__animated animate__fadeInUp animate__delay-1s" href="index.html" style="background:transparent; color:var(--cream); border:2px solid var(--cream); border-radius:40px; padding:12px 22px; font-weight:700; text-decoration:none; display:inline-block; transition:all .25s ease; box-shadow:0 8px 24px rgba(0,0,0,0.35);">На главную</a>
-</div>
-  </div>
-
-  <footer class="site-footer">
-    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
-  </footer>
 </body>
 </html>
