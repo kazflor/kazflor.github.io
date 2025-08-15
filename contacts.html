@@ -1,163 +1,198 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Контакты — KAZFLOR</title>
+<meta name="description" content="Контакты KAZFLOR: адреса, WhatsApp и Instagram.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 <style>
-:root {
-  --khaki:#556B2F;
-  --cream:#f9f6f2;
-  --bronze:#b08d57;
-  --glass: rgba(255,255,255,0.06);
-  --radius:18px;
-  --max-width:1200px;
+/* ====== Палитра/токены как в каталоге ====== */
+:root{
+  --bg:#faf7f5; --bg-2:#fff; --paper:#f4efec; --ink:#171717; --sub:#4b5563;
+  --accent:#e7cfd1; --accent-2:#d8c3c6; --line:rgba(23,23,23,.08);
+  --radius:18px; --shadow-sm:0 8px 24px rgba(0,0,0,.06); --shadow-md:0 18px 48px rgba(0,0,0,.12); --wrap:1200px;
 }
-body {
-  margin:0;
-  font-family:Inter, sans-serif;
-  background:#0f0f0f;
-  color:var(--cream);
+*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; color:var(--ink);
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%), linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; line-height:1.5; overflow-x:hidden;
 }
-.bg {
-  position:fixed;
-  inset:0;
-  z-index:-20;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
-    url("https://fv5-2.files.fm/thumb_show.php?i=gvxj4mfruq&view&v=1");
-  background-size:cover;
-  background-position:center;
-}
-.wrap {
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:36px 20px;
-}
-header.site-header {
-  padding:18px 0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.brand {
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-.brand img {
-  height:56px;
-  filter:brightness(0) invert(1);
-}
-h1 {
-  font-family:'Playfair Display',serif;
-  font-size:1.6rem;
-  margin:0;
-}
-.section-title {
-  text-align:center;
-  font-family:'Playfair Display',serif;
-  font-size:2.1rem;
-  margin-bottom:30px;
-}
-.contacts {
-  max-width:920px;
-  margin:0 auto;
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.contact-card {
-  background:var(--glass);
-  padding:18px;
-  border-radius:14px;
-  min-width:260px;
-  text-align:center;
-  box-shadow:0 12px 34px rgba(0,0,0,0.45);
-}
-.contact-card h3 {
-  font-family:'Playfair Display',serif;
-  margin-bottom:8px;
-}
-.btn-premium {
-  display:inline-block;
-  padding:12px 22px;
-  font-weight:700;
-  border-radius:40px;
-  text-decoration:none;
-  border:2px solid var(--cream);
-  color:var(--cream);
-  transition:all .25s ease;
-}
-.btn-premium:hover {
-  background:var(--cream);
-  color:#111;
-}
-.btn-whatsapp {
-  background-color:#4e6c50;
-  border:none;
-  color:white;
-}
-.btn-instagram {
-  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  border:none;
-  color:white;
-}
-.btn-main {
-  margin-top:40px;
-  display:block;
-  width:fit-content;
-  margin-left:auto;
-  margin-right:auto;
-}
-footer.site-footer {
-  padding:36px 0;
-  text-align:center;
-  color:#cfcfcf;
-}
+a{color:inherit; text-decoration:none} img{display:block; max-width:100%}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
+
+/* ====== Шапка как на каталоге ====== */
+.site-header{ position:fixed; inset:0 0 auto 0; backdrop-filter:saturate(1.1) blur(12px); background:color-mix(in oklab, #fff 88%, #f7f2f0); border-bottom:1px solid var(--line); z-index:1000 }
+.head-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px }
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand h1{ font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem }
+
+/* ====== Бургер + offcanvas ====== */
+.hamburger{ display:inline-flex; justify-content:center; align-items:center; width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease }
+.hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
+.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger span::before,.hamburger span::after{ content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink); transition:transform .25s ease, top .25s ease, opacity .2s ease }
+.hamburger span::before{ top:-7px } .hamburger span::after{ top:7px }
+.hamburger.active span{ background:transparent } .hamburger.active span::before{ top:0; transform:rotate(45deg) } .hamburger.active span::after{ top:0; transform:rotate(-45deg) }
+.side-menu{ position:fixed; inset:0 auto 0 0; width:min(86vw,360px); transform:translateX(-104%); transition:transform .34s cubic-bezier(.22,.9,.28,1); background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.92)); border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12); z-index:1200; display:flex; flex-direction:column }
+.side-menu.open{ transform:translateX(0) }
+.side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
+.side-head img{height:34px} .side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
+.side-nav{ padding:10px 12px 18px; overflow:auto }
+.side-nav a{ display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px; font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease }
+.side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
+.backdrop.show{ opacity:1; pointer-events:auto }
+
+/* ====== Герой (заголовок страницы) ====== */
+.hero{ padding-top:calc(var(--headH) + 24px); padding-bottom:12px; text-align:center; background: radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%), linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%) }
+.kicker{ letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub) }
+.hero h2{ font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.6vw,3rem); line-height:1.06; margin:10px auto 0; max-width:900px }
+.hero p{ max-width:760px; margin:10px auto 0; color:#444 }
+
+/* ====== Сетка карточек как в каталоге ====== */
+section{ padding:40px 0 }
+.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; max-width:900px; margin:0 auto }
+.card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow-sm); transition:transform .25s ease, box-shadow .25s ease; display:flex; flex-direction:column; align-items:stretch; min-height:180px }
+.card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md) }
+.card h3{ font-family:'Playfair Display',serif; margin:.2rem 0 .4rem; font-size:1.2rem }
+.card p{ color:#333; margin:.2rem 0 1rem }
+.actions{ margin-top:auto; display:flex; flex-direction:column; gap:8px }
+
+/* ====== Кнопки 1-в-1 ====== */
+.btn{ display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease; box-shadow:var(--shadow-sm); text-align:center; width:100% }
+.btn:hover{ transform:translateY(-2px) }
+.btn-ink{ color:#fff; background:var(--ink) }
+.btn-ink:hover{ box-shadow:0 10px 24px rgba(23,23,23,.18) }
+.btn-powder{ background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%); color:#2b2b2b; border-color:rgba(0,0,0,.06) }
+.btn-powder:hover{ box-shadow:0 10px 24px rgba(231,207,209,.25) }
+
+/* ====== Анимация появления (reveal) ====== */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
+.reveal.visible{ opacity:1; transform:translateY(0) }
+
+/* ====== Подвал ====== */
+.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
+.site-footer a{ text-decoration:underline; text-underline-offset:3px }
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important } }
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="wrap">
-<header class="site-header">
-  <div class="brand">
-    <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
-    <h1>KAZFLOR</h1>
+
+<!-- Backdrop / Offcanvas -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
+  <div class="side-head">
+    <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
+    <div class="side-title">Меню</div>
+  </div>
+  <nav class="side-nav" aria-label="Боковое меню">
+    <a href="https://kazflor.github.io/">Главная</a>
+    <a href="https://kazflor.github.io/catalog">Каталог</a>
+    <a href="https://kazflor.github.io/uhod">Уход за комнатными</a>
+    <a href="https://kazflor.github.io/contacts">Контакты</a>
+    <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</aside>
+
+<!-- Шапка -->
+<header id="siteHeader" class="site-header" role="banner">
+  <div class="wrap head-inner">
+    <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false"><span></span></button>
+    <div class="brand">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
+      <h1>KAZFLOR</h1>
+    </div>
+    <nav class="main-nav" aria-label="Главная навигация"></nav>
   </div>
 </header>
 
-<h2 class="section-title animate__animated animate__fadeInDown">Контакты</h2>
-
-<div class="contacts">
-  <div class="contact-card animate__animated animate__zoomIn animate__delay-1s">
-    <h3>Павлодар</h3>
-    <p>ул. Маяковского 9<br>9:00–21:00</p>
-    <a class="btn-premium btn-whatsapp" href="https://wa.me/77055826554" target="_blank">WhatsApp</a>
+<!-- Герой -->
+<section class="hero" id="contacts">
+  <div class="wrap">
+    <div class="kicker">связаться с нами</div>
+    <h2>Контакты</h2>
+    <p>Два салона в Павлодаре и Instagram для вдохновения. Пишите в WhatsApp — отвечаем быстро.</p>
   </div>
+</section>
 
-  <div class="contact-card animate__animated animate__zoomIn animate__delay-2s">
-    <h3>Павлодар</h3>
-    <p>пр.Назарбаева 69<br>9:00-21:00</p>
-    <a class="btn-premium btn-whatsapp" href="https://wa.me/77074565744" target="_blank">WhatsApp</a>
+<!-- Карточки контактов (точно как карточки каталога, но без фото) -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="cards">
+      <div class="card reveal">
+        <h3>Павлодар — Маяковского 9</h3>
+        <p>Ежедневно 9:00–21:00</p>
+        <div class="actions">
+          <a class="btn btn-ink" href="https://wa.me/77055826554" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-powder" href="https://2gis.kz/pavlodar/search/%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D1%8F%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%C2%A09%20kazflor/firm/70000001018655026/76.94273%2C52.265618?m=76.94253%2C52.265567%2F15.79" target="_blank" rel="noopener">Построить маршрут</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Павлодар — пр. Назарбаева 69</h3>
+        <p>Ежедневно 9:00–21:00</p>
+        <div class="actions">
+          <a class="btn btn-ink" href="https://wa.me/77075857488" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-powder" href="https://2gis.kz/pavlodar/firm/70000001018651106" target="_blank" rel="noopener">Построить маршрут</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>Instagram</h3>
+        <p>@kaz_flor_pvl — больше фото работ, сторис и актуальные новинки.</p>
+        <div class="actions">
+          <a class="btn btn-ink" href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Открыть Instagram</a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="contact-card animate__animated animate__zoomIn animate__delay-3s">
-    <h3>Instagram</h3>
-    <p>@kaz_flor_pvl</p>
-    <a class="btn-premium btn-instagram" href="https://instagram.com/kaz_flor_pvl" target="_blank">Instagram</a>
-  </div>
-</div>
-
-<a class="btn-premium btn-main animate__animated animate__fadeInUp animate__delay-4s" href="index.html">На главную</a>
-
-</div>
+</section>
 
 <footer class="site-footer">
-  <p>&copy; KAZFLOR — 2025. Все права защищены.</p>
+  <div class="wrap" style="max-width:900px;">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
+  </div>
 </footer>
+
+<script>
+/* ====== Высота шапки ====== */
+(function(){
+  const header = document.getElementById('siteHeader');
+  const setHead = ()=>{ const h = header.offsetHeight || 72; document.documentElement.style.setProperty('--headH', h + 'px'); };
+  setHead(); window.addEventListener('resize', setHead, {passive:true});
+})();
+
+/* ====== Меню ====== */
+(function(){
+  const btn = document.getElementById('menuButton');
+  const menu = document.getElementById('sideMenu');
+  const backdrop = document.getElementById('backdrop');
+  let lastFocus = null;
+  function open(){ lastFocus = document.activeElement; btn.classList.add('active'); btn.setAttribute('aria-expanded','true'); menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); backdrop.classList.add('show'); document.body.style.overflow='hidden'; const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus(); }
+  function close(){ btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); backdrop.classList.remove('show'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ====== Lazy-load изображений (на всякий случай) ====== */
+(function(){ document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy')); })();
+
+/* ====== Reveal on scroll (как в каталоге) ====== */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{ threshold:.15 });
+  items.forEach(i=> obs.observe(i));
+})();
+</script>
+
 </body>
 </html>
