@@ -1,115 +1,153 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Статья — KAZFLOR</title>
-<meta name="description" content="Статья блога KAZFLOR">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Свадебная флористика: лаконичная роскошь — KAZFLOR</title>
+<meta name="description" content="Как выбрать цветочную палитру и сочетать текстуры, чтобы получить эффект «дорого и сдержанно».">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #fff;
-    color: #333;
+/* ====== Палитра и токены (тот же стиль) ====== */
+:root{
+  --bg:#faf7f5; --bg-2:#fff; --paper:#f4efec; --ink:#171717; --sub:#4b5563;
+  --accent:#e7cfd1; --accent-2:#d8c3c6; --line:rgba(23,23,23,.08);
+  --radius:18px; --shadow-sm:0 8px 24px rgba(0,0,0,.06); --shadow-md:0 18px 48px rgba(0,0,0,.12); --wrap:1200px;
 }
-header {
-    background: #fff;
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; color:var(--ink);
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%),
+              linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
+  line-height:1.5; overflow-x:hidden;
 }
-header img {
-    height: 50px;
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
+
+/* ====== Шапка и меню (тот же код) ====== */
+.site-header{
+  position:fixed; inset:0 0 auto 0;
+  backdrop-filter:saturate(1.1) blur(12px);
+  background:color-mix(in oklab, #fff 88%, #f7f2f0);
+  border-bottom:1px solid var(--line);
+  z-index:1000;
 }
-nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color .3s;
-}
-nav a:hover {
-    color: #b48a78;
-}
-.article-hero {
-    width: 100%;
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-    animation: fadeIn 1s ease-in-out;
-}
-.article-container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
-    animation: fadeInUp .8s ease-in-out;
-}
-.article-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-.article-date {
-    color: #888;
-    font-size: 14px;
-    margin-bottom: 30px;
-}
-.article-content {
-    line-height: 1.8;
-    font-size: 18px;
-}
-.back-btn {
-    display: inline-block;
-    margin-top: 40px;
-    padding: 12px 24px;
-    border: 1px solid #b48a78;
-    color: #b48a78;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all .3s;
-}
-.back-btn:hover {
-    background: #b48a78;
-    color: #fff;
-}
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-@keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+.head-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06))}
+.brand h1{font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem}
+
+.hamburger{display:inline-flex; justify-content:center; align-items:center; width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow-sm); cursor:pointer}
+.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger span::before,.hamburger span::after{ content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink) }
+.hamburger span::before{ top:-7px } .hamburger span::after{ top:7px }
+.hamburger.active span{ background:transparent } .hamburger.active span::before{ top:0; transform:rotate(45deg) } .hamburger.active span::after{ top:0; transform:rotate(-45deg) }
+
+.side-menu{ position:fixed; inset:0 auto 0 0; width:min(86vw,360px); transform:translateX(-104%); background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.92)); border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12); z-index:1200; display:flex; flex-direction:column }
+.side-menu.open{ transform:translateX(0) }
+.side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
+.side-head img{height:34px}
+.side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
+.side-nav{ padding:10px 12px 18px; overflow:auto }
+.side-nav a{ display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px; font-weight:600 }
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; z-index:1100 }
+.backdrop.show{ opacity:1; pointer-events:auto }
+
+/* ====== Герой статьи ====== */
+.hero{ padding-top:calc(var(--headH) + 24px); padding-bottom:16px; text-align:center;
+  background: radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%), linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%) }
+.kicker{ letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub) }
+.hero h2{ font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.6vw,3rem); line-height:1.06; margin:10px auto 0; max-width:900px }
+.hero p{ max-width:760px; margin:10px auto 0; color:#444 }
+
+/* ====== Контент статьи ====== */
+.article-content{max-width:900px; margin:0 auto; padding:40px 0}
+.article-content img{border-radius:16px; margin-bottom:20px}
+.article-content h3{font-family:'Playfair Display',serif; font-size:1.4rem; margin-top:1.6em}
+.article-content p{margin-bottom:1.2em; color:#333}
+
+/* ====== Подвал ====== */
+.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
 </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html"><img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR"></a>
-    <nav>
-        <a href="index.html">Главная</a>
-        <a href="catalog.html">Каталог</a>
-        <a href="wedding.html">Свадьбы</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="blog.html">Блог</a>
-    </nav>
+<div class="backdrop" id="backdrop"></div>
+<aside class="side-menu" id="sideMenu">
+  <div class="side-head">
+    <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
+    <div class="side-title">Меню</div>
+  </div>
+  <nav class="side-nav">
+    <a href="/index.html">Главная</a>
+    <a href="/catalog.html">Каталог</a>
+    <a href="/blog.html">Блог</a>
+    <a href="https://kazflor.github.io/contacts.html" target="_blank">Оставить заявку</a>
+    <a href="https://instagram.com/kaz_flor_pvl" target="_blank">Instagram</a>
+  </nav>
+</aside>
+
+<header id="siteHeader" class="site-header">
+  <div class="wrap head-inner">
+    <button id="menuButton" class="hamburger" aria-label="Открыть меню">
+      <span></span>
+    </button>
+    <div class="brand">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
+      <h1>KAZFLOR</h1>
+    </div>
+  </div>
 </header>
 
-<div class="article-hero" style="background-image:url('https://fv5-4.files.fm/thumb_show.php?i=q3nz5pvtv4');"></div>
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Тренды</div>
+    <h2>Свадебная флористика: лаконичная роскошь</h2>
+    <p>15 августа 2025 — Как выбрать цветочную палитру и сочетать текстуры, чтобы получить эффект «дорого и сдержанно».</p>
+  </div>
+</section>
 
-<div class="article-container">
-    <h1 class="article-title">Как мы оформляем свадьбы в KAZFLOR</h1>
-    <div class="article-date">15 августа 2025</div>
-    <div class="article-content">
-        <p>В KAZFLOR мы создаём свадебные оформления, которые отражают уникальный стиль каждой пары. От нежных пастельных оттенков до роскошных цветочных инсталляций — мы воплощаем любые мечты.</p>
-        <p>Каждая композиция создаётся вручную нашими флористами, чтобы сохранить гармонию и индивидуальность. Мы подбираем только свежайшие цветы премиум-класса.</p>
-        <p>Свадьба — это не просто день, это целая история, и мы помогаем сделать её незабываемой.</p>
-    </div>
-    <a href="blog.html" class="back-btn">← Назад к блогу</a>
+<div class="wrap article-content reveal">
+  <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная флористика">
+  <p>Свадебная флористика в стиле «лаконичная роскошь» предполагает продуманное сочетание минимализма и утончённой элегантности. Главная задача — подчеркнуть торжественность момента, не перегружая пространство излишними деталями.</p>
+  <h3>Выбор цветочной палитры</h3>
+  <p>Отдавайте предпочтение приглушённым тонам: кремовый, пудровый, нежно-розовый, айвори, шампань. Такие оттенки создают ощущение гармонии и утончённости.</p>
+  <h3>Текстуры и формы</h3>
+  <p>Сочетайте гладкие лепестки роз с воздушными веточками эвкалипта или гипсофилы. Лёгкая асимметрия придаст композиции естественность.</p>
+  <h3>Декор зала</h3>
+  <p>Минималистичные композиции на столах, акцентные зоны с высокими вазами и свечи создадут атмосферу уюта.</p>
 </div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+    <p>Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const header=document.getElementById('siteHeader');
+  const setHead=()=>{const h=header.offsetHeight||72;document.documentElement.style.setProperty('--headH',h+'px');};
+  setHead();window.addEventListener('resize',setHead);
+})();
+(function(){
+  const btn=document.getElementById('menuButton');
+  const menu=document.getElementById('sideMenu');
+  const backdrop=document.getElementById('backdrop');
+  function open(){btn.classList.add('active');menu.classList.add('open');backdrop.classList.add('show');document.body.style.overflow='hidden';}
+  function close(){btn.classList.remove('active');menu.classList.remove('open');backdrop.classList.remove('show');document.body.style.overflow='';}
+  btn.addEventListener('click',()=>menu.classList.contains('open')?close():open());
+  backdrop.addEventListener('click',close);
+})();
+(function(){
+  const items=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.15});
+  items.forEach(i=>obs.observe(i));
+})();
+</script>
 
 </body>
 </html>
