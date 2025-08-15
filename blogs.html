@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KAZFLOR — Блог</title>
+<meta name="description" content="Блог KAZFLOR: идеи, советы и закулисье мастерской.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ====== Палитра и токены — как у тебя ====== */
+:root{
+  --bg:#faf7f5; --bg-2:#fff; --paper:#f4efec;
+  --ink:#171717; --sub:#4b5563;
+  --accent:#e7cfd1; --accent-2:#d8c3c6;
+  --line:rgba(23,23,23,.08);
+  --radius:18px;
+  --shadow-sm:0 8px 24px rgba(0,0,0,.06);
+  --shadow-md:0 18px 48px rgba(0,0,0,.12);
+  --wrap:1200px;
+}
+
+/* ====== База ====== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(232,210,213,.22), transparent 60%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 60%,var(--bg) 100%);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height:1.5; overflow-x:hidden;
+}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 20px}
+
+/* ====== Шапка ====== */
+.site-header{
+  position:fixed; inset:0 0 auto 0;
+  backdrop-filter:saturate(1.1) blur(12px);
+  background:color-mix(in oklab, #fff 88%, #f7f2f0);
+  border-bottom:1px solid var(--line);
+  z-index:1000;
+}
+.head-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px }
+.brand{ display:flex; align-items:center; gap:12px }
+.brand img{ height:44px; width:auto; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,.06)) }
+.brand h1{ font-family:'Playfair Display',serif; font-weight:700; letter-spacing:.5px; margin:0; font-size:1.4rem }
+
+/* ====== Бургер + offcanvas ====== */
+.hamburger{
+  display:inline-flex; justify-content:center; align-items:center;
+  width:44px; height:44px; border-radius:12px; border:1px solid var(--line);
+  background:#fff; box-shadow:var(--shadow-sm); cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.hamburger:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md) }
+.hamburger span{ position:relative; width:22px; height:2px; background:var(--ink); display:block }
+.hamburger span::before,.hamburger span::after{
+  content:""; position:absolute; left:0; width:22px; height:2px; background:var(--ink);
+  transition:transform .25s ease, top .25s ease, opacity .2s ease;
+}
+.hamburger span::before{ top:-7px }
+.hamburger span::after{ top:7px }
+.hamburger.active span{ background:transparent }
+.hamburger.active span::before{ top:0; transform:rotate(45deg) }
+.hamburger.active span::after{ top:0; transform:rotate(-45deg) }
+
+/* offcanvas */
+.side-menu{
+  position:fixed; inset:0 auto 0 0; width:min(86vw,360px);
+  transform:translateX(-104%); transition:transform .34s cubic-bezier(.22,.9,.28,1);
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.92));
+  border-right:1px solid var(--line); box-shadow:12px 0 40px rgba(0,0,0,.12);
+  z-index:1200; display:flex; flex-direction:column;
+}
+.side-menu.open{ transform:translateX(0) }
+.side-head{ display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line) }
+.side-head img{height:34px}
+.side-title{ font-family:'Playfair Display',serif; font-size:1.1rem }
+.side-nav{ padding:10px 12px 18px; overflow:auto }
+.side-nav a{
+  display:flex; align-items:center; gap:10px; padding:12px 14px; margin:6px 0; border-radius:12px;
+  font-weight:600; transition:background .2s ease, transform .18s ease, box-shadow .18s ease;
+}
+.side-nav a:hover{ background:rgba(231,207,209,.22); transform:translateX(4px) }
+.backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.32); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:1100 }
+.backdrop.show{ opacity:1; pointer-events:auto }
+
+/* ====== Герой (как у тебя) ====== */
+.hero{
+  padding-top:calc(var(--headH) + 32px);
+  padding-bottom:32px;
+  text-align:center;
+  background:
+    radial-gradient(800px 420px at 50% 0%, rgba(231,207,209,.22), transparent 60%),
+    linear-gradient(120deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%);
+}
+.kicker{ letter-spacing:.14em; text-transform:uppercase; font-size:.9rem; color:var(--sub) }
+.hero h2{
+  font-family:'Playfair Display',serif; font-size:clamp(2rem, 4vw, 3.2rem);
+  line-height:1.06; margin:10px auto 0; max-width:900px;
+}
+.hero p{ max-width:760px; margin:12px auto 0; color:#444 }
+
+/* ====== Кнопки — те же ====== */
+.btn{
+  display:inline-block; padding:12px 22px; font-weight:700; border-radius:999px; border:2px solid transparent;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  box-shadow:var(--shadow-sm); text-align:center;
+}
+.btn:hover{ transform:translateY(-2px) }
+.btn-ink{ color:#fff; background:var(--ink) }
+.btn-ink:hover{ box-shadow:0 10px 24px rgba(23,23,23,.18) }
+.btn-powder{ background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%); color:#2b2b2b; border-color:rgba(0,0,0,.06) }
+.btn-powder:hover{ box-shadow:0 10px 24px rgba(231,207,209,.25) }
+
+/* ====== Секция и сетка карточек (в стиле каталога) ====== */
+section{ padding:48px 0 }
+.section-title{
+  text-align:center; font-family:'Playfair Display',serif; font-size:2.2rem; margin:0 0 8px;
+}
+.section-sub{ text-align:center; color:var(--sub); margin:0 auto 24px; max-width:880px }
+
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px; max-width:1100px; margin:0 auto;
+}
+.card{
+  background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow-sm); transition:transform .25s ease, box-shadow .25s ease;
+  display:flex; flex-direction:column; min-height:100%;
+}
+.card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md) }
+.thumb{ position:relative; height:200px; overflow:hidden; background:#eee }
+.thumb img{ width:100%; height:100%; object-fit:cover; transform:scale(1.02); transition:transform .5s ease }
+.card:hover .thumb img{ transform:scale(1.06) }
+.badge{
+  position:absolute; left:12px; top:12px; background:rgba(255,255,255,.92);
+  padding:6px 10px; border-radius:999px; font-weight:700; font-size:.8rem; box-shadow:0 6px 18px rgba(0,0,0,.12)
+}
+.content{ padding:16px }
+.date{ color:var(--sub); font-size:.9rem; margin:0 0 6px }
+.title{ font-family:'Playfair Display',serif; font-size:1.2rem; margin:.1rem 0 .4rem }
+.excerpt{ color:#333; margin:0 0 14px }
+.actions{ margin-top:auto; padding:0 16px 16px }
+
+/* ====== Просмотр статьи (в том же стиле) ====== */
+.article-view{
+  max-width:900px; margin:0 auto;
+  background:#fff; border:1px solid var(--line); border-radius:22px; box-shadow:var(--shadow-md);
+  overflow:hidden; display:none; /* по умолчанию скрыт */
+  transition:opacity .35s ease, transform .35s ease;
+}
+.article-cover{ height:360px; background:#000; }
+.article-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+.article-body{ padding:20px }
+.article-date{ color:var(--sub); font-size:.95rem; margin:0 0 8px }
+.article-title{ font-family:'Playfair Display',serif; font-size:1.8rem; margin:.2rem 0 .6rem }
+.article-text{ color:#2b2b2b; line-height:1.7 }
+.article-actions{ padding:0 20px 20px }
+
+/* Плавные переходы для вида */
+.fade-hide{ opacity:0; transform:translateY(8px) }
+.fade-show{ opacity:1; transform:translateY(0) }
+
+/* ====== Reveal ====== */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
+.reveal.visible{ opacity:1; transform:translateY(0) }
+
+/* ====== Подвал ====== */
+.site-footer{ padding:36px 0; text-align:center; color:#666; background:#fbf9f8; border-top:1px solid var(--line) }
+.site-footer a{ text-decoration:underline; text-underline-offset:3px }
+
+/* Доступность: без анимаций */
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; animation:none !important }
+}
+</style>
+</head>
+<body>
+
+<!-- Backdrop / Offcanvas -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<aside class="side-menu" id="sideMenu" aria-hidden="true" aria-labelledby="menuButton" role="dialog">
+  <div class="side-head">
+    <img src="https://kazflor.github.io/logo_no.png" alt="KAZFLOR"/>
+    <div class="side-title">Меню</div>
+  </div>
+  <nav class="side-nav" aria-label="Боковое меню">
+    <a href="/index.html">Главная</a>
+    <a href="/catalog.html">Каталог</a>
+    <a href="#blog">Блог</a>
+    <a href="https://kazflor.github.io/contacts.html" target="_blank" rel="noopener">Оставить заявку</a>
+    <a href="https://instagram.com/kaz_flor_pvl" target="_blank" rel="noopener">Instagram</a>
+  </nav>
+</aside>
+
+<!-- Шапка -->
+<header id="siteHeader" class="site-header" role="banner">
+  <div class="wrap head-inner">
+    <button id="menuButton" class="hamburger" aria-label="Открыть меню" aria-controls="sideMenu" aria-expanded="false">
+      <span></span>
+    </button>
+    <div class="brand">
+      <img src="https://kazflor.github.io/logo_no_bg.png" alt="KAZFLOR logo" />
+      <h1>KAZFLOR</h1>
+    </div>
+    <nav class="main-nav" aria-label="Главная навигация"></nav>
+  </div>
+</header>
+
+<!-- Герой -->
+<main id="blog" class="hero" role="main">
+  <div class="wrap">
+    <div class="kicker">истории и советы</div>
+    <h2>Блог</h2>
+    <p>Идеи оформления, закулисье KAZFLOR и полезные подборки по цветам.</p>
+  </div>
+</main>
+
+<!-- Сетка карточек -->
+<section id="posts" class="reveal">
+  <div class="wrap">
+    <h2 class="section-title">Свежие записи</h2>
+    <p class="section-sub">Нажмите «Читать», статья откроется здесь же — без перезагрузки.</p>
+
+    <div class="grid" id="grid">
+      <!-- Пост 1 -->
+      <article class="card reveal">
+        <div class="thumb">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Свадебная флористика">
+          <div class="badge">Тренды</div>
+        </div>
+        <div class="content">
+          <div class="date">15 августа 2025</div>
+          <h3 class="title">Свадебная флористика: лаконичная роскошь</h3>
+          <p class="excerpt">Как выбрать палитру и текстуры, чтобы получить эффект «дорого и сдержанно».</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ink read-btn" data-article="lux-wedding">Читать</button>
+        </div>
+      </article>
+
+      <!-- Пост 2 -->
+      <article class="card reveal">
+        <div class="thumb">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Уход за букетом">
+          <div class="badge">Советы</div>
+        </div>
+        <div class="content">
+          <div class="date">10 августа 2025</div>
+          <h3 class="title">Уход за букетом: 5 простых правил</h3>
+          <p class="excerpt">Температура воды, обновление среза, ваза и маленький секрет KAZFLOR.</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ink read-btn" data-article="care-5rules">Читать</button>
+        </div>
+      </article>
+
+      <!-- Пост 3 -->
+      <article class="card reveal">
+        <div class="thumb">
+          <img src="https://fv5-4.files.fm/thumb_show.php?i=w87pnpu74v" alt="Оформление залов">
+          <div class="badge">Проекты</div>
+        </div>
+        <div class="content">
+          <div class="date">28 июля 2025</div>
+          <h3 class="title">Оформление зала: как мы строим концепт</h3>
+          <p class="excerpt">От референсов до монтажа: показываем процесс шаг за шагом.</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ink read-btn" data-article="venue-concept">Читать</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Просмотр статьи -->
+<section id="reader" class="reveal" style="display:none;">
+  <div class="wrap">
+    <article class="article-view fade-hide" id="articleView" aria-live="polite">
+      <div class="article-cover"><img id="articleImg" src="" alt=""></div>
+      <div class="article-body">
+        <div class="article-date" id="articleDate"></div>
+        <h1 class="article-title" id="articleTitle"></h1>
+        <div class="article-text" id="articleText"></div>
+      </div>
+      <div class="article-actions">
+        <button id="backBtn" class="btn btn-ink">Назад к блогу</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap" style="max-width:900px;">
+    <p>&copy; <strong>KAZFLOR</strong> — 2025. Все права защищены.</p>
+    <p style="margin-top:6px">Instagram: <a href="https://instagram.com/kaz_flor_pvl" target="_blank">@kaz_flor_pvl</a></p>
+  </div>
+</footer>
+
+<script>
+/* ====== Высота шапки ====== */
+(function(){
+  const header = document.getElementById('siteHeader');
+  const setHead = ()=>{ const h = header.offsetHeight || 72; document.documentElement.style.setProperty('--headH', h + 'px'); };
+  setHead(); window.addEventListener('resize', setHead, {passive:true});
+})();
+
+/* ====== Меню ====== */
+(function(){
+  const btn = document.getElementById('menuButton');
+  const menu = document.getElementById('sideMenu');
+  const backdrop = document.getElementById('backdrop');
+  let lastFocus = null;
+
+  function open(){
+    lastFocus = document.activeElement;
+    btn.classList.add('active'); btn.setAttribute('aria-expanded','true');
+    menu.classList.add('open'); menu.setAttribute('aria-hidden','false');
+    backdrop.classList.add('show'); document.body.style.overflow='hidden';
+    const firstLink = menu.querySelector('a'); if(firstLink) firstLink.focus();
+  }
+  function close(){
+    btn.classList.remove('active'); btn.setAttribute('aria-expanded','false');
+    menu.classList.remove('open'); menu.setAttribute('aria-hidden','true');
+    backdrop.classList.remove('show'); document.body.style.overflow='';
+    if(lastFocus) lastFocus.focus();
+  }
+
+  btn.addEventListener('click', ()=> menu.classList.contains('open') ? close() : open());
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+})();
+
+/* ====== Lazy-load изображений ====== */
+(function(){
+  document.querySelectorAll('img').forEach(img=> img.loading !== undefined && img.setAttribute('loading','lazy'));
+})();
+
+/* ====== Reveal on scroll ====== */
+(function(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{ threshold:.15 });
+  items.forEach(i=> obs.observe(i));
+})();
+
+/* ====== Данные статей ====== */
+const ARTICLES = {
+  "lux-wedding": {
+    date: "15 августа 2025",
+    title: "Свадебная флористика: лаконичная роскошь",
+    img: "https://images.unsplash.com/photo-1508747703725-719777637510?q=80&w=1800&auto=format&fit=crop",
+    html: `
+      <p>Лаконичная палитра, чистые линии и фактуры — ключ к премиальному ощущению. Мы собираем moodboard, определяем 2–3 доминирующих оттенка (пудровые, кремовые, графитовые акценты) и добавляем текстуры: матовые листья, деликатные бутоны, воздушные соцветия.</p>
+      <p>На площадке работаем блоками: входная зона, президиум, гостьевые столы, фотозона. Для цельности — повторяем формы и зелень в каждом блоке. Итог — «тихая роскошь», которая не кричит, а действует.</p>
+    `
+  },
+  "care-5rules": {
+    date: "10 августа 2025",
+    title: "Уход за букетом: 5 простых правил",
+    img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1800&auto=format&fit=crop",
+    html: `
+      <ol>
+        <li><strong>Свежий срез.</strong> Обновляйте срез под углом 45° каждые 2 дня.</li>
+        <li><strong>Чистая ваза.</strong> Меняйте воду ежедневно, без льда и кипятка.</li>
+        <li><strong>Листья выше воды.</strong> Всё лишнее — убрать.</li>
+        <li><strong>Тень и прохлада.</strong> Без прямого солнца и батарей.</li>
+        <li><strong>Питание.</strong> Пакетик-консервант или щепотка сахара + капля лимона.</li>
+      </ol>
+      <p>Так букет проживёт заметно дольше и сохранит форму.</p>
+    `
+  },
+  "venue-concept": {
+    date: "28 июля 2025",
+    title: "Оформление зала: как мы строим концепт",
+    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1800&auto=format&fit=crop",
+    html: `
+      <p>Начинаем с плана площадки: свет, логистика, высоты. Дальше — палитра и точки внимания: президиум, арка, потолочные подвесы. В эскизах фиксируем уровни: нижние компoзиции, средние (на столах) и верхние (инсталляции).</p>
+      <p>Монтаж — ночью или ранним утром, чтобы сохранить свежесть. На готовности держим «аварийный» комплект замены цветов — премиальный сервис без сюрпризов.</p>
+    `
+  }
+};
+
+/* ====== Логика: открыть статью / назад ====== */
+(function(){
+  const gridSection = document.getElementById('posts');
+  const grid = document.getElementById('grid');
+  const readerSection = document.getElementById('reader');
+  const articleView = document.getElementById('articleView');
+  const img = document.getElementById('articleImg');
+  const dt = document.getElementById('articleDate');
+  const title = document.getElementById('articleTitle');
+  const text = document.getElementById('articleText');
+  const backBtn = document.getElementById('backBtn');
+
+  function showArticle(key){
+    const data = ARTICLES[key];
+    if(!data) return;
+
+    // Заполняем
+    img.src = data.img; img.alt = data.title;
+    dt.textContent = data.date;
+    title.textContent = data.title;
+    text.innerHTML = data.html;
+
+    // Скрываем сетку, показываем ридер
+    gridSection.classList.remove('visible');
+    gridSection.classList.add('fade-hide');
+    setTimeout(()=>{
+      gridSection.style.display = 'none';
+      readerSection.style.display = 'block';
+      // небольшой таймаут для плавной анимации входа
+      requestAnimationFrame(()=>{
+        articleView.classList.remove('fade-hide');
+        articleView.classList.add('fade-show');
+        readerSection.classList.add('visible');
+        articleView.focus?.();
+      });
+    }, 220);
+  }
+
+  function backToGrid(){
+    // Прячем статью
+    articleView.classList.remove('fade-show');
+    articleView.classList.add('fade-hide');
+    readerSection.classList.remove('visible');
+
+    setTimeout(()=>{
+      readerSection.style.display = 'none';
+      gridSection.style.display = 'block';
+      // вернуть анимацию грида
+      requestAnimationFrame(()=>{
+        gridSection.classList.remove('fade-hide');
+        gridSection.classList.add('visible');
+      });
+      // скролл к началу блога
+      document.getElementById('blog').scrollIntoView({behavior:'smooth', block:'start'});
+    }, 220);
+  }
+
+  // Навесить обработчики на кнопки «Читать»
+  document.querySelectorAll('.read-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> showArticle(btn.dataset.article));
+  });
+  backBtn.addEventListener('click', backToGrid);
+
+})();
+</script>
+
+</body>
+</html>
